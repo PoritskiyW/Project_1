@@ -76,27 +76,3 @@
   opacity: 0.3;
   cursor: no-drop;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  background-color: black;
-  color: white;
-  text-align: center;
-  margin: 20px auto;
-}
-
-.button {
-  background-color: black;
-  border: 1px solid;
-  border-radius: 15px;
-  color: white;
-  padding: 7px 15px;
-  margin: 10px 5px;
-  cursor: pointer;
-}
-.button:hover {
-  background-color: skyblue;
-}

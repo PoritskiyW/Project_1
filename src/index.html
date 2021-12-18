@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="styles.css" rel="stylesheet"/>
     <title></title>
 </head>
 <body>
@@ -12,25 +13,25 @@
     <img class="header__logo" alt="logo" src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/50/000000/external-webstorm-an-integrated-development-environment-for-javascript-logo-color-tal-revivo.png"/>
     <p class="header__team">Джаваскриптизеры</p>
     <nav class="header__navigation navigation">
-        <button class="navigation__button">HOME</button>
-        <button class="navigation__button">QUESTIONS</button>
-        <button class="navigation__button">ABOUT</button>
+        <button class="navigation__button button" onclick="route('page-home')">HOME</button>
+        <button class="navigation__button button" onclick="route('page-questions')">QUESTIONS</button>
+        <button class="navigation__button button" onclick="route('page-about')">ABOUT</button>
     </nav>
 </header>
 <main>
     <section id="page-home"> <div class="characters__developer1">
-        <div class="avatar__developer">
-            <input alt="avatar" name="avatar" type="image" placeholder="Add avatar">
-        </div>
+        <label class="avatar__developer">
+            <p><input name="avatar" type="image" placeholder="Add avatar"></p>
+        </label>
         <label class="info__developer">
-            Weight: <input name="info" type="text"><br>
-            Height: <input name="info" type="text"><br>
-            Age:    <input name="info" type="text"><br>
-            Gender: <input name="info" type="text"><br>
-            Name:   <input name="info" type="text"><br>
+            <p>Weight: <input name="info" type="text"></p>
+            <p>Height: <input name="info" type="text"></p>
+            <p>Age: <input name="info" type="text"></p>
+            <p>Gender: <input name="info" type="text"></p>
+            <p>Name: <input name="info" type="text"></p>
         </label>
         <label class="hobbie__developer">
-            Hobbie: <input name="info" type="text" placeholder="tell about yourself"><br>
+            <p>Hobbie: <input name="info" type="text" placeholder="tell about yourself"></p>
         </label>
         <div class="edit__characters">
             <button>Edit</button>
@@ -39,87 +40,129 @@
             <button>Save</button>
         </div>
     </div>
-        <div class="characters__developer2">
-            <div class="avatar__developer">
-                <input alt="avatar" name="avatar" type="image" placeholder="Add avatar">
-            </div>
-            <label class="info__developer">
-                Weight: <input name="info" type="text"><br>
-                Height: <input name="info" type="text"><br>
-                Age:    <input name="info" type="text"><br>
-                Gender: <input name="info" type="text"><br>
-                Name:   <input name="info" type="text"><br>
-            </label>
-            <label class="hobbie__developer">
-                Hobbie: <input name="info" type="text" placeholder="tell about yourself"><br>
-            </label>
-            <div class="edit__characters">
-                <button>Edit</button>
-            </div>
-            <div class="save__characters">
-                <button>Save</button>
-            </div>
+    <div class="characters__developer2">
+        <label class="avatar__developer">
+            <p><input name="avatar" type="image" placeholder="Add avatar"></p>
+        </label>
+        <label class="info__developer">
+            <p>Weight: <input name="info" type="text"></p>
+            <p>Height: <input name="info" type="text"></p>
+            <p>Age: <input name="info" type="text"></p>
+            <p>Gender: <input name="info" type="text"></p>
+            <p>Name: <input name="info" type="text"></p>
+        </label>
+        <label class="hobbie__developer">
+            <p>Hobbie: <input name="info" type="text" placeholder="tell about yourself"></p>
+        </label>
+        <div class="edit__characters">
+            <button>Edit</button>
         </div>
-        <div class="characters__developer3">
-            <div class="avatar__developer">
-                <input alt="avatar" name="avatar" type="image" placeholder="Add avatar">
-            </div>
-            <label class="info__developer">
-                Weight: <input name="info" type="text"><br>
-                Height: <input name="info" type="text"><br>
-                Age:    <input name="info" type="text"><br>
-                Gender: <input name="info" type="text"><br>
-                Name:   <input name="info" type="text"><br>
-            </label>
-            <label class="hobbie__developer">
-                Hobbie: <input name="info" type="text" placeholder="tell about yourself"><br>
-            </label>
-            <div class="edit__characters">
-                <button>Edit</button>
-            </div>
-            <div class="save__characters">
-                <button>Save</button>
-            </div>
+        <div class="save__characters">
+            <button>Save</button>
         </div>
-        <div class="characters__developer4">
-            <div class="avatar__developer">
-                <input alt="avatar" name="avatar" type="image" placeholder="Add avatar">
-            </div>
-            <label class="info__developer">
-                Weight: <input name="info" type="text"><br>
-                Height: <input name="info" type="text"><br>
-                Age:    <input name="info" type="text"><br>
-                Gender: <input name="info" type="text"><br>
-                Name:   <input name="info" type="text"><br>
-            </label>
-            <label class="hobbie__developer">
-                Hobbie: <input name="info" type="text" placeholder="tell about yourself"><br>
-            </label>
-            <div class="edit__characters">
-                <button>Edit</button>
-            </div>
-            <div class="save__characters">
-                <button>Save</button>
-            </div>
+    </div>
+    <div class="characters__developer3">
+        <label class="avatar__developer">
+            <p><input name="avatar" type="image" placeholder="Add avatar"></p>
+        </label>
+        <label class="info__developer">
+            <p>Weight: <input name="info" type="text"></p>
+            <p>Height: <input name="info" type="text"></p>
+            <p>Age: <input name="info" type="text"></p>
+            <p>Gender: <input name="info" type="text"></p>
+            <p>Name: <input name="info" type="text"></p>
+        </label>
+        <label class="hobbie__developer">
+            <p>Hobbie: <input name="info" type="text" placeholder="tell about yourself"></p>
+        </label>
+        <div class="edit__characters">
+            <button>Edit</button>
         </div>
-    </section>
-
-<section id="page-questions">
-    <label>
-        <select name="file-system" id="file-system">
-            <option disabled>Select file system</option>
-        </select>
-    </label>
-    <label>
-        <select name="theme" id="theme">
-            <option disabled>Select theme</option>
-        </select>
-    </label>
+        <div class="save__characters">
+            <button>Save</button>
+        </div>
+    </div>
+    <div class="characters__developer4">
+        <label class="avatar__developer">
+            <p><input name="avatar" type="image" placeholder="Add avatar"></p>
+        </label>
+        <label class="info__developer">
+            <p>Weight: <input name="info" type="text"></p>
+            <p>Height: <input name="info" type="text"></p>
+            <p>Age: <input name="info" type="text"></p>
+            <p>Gender: <input name="info" type="text"></p>
+            <p>Name: <input name="info" type="text"></p>
+        </label>
+        <label class="hobbie__developer">
+            <p>Hobbie: <input name="info" type="text" placeholder="tell about yourself"></p>
+        </label>
+        <div class="edit__characters">
+            <button>Edit</button>
+        </div>
+        <div class="save__characters">
+            <button>Save</button>
+        </div>
+    </div>
 </section>
-
-    <div id="page-about"></div>
-
+    <section id="page-questions">
+        <label>
+            <select name="file-system" id="file-system">
+                <option disabled>Select file system</option>
+            </select>
+        </label>
+        <label>
+            <select name="theme" id="theme">
+                <option disabled>Select theme</option>
+            </select>
+        </label>
+        <button class="add" id="show-button" type="button">+</button>
+        <section class="modal">
+            <div class="modal__container">
+                <form class="form-questions">
+                    <button class="form-questions__exit" name="exit" type="button">x</button>
+                    <div class="form-questions__message"></div>
+                    <label class="form-questions__title" for="questions">Questions</label>
+                    <textarea tabindex="0" id="questions" placeholder="Your question ..." cols="30" rows="5"></textarea>
+                    <label class="form-questions__title" for="form-questions__theme">Theme</label>
+                    <input class="form-questions__input" id="form-questions__theme" name="text" type="text">
+                    <div class="form-questions__title">Answer</div>
+                    <div class="form-questions__buttons-group">
+                        <label>
+                            <input type="radio" name="boolean" value="True">True
+                        </label>
+                        <label>
+                            <input type="radio" name="boolean" value="false">False
+                        </label>
+                    </div>
+                    <label class="form-questions__title">File system</label>
+                    <div class="form-questions__buttons-group">
+                        <label>
+                            <input type="checkbox" name="format" value="false">CSV
+                        </label>
+                        <label>
+                            <input type="checkbox" name="format" value="false">JSON
+                        </label>
+                        <label>
+                            <input type="checkbox" name="format" value="false">XML
+                        </label>
+                        <label>
+                            <input type="checkbox" name="format" value="false">YAML
+                        </label>
+                    </div>
+                    <div  class="form-questions__buttons-group">
+                        <button class="button" type="button" name="cancel">cancel</button>
+                        <button class="button" type="submit">create</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section>
+            <template id="question-template"></template>
+        </section>
+    </section>
+    <section id="page-about"></section>
 </main>
-<script src="scripts/main.js"></script>
+<footer></footer>
+<script src="main.js"></script>
 </body>
 </html>
