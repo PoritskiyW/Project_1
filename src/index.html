@@ -13,9 +13,9 @@
     <img class="header__logo" alt="logo" src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/50/000000/external-webstorm-an-integrated-development-environment-for-javascript-logo-color-tal-revivo.png"/>
     <p class="header__team">Джаваскриптизеры</p>
     <nav class="header__navigation navigation">
-        <button class="navigation__button button">HOME</button>
-        <button class="navigation__button button">QUESTIONS</button>
-        <button class="navigation__button button">ABOUT</button>
+        <button class="navigation__button button" onclick="route('page-home')">HOME</button>
+        <button class="navigation__button button" onclick="route('page-questions')">QUESTIONS</button>
+        <button class="navigation__button button" onclick="route('page-about')">ABOUT</button>
     </nav>
 </header>
 <main>
@@ -73,7 +73,7 @@
             </div>
         </section>
         <section>
-            list of questions
+            <template id="question-template"></template>
         </section>
     </section>
     <section id="page-about"></section>
