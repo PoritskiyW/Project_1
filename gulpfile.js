@@ -27,8 +27,15 @@ gulpfile.task('copy:js', function (cb) {
     cb()
 })
 
+//.gif
+gulpfile.task('copy:gif', function (cb) {
+    gulp.src('./src/images/*.gif')
+        .pipe(gulp.dest('./dist'))
+    cb()
+})
+
 gulpfile.task('watch', function () {
-    gulpfile.watch(['./src/**/*.scss', './src/scripts/main.js', './src/index.html'], gulpfile.series(['clean', 'sass', 'copy:html', 'copy:js']));
+    gulpfile.watch(['./src/**/*.scss', './src/scripts/main.js', './src/index.html', './src/images/*.gif'], gulpfile.series(['clean', 'sass', 'copy:html', 'copy:js', 'copy:gif']));
 })
 
 gulpfile.task('default', gulpfile.series(['clean', 'sass', 'copy:html', 'copy:js']))
