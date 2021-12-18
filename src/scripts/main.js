@@ -1,5 +1,25 @@
-// Показать полупрозрачный DIV, чтобы затенить страницу
-// (форма располагается не внутри него, а рядом, потому что она не должна быть полупрозрачной)
+//////////////////////////////////////////////////////////////////////////////////
+//routing functions
+function route(id) {
+
+    //get all pages + our page from argument
+    let homePage = document.getElementById('page-home');
+    let questionsPage = document.getElementById('page-questions');
+    let aboutPage = document.getElementById('page-about');
+    let showPage = document.getElementById(id);
+
+    //hide all pages + show page from argument
+    homePage.hidden = true;
+    questionsPage.hidden = true;
+    aboutPage.hidden = true;
+    showPage.hidden = false;
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+//page home functions
+
+//////////////////////////////////////////////////////////////////////////////////
+//page questions functions
 function showCover() {
     let coverDiv = document.createElement('div');
     coverDiv.id = 'cover-div';
@@ -45,7 +65,7 @@ function showPrompt(text, callback) {
     };
 
     document.onkeydown = function (e) {
-        if (e.key == 'Escape') {
+        if (e.key === 'Escape') {
             complete(null);
         }
     };
@@ -54,14 +74,14 @@ function showPrompt(text, callback) {
     let firstElem = form.elements[0];
 
     lastElem.onkeydown = function (e) {
-        if (e.key == 'Tab' && !e.shiftKey) {
+        if (e.key === 'Tab' && !e.shiftKey) {
             firstElem.focus();
             return false;
         }
     };
 
     firstElem.onkeydown = function (e) {
-        if (e.key == 'Tab' && e.shiftKey) {
+        if (e.key === 'Tab' && e.shiftKey) {
             lastElem.focus();
             return false;
         }
@@ -76,3 +96,6 @@ document.getElementById('show-button').onclick = function () {
         console.log("Вы ввели: " + value);
     });
 };
+
+//////////////////////////////////////////////////////////////////////////////////
+//page about functions
