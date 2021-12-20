@@ -18,12 +18,12 @@
   }
 
   &__input {
-    border: 3px double skyblue;
+    border: 3px double $main-color;
 
     &:focus,
     &:focus-visible {
       outline: skyblue;
-      border: 3px double lightblue;
+      border: 3px double $main-color;
     }
   }
 
