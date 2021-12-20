@@ -5,12 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="styles.css" rel="stylesheet"/>
+    <link href="index.css" rel="stylesheet"/>
     <title></title>
 </head>
 <body>
 <header class="header">
-    <img class="header__logo" alt="logo" src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/50/000000/external-webstorm-an-integrated-development-environment-for-javascript-logo-color-tal-revivo.png"/>
+    <img class="header__logo" alt="logo" style="border-radius: 10px; width: 80px;"
+         src="https://img.genial.ly/5f89a55dbce4d50f7480c1f6/6503b195-b167-4705-b96b-97243ce67c21.gif?602d5d218af1fa10335c4fdf&1639939212268"/>
     <p class="header__team">Джаваскриптизеры</p>
     <nav class="header__navigation navigation">
         <button class="navigation__button button" onclick="route('page-home')">HOME</button>
@@ -18,93 +19,26 @@
         <button class="navigation__button button" onclick="route('page-about')">ABOUT</button>
     </nav>
 </header>
+
 <main>
     <section id="page-home">
-        <div class="characters__developer1">
-            <label class="avatar__developer">
-                <input name="avatar" type="image" placeholder="Add avatar"><br>
-            </label>
-            <label class="info__developer">
-                Weight: <input name="info" type="text"><br>
-                Height: <input name="info" type="text"><br>
-                Age: <input name="info" type="text"><br>
-                Gender: <input name="info" type="text"><br>
-                Name: <input name="info" type="text"><br>
-            </label>
-            <label class="hobbie__developer">
-                Hobbie: <input name="info" type="text" placeholder="tell about yourself"><br>
-            </label>
-            <div class="edit__characters">
-                <button>Edit</button>
-            </div>
-            <div class="save__characters">
-                <button>Save</button>
-            </div>
-        </div>
-        <div class="characters__developer2">
-            <label class="avatar__developer">
-                <input name="avatar" type="image" placeholder="Add avatar"><br>
-            </label>
-            <label class="info__developer">
-                Weight: <input name="info" type="text"><br>
-                Height: <input name="info" type="text"><br>
-                Age: <input name="info" type="text"><br>
-                Gender: <input name="info" type="text"><br>
-                Name: <input name="info" type="text"><br>
-            </label>
-            <label class="hobbie__developer">
-                Hobbie: <input name="info" type="text" placeholder="tell about yourself"><br>
-            </label>
-            <div class="edit__characters">
-                <button>Edit</button>
-            </div>
-            <div class="save__characters">
-                <button>Save</button>
-            </div>
-        </div>
-        <div class="characters__developer3">
-            <label class="avatar__developer">
-                <input name="avatar" type="image" placeholder="Add avatar"><br>
-            </label>
-            <label class="info__developer">
-                Weight: <input name="info" type="text"><br>
-                Height: <input name="info" type="text"><br>
-                Age: <input name="info" type="text"><br>
-                Gender: <input name="info" type="text"><br>
-                Name: <input name="info" type="text"><br>
-            </label>
-            <label class="hobbie__developer">
-                Hobbie: <input name="info" type="text" placeholder="tell about yourself"><br>
-            </label>
-            <div class="edit__characters">
-                <button>Edit</button>
-            </div>
-            <div class="save__characters">
-                <button>Save</button>
-            </div>
-        </div>
-        <div class="characters__developer4">
-            <label class="avatar__developer">
-                <input name="avatar" type="image" placeholder="Add avatar"><br>
-            </label>
-            <label class="info__developer">
-                Weight: <input name="info" type="text"></p>
-                Height: <input name="info" type="text"><br>
-                Age: <input name="info" type="text"><br>
-                Gender: <input name="info" type="text"><br>
-                Name: <input name="info" type="text"><br>
-            </label>
-            <label class="hobbie__developer">
-                Hobbie: <input name="info" type="text" placeholder="tell about yourself"><br>
-            </label>
-            <div class="edit__characters">
-                <button>Edit</button>
-            </div>
-            <div class="save__characters">
-                <button>Save</button>
-            </div>
-        </div>
-</section>
+        <div id="info-developer"></div>
+        <button class="add button" id="show-change" type="button">Change participant data</button>
+        <!--         modal -->
+        <!--        <section class="modal">-->
+        <!--            <div class="modal__container">-->
+        <!--                <form class="form-questions">-->
+        <!--                    <button class="form-questions__exit" name="exit" type="button">x</button>-->
+        <!--                    <div class="form-questions__message"></div>-->
+        <!--                    <div>test</div>-->
+        <!--                    <div  class="form-questions__buttons-group">-->
+        <!--                        <button class="button" type="button" name="edit">edit</button>-->
+        <!--                        <button class="button" type="submit">save</button>-->
+        <!--                    </div>-->
+        <!--                </form>-->
+        <!--            </div>-->
+        <!--        </section>-->
+  </section>
     <section id="page-questions">
         <label>
             <select name="file-system" id="file-system">
@@ -162,26 +96,26 @@
         </section>
     </section>
     <section id="page-about">
-    <div class="page-about__name"></div>
-    <div class="page-about__content">
-        <div class="page-about__content info">
-            <span class="info">Этот проект поддерживает хранение данных в 4-х разных форматах</span>
+        <div class="page-about__name"></div>
+        <div class="page-about__content">
+            <div class="page-about__content info">
+                <span class="info">Этот проект поддерживает хранение данных в 4-х разных форматах</span>
+            </div>
+            <div class="page-about__content forms">
+                <label class="forms__form-one">CSV</label>
+                <label class="forms__form-two">JSON</label>
+                <label class="forms__form-three">YAML</label>
+                <label class="forms__form-four">XML</label>
+            </div>
+            <div class="page-about__content gifs">
+                <img class="gifs__gif-one" src="masyanya-wait.gif" alt="">
+                <img class="gifs__gif-two" src="masyanya-love.gif" alt="">
+            </div>
         </div>
-        <div class="page-about__content forms">
-            <label class="forms__form-one">CSV</label>
-            <label class="forms__form-two">JSON</label>
-            <label class="forms__form-three">YAML</label>
-            <label class="forms__form-four">XML</label>
-        </div>
-        <div class="page-about__content gifs">
-            <img class="gifs__gif-one" src="masyanya-wait.gif" alt="">
-            <img class="gifs__gif-two" src="masyanya-love.gif" alt="">
-        </div>
-    </div>
-</section>
+    </section>
 </main>
 <footer></footer>
-<script src="main.js"></script>
 
+<script type="text/javascript" src="index.js"></script>
 </body>
 </html>
