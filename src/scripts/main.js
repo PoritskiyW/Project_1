@@ -17,6 +17,25 @@ function route(id) {
 
 //////////////////////////////////////////////////////////////////////////////////
 //page home functions
+function modal() {
+    let modal = document.getElementById("MODAL");
+    let btn = document.getElementById("BTN");
+    let span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 //page questions functions

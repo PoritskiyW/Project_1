@@ -2,6 +2,7 @@
 //добавить в home page данные с information.json
 const infoDeveloper = document.getElementById('info-developer');
 
+
 fetch('../information.json')
     .then((response) => {
         return response.json();
@@ -23,7 +24,7 @@ function fillForm(human) {
         mySection.innerHTML = `
         <img src="${item.images}" alt='person'/>
         <p>Name: ${item.name}</p>
-         <p>Surname: ${item.surname}</p>
+        <p>Surname: ${item.surname}</p>
         <p>Gender: ${item.sex}</p>
         <p>Age: ${item.age}</p>
         <p>Weight: ${item.weight}</p>

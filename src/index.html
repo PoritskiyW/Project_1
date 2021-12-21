@@ -22,22 +22,27 @@
 
 <main>
     <section id="page-home">
-        <div id="info-developer"></div>
-        <button class="add button" id="show-change" type="button">Change participant data</button>
-        <!--         modal -->
-        <!--        <section class="modal">-->
-        <!--            <div class="modal__container">-->
-        <!--                <form class="form-questions">-->
-        <!--                    <button class="form-questions__exit" name="exit" type="button">x</button>-->
-        <!--                    <div class="form-questions__message"></div>-->
-        <!--                    <div>test</div>-->
-        <!--                    <div  class="form-questions__buttons-group">-->
-        <!--                        <button class="button" type="button" name="edit">edit</button>-->
-        <!--                        <button class="button" type="submit">save</button>-->
-        <!--                    </div>-->
-        <!--                </form>-->
-        <!--            </div>-->
-        <!--        </section>-->
+        <div id="info-developer">
+
+        </div>
+        <div class="modal__edit__window">
+            <button id="BTN" class="modal__edit" type="button" onclick="modal">Change participant data</button>
+            <div id="MODAL" class="modal">
+                <div class="modal-content">
+                    <div class="modal_header">
+                        <span class="close">&times;</span>
+                        <h1>Change info about users</h1>
+                    </div>
+                    <div class="modal-body">
+                        <p>Некоторый текст в модальном теле</p>
+                        <p>Какой-то другой текст...</p>
+                    </div>
+                    <div class="modal-footer">
+                        <h3>Модальный нижний колонтитул</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
   </section>
     <section id="page-questions">
         <label>
