@@ -1,0 +1,78 @@
+.add {
+  color: white;
+  background: no-repeat;
+  border: none;
+  cursor: pointer;
+}
+
+.form-questions {
+  min-width: 280px;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 5px 5px 70px;
+  background: white url(https://en.js.cx/clipart/prompt.png) no-repeat left 5px;
+  position: relative;
+}
+.form-questions input {
+  cursor: pointer;
+}
+.form-questions__input {
+  border: 3px double skyblue;
+}
+.form-questions__input:focus, .form-questions__input:focus-visible {
+  outline: skyblue;
+  border: 3px double lightblue;
+}
+.form-questions__exit {
+  color: black;
+  background: no-repeat;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+}
+.form-questions__title {
+  display: block;
+  text-align: left;
+  padding: 15px;
+}
+.form-questions__buttons-group {
+  text-align: left;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 101;
+  display: none;
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+.modal:before {
+  display: inline-block;
+  height: 100%;
+  content: "";
+  vertical-align: middle;
+}
+.modal__container {
+  display: inline-block;
+  border: 1px solid black;
+  vertical-align: middle;
+  min-width: 280px;
+  max-width: 550px;
+}
+
+#cover-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  opacity: 0.3;
+  cursor: no-drop;
+}
