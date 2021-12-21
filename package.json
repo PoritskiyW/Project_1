@@ -14,6 +14,7 @@
   "scripts": {
     "cmd": "gulp",
     "build": "yarn cmd default",
-    "watch": "yarn cmd watch"
+    "watch": "yarn cmd watch",
+    "start": "node server"
   }
 }
