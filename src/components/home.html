@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../index.css" rel="stylesheet">
+    <title>Home</title>
+</head>
+<body>
+<header class="header">
+    <img class="header__logo" alt="logo" style="border-radius: 10px; width: 80px;"
+         src="https://img.genial.ly/5f89a55dbce4d50f7480c1f6/6503b195-b167-4705-b96b-97243ce67c21.gif?602d5d218af1fa10335c4fdf&1639939212268"/>
+    <p class="header__team">Джаваскриптизеры</p>
+    <nav class="header__navigation navigation">
+        <a href="home.html" class="navigation__link">HOME</a>
+        <a href="question.html" class="navigation__link">QUESTIONS</a>
+        <a href="about.html" class="navigation__link">ABOUT</a>
+    </nav>
+</header>
+
+<section class="page-home" id="page-home">
+    <div id="info-developer"></div>
+    <button class="add button" id="show-change" type="button">Change participant data</button>
+
+    <button id="modal-home" class="button">Open Modal</button>
+    <div id="my-modal-home" class="modal">
+        <div class="modal_content">
+            <span class="close-modal">×</span>
+            <p>Модальное окно!</p>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="../index.js"></script>
+<script>
+    const modalHome = document.getElementById("modal-home");
+    const myModal = document.getElementById("my-modal-home");
+    const closeMyModal = document.getElementsByClassName("close-modal")[0];
+
+    modalHome.onclick = function () {
+        myModal.style.display = "grid";
+    }
+
+    closeMyModal.onclick = function () {
+        myModal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        if (event.target == myModal) {
+            myModal.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>
