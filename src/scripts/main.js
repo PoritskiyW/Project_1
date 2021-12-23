@@ -17,13 +17,13 @@ function route(id) {
 
 //////////////////////////////////////////////////////////////////////////////////
 //page home functions
-function modal() {
+function modal01() {
     let modal = document.getElementById("MODAL");
     let btn = document.getElementById("BTN");
     let span = document.getElementsByClassName("close")[0];
 
     btn.onclick = function() {
-        modal.style.display = "block";
+        modal.style.display = "grid";
     }
 
     span.onclick = function() {
@@ -36,7 +36,66 @@ function modal() {
         }
     }
 }
+function modal02() {
+    let modal = document.getElementById("MODAL2");
+    let btn = document.getElementById("BTN2");
+    let span = document.getElementsByClassName("close2")[0];
 
+    btn.onclick = function() {
+        modal.style.display = "grid";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+
+}
+function modal03() {
+    let modal3 = document.getElementById("MODAL3");
+    let btn3 = document.getElementById("BTN3");
+    let span3 = document.getElementsByClassName("close3")[0];
+
+    btn3.onclick = function() {
+        modal3.style.display = "grid";
+    }
+
+    span3.onclick = function() {
+        modal3.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target === modal3) {
+            modal3.style.display = "none";
+        }
+    }
+
+}
+function modal04() {
+    let modal4 = document.getElementById("MODAL4");
+    let btn4 = document.getElementById("BTN4");
+    let span4 = document.getElementsByClassName("close4")[0];
+
+    btn4.onclick = function() {
+        modal4.style.display = "grid";
+    }
+
+    span4.onclick = function() {
+        modal4.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target === modal4) {
+            modal4.style.display = "none";
+        }
+    }
+
+}
 //////////////////////////////////////////////////////////////////////////////////
 //page questions functions
 function showCover() {

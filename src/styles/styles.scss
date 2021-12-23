@@ -1,7 +1,6 @@
 @import "about";
 @import "questions";
 @import "_variables";
-@import "home";
 
 * {
   box-sizing: border-box;
@@ -49,6 +48,7 @@ header {
     border: 5px double $main-color;
   }
 }
+
 
 #info-developer {
   display: flex;
