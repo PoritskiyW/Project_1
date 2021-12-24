@@ -1,0 +1,9 @@
+@mixin toggle($color) {
+  color: $color;
+  background: no-repeat;
+  border: none;
+  cursor: pointer;
+}
+
+$main-color: darkorange;
+

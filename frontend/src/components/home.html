@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="../index.css" rel="stylesheet">
+
+    <title>Home</title>
+</head>
+<body>
+<header class="header">
+    <img class="header__logo" alt="logo" style="border-radius: 10px; width: 80px;"
+         src="https://img.genial.ly/5f89a55dbce4d50f7480c1f6/6503b195-b167-4705-b96b-97243ce67c21.gif?602d5d218af1fa10335c4fdf&1639939212268"/>
+    <p class="header__team">Джаваскриптизеры</p>
+    <nav class="header__navigation navigation">
+
+        <a href="home.html" class="navigation__link">HOME</a>
+        <a href="question.html" class="navigation__link">QUESTIONS</a>
+        <a href="about.html" class="navigation__link">ABOUT</a>
+    </nav>
+</header>
+
+<section class="page-home" id="page-home">
+    <div id="info-developer">
+        <section id="1">
+            <img src="masyanya-wait.gif" alt="person">
+            <p>Name: Viacheslav</p>
+            <p>Surname: </p>
+            <p>Gender: Male</p>
+            <p>Age: 23</p>
+            <p>Weight: 60</p>
+            <p>Height: 170</p>
+            <p>Birthday: October 29, 1998</p>
+            <p>Locations: Kharkov</p>
+            <p>Hobby: music, anime, hiking</p>
+            <div class="modal__edit__window">
+                <button id="BTN" class="modal__edit-1" type="button" onclick="modal01()">Change participant data</button>
+                <div id="MODAL" class="modal">
+                    <div class="modal-content">
+                        <div class="modal_header">
+                            <span id="close" class="close">&times;</span>
+                            <h1>Change info about users</h1>
+                        </div>
+                        <div class="modal-body">
+                            <p>Некоторый текст в модальном теле</p>
+                            <p>Какой-то другой текст...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="2">
+            <img src="masyanya-wait.gif" alt="person">
+            <p>Name: Viktoria</p>
+            <p>Surname: Bereziuk</p>
+            <p>Gender: Female</p>
+            <p>Age: 26</p>
+            <p>Weight: 65</p>
+            <p>Height: 165</p>
+            <p>Birthday: July 20, 1995</p>
+            <p>Locations: Kharkov</p>
+            <p>Hobby: Travel, gum, cinema, hiking, music</p>
+            <div class="modal__edit__window">
+                <button id="BTN2" class="modal__edit-2" type="button" onclick="modal02()">Change participant data</button>
+                <div id="MODAL2" class="modal">
+                    <div class="modal-content">
+                        <div class="modal_header">
+                            <span id="close2" class="close2">&times;</span>
+                            <h1>Change info about users</h1>
+                        </div>
+                        <div class="modal-body">
+                            <p>Некоторый текст в модальном теле</p>
+                            <p>Какой-то другой текст...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="3">
+            <img src="masyanya-wait.gif" alt="person">
+            <p>Name: Yehor</p>
+            <p>Surname: </p>
+            <p>Gender: Male</p>
+            <p>Age: 18</p>
+            <p>Weight: 60</p>
+            <p>Height: 170</p>
+            <p>Birthday: July 24, 2003</p>
+            <p>Locations: Kharkov</p>
+            <p>Hobby: games, music, reading, technologies</p>
+            <div class="modal__edit__window">
+                <button id="BTN3" class="modal__edit-3" type="button" onclick="modal03()">Change participant data</button>
+                <div id="MODAL3" class="modal">
+                    <div class="modal-content">
+                        <div class="modal_header">
+                            <span id="close3" class="close3">&times;</span>
+                            <h1>Change info about users</h1>
+                        </div>
+                        <div class="modal-body">
+                            <p>Некоторый текст в модальном теле</p>
+                            <p>Какой-то другой текст...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="4">
+            <img src="masyanya-wait.gif" alt="person">
+            <p>Name: Vladyslav</p>
+            <p>Surname: </p>
+            <p>Gender: Male</p>
+            <p>Age: 21</p>
+            <p>Weight: 60</p>
+            <p>Height: 170</p>
+            <p>Birthday: May 2, 2000</p>
+            <p>Locations: Kharkov</p>
+            <p>Hobby: MMO games</p>
+            <div class="modal__edit__window">
+                <button id="BTN4" class="modal__edit-4" type="button" onclick="modal04()">Change participant data</button>
+                <div id="MODAL4" class="modal">
+                    <div class="modal-content">
+                        <div class="modal_header">
+                            <span id="close4" class="close4">&times;</span>
+                            <h1>Change info about users</h1>
+                        </div>
+                        <div class="modal-body">
+                            <p>Некоторый текст в модальном теле</p>
+                            <p>Какой-то другой текст...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</section>
+
+<script type="text/javascript" src="../index.js"></script>
+<script>
+    function modal01() {
+        let modal = document.getElementById("MODAL");
+        let btn = document.getElementById("BTN");
+        let span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "grid";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+    function modal02() {
+        let modal = document.getElementById("MODAL2");
+        let btn = document.getElementById("BTN2");
+        let span = document.getElementsByClassName("close2")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "grid";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+    }
+    function modal03() {
+        let modal3 = document.getElementById("MODAL3");
+        let btn3 = document.getElementById("BTN3");
+        let span3 = document.getElementsByClassName("close3")[0];
+
+        btn3.onclick = function() {
+            modal3.style.display = "grid";
+        }
+
+        span3.onclick = function() {
+            modal3.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal3) {
+                modal3.style.display = "none";
+            }
+        }
+
+    }
+    function modal04() {
+        let modal4 = document.getElementById("MODAL4");
+        let btn4 = document.getElementById("BTN4");
+        let span4 = document.getElementsByClassName("close4")[0];
+
+        btn4.onclick = function() {
+            modal4.style.display = "grid";
+        }
+
+        span4.onclick = function() {
+            modal4.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal4) {
+                modal4.style.display = "none";
+            }
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

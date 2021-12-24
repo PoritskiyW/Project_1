@@ -1,0 +1,23 @@
+{
+  "name": "Project_1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/PoritskiyW/Project_1.git",
+  "author": "Poritskiy W <PoritskiyW@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.45.0"
+  },
+  "scripts": {
+    "cmd": "gulp",
+    "build": "yarn cmd default",
+    "watch": "yarn cmd watch",
+
+    "start": "node server/server"
+
+  }
+}
