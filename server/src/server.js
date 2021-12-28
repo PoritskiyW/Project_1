@@ -1,16 +1,10 @@
-import express from 'express';
-import path from 'path';
-//const express = require('express');
+const express = require('express');
+const path  = require('path');
 
-const __dirname = path.resolve();
+const dataFill = require('./modules/dataFill.js');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
-// const homeRoutes = require('./routes/home');
-// const aboutRoutes = require('./routes/about');
-// const questionRoutes = require('./routes/questions');
-// app.use('/', homeRoutes);
-// app.use('/about', aboutRoutes);
-// app.use('/questions', questionRoutes);
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'static', './../../web/dist/views/home.html'));
@@ -24,4 +18,5 @@ app.get('/download', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+    dataFill();
 });
