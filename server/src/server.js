@@ -1,14 +1,18 @@
 const express = require('express');
-
 const path = require('path');
 const cors = require('cors');
+const dataFill = require('./modules/dataFill');
 //let question = require('./questions.json');
 //TODO: Переделать чтение и запись файлов на папку дата + убрать require на файле
+const parse = require('./modules/questionData')
 
 const server = express();
 
 const PORT = process.env.PORT || 3000;
 
+
+
+/*
 //'Access-Control-Allow-Origin'
 server.use(cors);
 
@@ -56,7 +60,7 @@ server.delete('/deleteQuestion', (request, response) => {
         response.status(404);
         response.end();
     }
-})
+})*/
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
