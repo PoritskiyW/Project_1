@@ -1,47 +1,109 @@
 const fs = require('fs');
-const path = require('path');
 
+//////////////////////////////////////////////////////////////////
+//File reading section
 
-class questionData {
+function parse(formatStr) {
+    let file;
+    let result;
 
-    constructor(question, theme, answer, fileSystem, dateModify) {
+    switch (formatStr){
+        case 'XML':
+            file = fs.readFileSync('./data/questions.xml', 'utf-8');
+            break;
+        case 'JSON':
+            file = fs.readFileSync('./data/questions.json', 'utf-8');
+            result = parseJSON(file);
+            break;
+        case 'YAML':
+            file = fs.readFileSync('./data/questions.yaml', 'utf-8');
+            break;
+        case 'CSV':
+            file = fs.readFileSync('./data/questions.csv', 'utf-8');
+            break;
+    }
+    return result;
+}
 
-        this.question = question;
-        this.theme = theme;
-        this.answer = answer;
-        this.fileSystem = fileSystem;
-        this.dateModify = dateModify;
+function writeFile(formatArray, jsonData) {
+    let file;
 
+    for (let i = 0; i < formatArray.length; i++) {
+        switch (formatArray[i]){
+            case 'XML':
+                file = fs.readFileSync('./data/questions.xml', 'utf-8');
+                fs.writeFile('./data/questions.xml', getXML(), (e) => {
+
+                    if(e) {
+                        throw e;
+                    } else {
+                        console.log('success');
+                    }
+                });
+                break;
+            case 'JSON':
+                file = fs.readFileSync('./data/questions.json', 'utf-8');
+                break;
+            case 'YAML':
+                file = fs.readFileSync('./data/questions.yaml', 'utf-8');
+                break;
+            case 'CSV':
+                file = fs.readFileSync('./data/questions.csv', 'utf-8');
+                break;
+        }
     }
 
-    question;
-    theme;
-    answer;
-    fileSystem;
-    dateModify;
 
-    getJSON() {
 
-        return JSON.stringify(this.valueOf())
+}
+
+function parseJSON(file) {
+    return JSON.parse(file);
+}
+
+
+
+function parseYAML(file) {
+
+    let result = [];
+
+
+    let YAMLArr = file.split('\n');
+    let fileSystemArr = [];
+
+    for (let i = 0; i < YAMLArr.length; i++) {
+        let partResult = YAMLArr[i].replace(' ', '').split(':');
+
+        if (partResult[0] === 'question') {
+            this.question = partResult[1];
+        } else if (partResult[0] === 'theme') {
+            this.theme = partResult[1];
+        } else if (partResult[0] === 'answer') {
+
+            if (partResult[1] === 'true') {
+                this.answer = true;
+            } else {
+                this.answer = false;
+            }
+        } else if (partResult[0] === 'fileSystem') {
+            for (let j = 1; j < 6; j++) {
+                partResult = YAMLArr[i + j].replace('-', '').replaceAll(' ', '');
+
+                if (partResult.includes(':')) {
+                    break;
+                } else {
+                    fileSystemArr.push(partResult);
+                }
+            }
+            this.fileSystem = fileSystemArr;
+
+        } else if (partResult[0] === 'dateModify') {
+            this.dateModify = partResult[1];
+        }
     }
 }
 
-console.log(new questionData('question', 'theme', 'answer', 'fileSystem', 'dateModify').getJSON());
 
-getJSON = function () {
-
-    return JSON.stringify(this.valueOf())
-}
-
-parseJSON = function (JSONStr) {
-
-    let JSONObj = JSON.parse(JSONStr);
-    this.question = JSONObj.question;
-    this.theme = JSONObj.theme;
-    this.answer = JSONObj.answer;
-    this.fileSystem = JSONObj.fileSystem;
-    this.dateModify = JSONObj.dateModify;
-}
 
 getCSV = function () {
 
@@ -143,56 +205,7 @@ parseXML = function (XMLStr) {
     this.dateModify = JSONObj.dateModify;*/
 }
 
-parseYAML = function (YAMLStr) {
 
-    let YAMLArr = YAMLStr.split('\n');
-    let fileSystemArr = [];
-
-    for (let i = 0; i < YAMLArr.length; i++) {
-
-        let partResult = YAMLArr[i].replace(' ', '').split(':');
-
-        if (partResult[0] === 'question') {
-
-            this.question = partResult[1];
-
-        } else if (partResult[0] === 'theme') {
-
-            this.theme = partResult[1];
-
-        } else if (partResult[0] === 'answer') {
-
-            if (partResult[1] === 'true') {
-
-                this.answer = true;
-
-            } else {
-
-                this.answer = false;
-            }
-        } else if (partResult[0] === 'fileSystem') {
-
-            for (let j = 1; j < 6; j++) {
-
-                partResult = YAMLArr[i + j].replace('-', '').replaceAll(' ', '');
-
-                if (partResult.includes(':')) {
-
-                    break;
-
-                } else {
-
-                    fileSystemArr.push(partResult);
-                }
-            }
-            this.fileSystem = fileSystemArr;
-
-        } else if (partResult[0] === 'dateModify') {
-
-            this.dateModify = partResult[1];
-        }
-    }
-}
 
 getYAML = function () {
 
@@ -221,3 +234,5 @@ getYAML = function () {
     }
     return result;
 }
+
+module.exports = {parse, writeFile};
