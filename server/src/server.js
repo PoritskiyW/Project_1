@@ -2,7 +2,7 @@ const express = require('express');
 
 const path = require('path');
 const cors = require('cors');
-let question = require('./questions.json');
+//let question = require('./questions.json');
 //TODO: Переделать чтение и запись файлов на папку дата + убрать require на файле
 
 const server = express();
@@ -10,7 +10,7 @@ const server = express();
 const PORT = process.env.PORT || 3000;
 
 //'Access-Control-Allow-Origin'
-server.use(cors());
+server.use(cors);
 
 server.get('/', (req, res) => {
     res.sendFile(path.resolve(path.resolve(), 'static', './../../web/dist/views/home.html'));

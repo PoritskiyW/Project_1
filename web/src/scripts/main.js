@@ -13,3 +13,7 @@ function route(id) {
     aboutPage.hidden = true;
     showPage.hidden = false;
 }
+
+window.onload = () => {
+    route('page-home');
+}
