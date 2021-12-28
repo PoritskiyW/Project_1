@@ -5,8 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-<!--    <link href="./../../../web/dist/index.css" type="text/css" rel="stylesheet">-->
+    <link href="./../index.css" type="text/css" rel="stylesheet">
 
     <title>Home</title>
 </head>
@@ -52,27 +51,18 @@
         <option name="theme3">theme 3</option>
         <option name="theme4">theme 4</option>
     </select>
-    <button type="submit" class="button" onclick="fileSystem()">Search</button>
-    <button class="add button" id="show-button" type="button">
+    <button type="submit" class="button" onclick="myLocalStorage()">Search</button>
+    <button class="add button" id="show-button" onclick="modalQuestion()" type="button">
         <abbr title="Add new question">+</abbr>
     </button>
     <section class="modal" id="modal">
         <div class="modal_content">
             <form class="form-questions" id="get-form-questions">
-                <button class="form-questions__exit" type="button">x</button>
-                <div class="form-questions__message"></div>
-                <label class="form-questions__title" for="getQuestion">Questions:</label>
-                <textarea name="details" maxlength='250' autofocus tabindex="0" id="getQuestion"
+                <button class="form-questions__exit" onclick="closedModal()" type="submit">x</button>
+                <label class="form-questions__title" for="form-questions__question">Questions:</label>
+                <textarea name="details" maxlength='250' autofocus tabindex="0" id="form-questions__question"
                           placeholder="Your question ..." cols="30" rows="5"></textarea>
                 <div>Select from the list of topics:</div>
-                <select name="theme" id="modal__theme">
-                    <option selected disabled>Select theme</option>
-                    <option value="all">all</option>
-                    <option value="theme1">theme 1</option>
-                    <option value="theme2">theme 2</option>
-                    <option value="theme3">theme 3</option>
-                    <option value="theme4">theme 4</option>
-                </select>
                 <label class="form-questions__title" for="form-questions__theme">If you don't like it, write your
                     topic:</label>
                 <input class="form-questions__input" tabindex="1" id="form-questions__theme" name="text" type="text"
@@ -87,29 +77,29 @@
                     </label>
                 </div>
                 <label class="form-questions__title">File system</label>
-                <div class="form-questions__buttons-group">
+                <div class="form-questions__type questions__type">
                     <label>
-                        <input type="checkbox" name="format" value="false">CSV
+                        <input type="checkbox" id="questions__type--JSON" name="fileSystem">JSON
                     </label>
                     <label>
-                        <input type="checkbox" name="format" value="false">JSON
+                        <input type="checkbox" id="question__type-CSV" name="fileSystem">CSV
                     </label>
                     <label>
-                        <input type="checkbox" name="format" value="false">XML
+                        <input type="checkbox" id="question__type-XML" name="fileSystem">XML
                     </label>
                     <label>
-                        <input type="checkbox" name="format" value="false">YAML
+                        <input type="checkbox" id="question__type-YAML" name="fileSystem">YAML
                     </label>
                 </div>
                 <div class="form-questions__buttons-group">
-                    <button class="button form-questions__cansel" type="button">cancel</button>
-                    <button class="button" type="button">save</button>
+                    <button class="button form-questions__cansel" onclick="closedModal()" type="submit">cancel</button>
+                    <button class="button" type="submit" onclick="postQuestions()">save</button>
                 </div>
             </form>
         </div>
     </section>
     <section class="page-questions__add add">
-        <p class="add__question">list of questions</p>
+        <p class="add__question" id="question-list">list of questions</p>
         <a href="/download" target="_blank">Download this pade</a>
     </section>
     <section>
@@ -139,92 +129,6 @@
     </div>
 </section>
 
-<!--<script type="text/javascript" src="../index.js"></script>-->
-<script>
-    function modal01() {
-        let modal = document.getElementById("MODAL");
-        let btn = document.getElementById("BTN");
-        let span = document.getElementsByClassName("close")[0];
-
-        btn.onclick = function () {
-            modal.style.display = "grid";
-        }
-
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
-    }
-
-    function modal02() {
-        let modal = document.getElementById("MODAL2");
-        let btn = document.getElementById("BTN2");
-        let span = document.getElementsByClassName("close2")[0];
-
-        btn.onclick = function () {
-            modal.style.display = "grid";
-        }
-
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
-
-    }
-
-    function modal03() {
-        let modal3 = document.getElementById("MODAL3");
-        let btn3 = document.getElementById("BTN3");
-        let span3 = document.getElementsByClassName("close3")[0];
-
-        btn3.onclick = function () {
-            modal3.style.display = "grid";
-        }
-
-        span3.onclick = function () {
-            modal3.style.display = "none";
-        }
-
-        window.onclick = function (event) {
-            if (event.target === modal3) {
-                modal3.style.display = "none";
-            }
-        }
-
-    }
-
-    function modal04() {
-        let modal4 = document.getElementById("MODAL4");
-        let btn4 = document.getElementById("BTN4");
-        let span4 = document.getElementsByClassName("close4")[0];
-
-        btn4.onclick = function () {
-            modal4.style.display = "grid";
-        }
-
-        span4.onclick = function () {
-            modal4.style.display = "none";
-        }
-
-        window.onclick = function (event) {
-            if (event.target === modal4) {
-                modal4.style.display = "none";
-            }
-        }
-
-    }
-
-</script>
-
+<script type="text/javascript" src="../index.js"></script>
 </body>
 </html>
