@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 let question = require('./questions.json');
+//TODO: Переделать чтение и запись файлов на папку дата + убрать require на файле
 
 const server = express();
 const PORT = process.env.PORT || 3000;
@@ -34,7 +35,7 @@ server.post('/addQuestion', (request, response) => {
         theme: request.body.theme,
         answer: request.body.boolean,
         fileSystem: request.body.fileSystem,
-        dateModify: new Date()
+        dateModify: new Date() //Дату добавлять на фронте и передавать в JSON на бэк
     };
     question.questions.push(addQuestion);
     console.log(request.body);
