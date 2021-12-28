@@ -19,9 +19,7 @@ gulpfile.task('sass', function(cb) {
 
 gulpfile.task('copy:html', function (cb) {
     gulp.src('./src/views/*.html')
-
         .pipe(gulp.dest('./dist/views'))
-
     cb()
 })
 
