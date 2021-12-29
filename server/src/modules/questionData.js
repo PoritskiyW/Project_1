@@ -52,15 +52,98 @@ function writeFile(formatArray, jsonData) {
                 break;
         }
     }
-
-
-
 }
 
 function parseJSON(file) {
     return JSON.parse(file);
 }
 
+
+// Для XML
+
+/*<?xml version="1.0" encoding="UTF-8" ?> // Обязательно
+<root> //Обязательно
+    <questions> //Обязательно
+        <question>
+            <id>1</id>
+            <question>questionAsk1</question>
+            <theme>theme1</theme>
+            <answer>true</answer>
+            <dateModify></dateModify>
+        </question>
+        <question>
+            <id>1</id>
+            <question>questionAsk1</question>
+            <theme>theme1</theme>
+            <answer>true</answer>
+            <dateModify></dateModify>
+        </question>
+        <question>
+            <id>1</id>
+            <question>questionAsk1</question>
+            <theme>theme1</theme>
+            <answer>true</answer>
+            <dateModify></dateModify>
+        </question>
+    </questions> //Обязательно
+</root>*/ //Обязательно
+
+// Для YAML
+
+/*---
+questions: // Тут всегда должен быть идентификатор массива
+- id: 1
+  question: questionAsk1
+  theme: theme1
+  answer: 'true'
+  dateModify: ''
+- id: 1
+  question: questionAsk1
+  theme: theme1
+  answer: 'true'
+  dateModify: ''
+- id: 1
+  question: questionAsk1
+  theme: theme1
+  answer: 'true'
+  dateModify: ''
+
+ Для CSV
+
+ id,questionAsk,theme,answer,dateModify //Тут всегда должна быть строка с параметрами
+1,questionAsk1,theme1,true,
+1,questionAsk1,theme1,true,
+1,questionAsk1,theme1,true,
+
+
+//При парсе из файла я хочу получить JSON ===>>
+
+{
+  "questions": [
+    {
+      "id": 1,
+      "questionAsk": "questionAsk1",
+      "theme": "theme1",
+      "answer": "true",
+      "dateModify": ""
+    },
+    {
+      "id": 1,
+      "questionAsk": "questionAsk1",
+      "theme": "theme1",
+      "answer": "true",
+      "dateModify": ""
+    },
+    {
+      "id": 1,
+      "questionAsk": "questionAsk1",
+      "theme": "theme1",
+      "answer": "true",
+      "dateModify": ""
+    }]}
+
+   // При записи в файл мы из JSON получаем формат представленный выше.
+*/
 
 
 function parseYAML(file) {
@@ -213,21 +296,16 @@ getYAML = function () {
     let result = ``;
 
     for (const JSONKey in JSONObj) {
-
         if (typeof JSONObj[JSONKey] !== "function") {
-
             if (typeof JSONObj[JSONKey] === "object") {
-
                 let partData = JSONObj[JSONKey]
                 let partResult = `${JSONKey}: \n`;
-
                 for (let i = 0; i < partData.length; i++) {
 
                     partResult += `    - ${partData[i]} \n`
                 }
                 result += partResult;
             } else {
-
                 result += `${JSONKey}: ${JSONObj[JSONKey]} \n`
             }
         }
