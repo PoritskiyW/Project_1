@@ -10,9 +10,8 @@ function getQuestionsList() {
         })
         .catch(error => {
             throw(error);
-            console.log(error);
         })
-};
+}
 
 getQuestionsList();
 
@@ -26,12 +25,11 @@ function questionsList(data) {
 
         myUl.id = `${el.id}`;
         myUl.innerHTML = `
-            <li>${el.questionAsk}</li>
-            <li>${el.answer}</li>
-            <li>${el.theme}</li>
-            <li>${el.fileSystem}</li>
-            <li>${el.dateModify}</li>
-            <li><button type="submit" onclick="deleteQuestion()">Delete question</button></li>`
+            <li><button type='submit' class='question__delete' onclick='modalDeleteQuestion()'>x</button></li>
+            <li>Question: ${el.questionAsk}</li>
+            <li>Answer: ${el.answer}</li>
+            <li>Theme question: ${el.theme}</li>
+            <li class='question__date'>Date: ${el.dateModify}</li>`
 
         questionList.appendChild(myUl);
         return questionList;
@@ -40,16 +38,22 @@ function questionsList(data) {
 
 //modal question
 function modalQuestion() {
-    const myModal = document.getElementById("modal");
-    myModal.style.display = "grid";
+    const myModal = document.getElementById('modal');
+    myModal.style.display = 'grid';
 }
 
 function closedModal() {
-    const myModal = document.getElementById("modal");
-    myModal.style.display = "none";
+    const myModal = document.getElementById('modal');
+    myModal.style.display = 'none';
+    route('page-questions');
+}
+// modal delete question   TODO: open modal
+function modalDeleteQuestion() {
+    const myModal = document.getElementById("deleteQuestion");
+    myModal.style.display = 'grid';
 }
 
-// local storage
+//TODO: local storage
 function myLocalStorage() {
     const myTheme = document.getElementById('theme');
     const myFileSystem = document.getElementById('file-system');
@@ -69,7 +73,7 @@ function myLocalStorage() {
 
 //post questions
 function postQuestions() {
-    const myModal = document.getElementById("modal");
+    const myModal = document.getElementById('modal');
     const questionAsk = document.getElementById('form-questions__question').value;
     const theme = document.getElementById('form-questions__theme').value;
     const answer = document.forms['get-form-questions'].getElementsByClassName('radio');
@@ -80,10 +84,10 @@ function postQuestions() {
     // if(checkbox.value) {
     //     fileSystem.push(this.value)
     // }
-    // const JSON = document.getElementById("question__type-JSON");
-    // const XML = document.getElementById("question__type-XML");
-    // const YAML = document.getElementById("question__type-YAML");
-    // const CSV = document.getElementById("question__type-CSV");
+    // const JSON = document.getElementById('question__type-JSON');
+    // const XML = document.getElementById('question__type-XML');
+    // const YAML = document.getElementById('question__type-YAML');
+    // const CSV = document.getElementById('question__type-CSV');
 
     fetch('http://localhost:3000/addQuestion', {
         method: 'POST',
@@ -98,12 +102,11 @@ function postQuestions() {
     })
         .then((data) => {
             console.log(data);
-            myModal.style.display = "none";
+            myModal.style.display = 'none';
             getQuestionsList();
         })
         .catch(error => {
             throw(error);
-            console.log(error);
         })
 }
 
@@ -125,6 +128,5 @@ function deleteQuestion(id) {
         }) // Manipulate the data retrieved back, if we want to do something with it
         .catch(error => {
             throw(error);
-            console.log(error);
         }) // Do something with the error
-};
+}

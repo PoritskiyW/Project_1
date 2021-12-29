@@ -36,25 +36,50 @@
 
 <section class="page-questions" id="page-questions">
     <select name="file-system" id="file-system">
-        <option selected disabled>Select file system</option>
-        <option value="all">all</option>
-        <option value="JSON">JSON</option>
+        <option disabled>Select file system</option>
+        <option selected value="JSON">JSON</option>
         <option value="YML">YML</option>
         <option value="CVS">CVS</option>
         <option value="XML">XML</option>
     </select>
-    <select name="theme" id="theme">
-        <option selected disabled>Select theme</option>
-        <option name="all">all</option>
-        <option name="theme1" value="theme1">theme 1</option>
-        <option name="theme2">theme 2</option>
-        <option name="theme3">theme 3</option>
-        <option name="theme4">theme 4</option>
+    <select id="theme">
+        <option disabled>Select theme</option>
+        <option selected value="ALL">ALL</option>
+        <option value="HTML">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="JAVASCRIPT">JAVASCRIPT</option>
+        <option value="GIT">GIT</option>
+        <option value="REACT">REACT</option>
     </select>
     <button type="submit" class="button" onclick="myLocalStorage()">Search</button>
     <button class="add button" id="show-button" onclick="modalQuestion()" type="button">
         <abbr title="Add new question">+</abbr>
     </button>
+    <section class="page-questions__add add">
+        <!--        <p class="add__question" id="question-list">There are no questions</p>-->
+        <!--        //test ==>-->
+        <ul>
+            <li>
+                <button type="submit" class="question__delete" onclick="deleteQuestion()">x</button>
+            </li>
+            <li class="question__ask">Question: ggggggggggggggggggggggggggggggggggggg gggggggggggggggggggggggggggggggggggggg ggggg
+                gggggggggggggggggggggggg gjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+                jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb bbbbbbbbbbbbbbbbbb
+            </li>
+            <li>Answer: ${el.answer}</li>
+            <li>Theme question: ${el.theme}</li>
+            <li class="question__date">Date: ${el.dateModify}</li>
+        </ul>
+        <ul>
+            <li>
+                <button type="submit" class="question__delete" onclick="deleteQuestion()">x</button>
+            </li>
+            <li>Question: ${el.questionAsk}</li>
+            <li>Answer: ${el.answer}</li>
+            <li>Theme question: ${el.theme}</li>
+            <li class="question__date">${el.dateModify}</li>
+        </ul>
+    </section>
     <section class="modal" id="modal">
         <div class="modal_content">
             <form class="form-questions" id="get-form-questions">
@@ -62,11 +87,14 @@
                 <label class="form-questions__title" for="form-questions__question">Questions:</label>
                 <textarea name="details" maxlength='250' autofocus tabindex="0" id="form-questions__question"
                           placeholder="Your question ..." cols="30" rows="5"></textarea>
-                <div>Select from the list of topics:</div>
-                <label class="form-questions__title" for="form-questions__theme">If you don't like it, write your
-                    topic:</label>
-                <input class="form-questions__input" tabindex="1" id="form-questions__theme" name="text" type="text"
-                       placeholder="yuor theme">
+                <select id="modalTheme">
+                    <option selected disabled>Select theme</option>
+                    <option value="HTML">HTML</option>
+                    <option value="CSS">CSS</option>
+                    <option value="JAVASCRIPT">JAVASCRIPT</option>
+                    <option value="GIT">GIT</option>
+                    <option value="REACT">REACT</option>
+                </select>
                 <div class="form-questions__title">Answer</div>
                 <div class="form-questions__buttons-group">
                     <label>
@@ -93,17 +121,17 @@
                 </div>
                 <div class="form-questions__buttons-group">
                     <button class="button form-questions__cansel" onclick="closedModal()" type="submit">cancel</button>
-                    <button class="button" type="submit" onclick="postQuestions()">save</button>
+                    <button class="button" type="submit" disabled="disabled" onclick="postQuestions()">save</button>
                 </div>
             </form>
         </div>
     </section>
-    <section class="page-questions__add add">
-        <p class="add__question" id="question-list">list of questions</p>
-        <a href="/download" target="_blank">Download this pade</a>
-    </section>
-    <section>
-        <template id="question-template"></template>
+    <section class="modal" id="deleteQuestion">
+        <div class="modal_content">
+            <p>Are you sure you want to delete this question?</p>
+            <button class="button" type="button" onclick="deleteQuestion()">confirm</button>
+            <button class="button" type="button">cancel</button>
+        </div>
     </section>
 </section>
 
