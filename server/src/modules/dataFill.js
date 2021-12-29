@@ -80,13 +80,7 @@ function createDataDir() {
       "questionAsk": "questionAsk1",
       "theme": "theme1",
       "answer": "true",
-      "fileSystem": [
-        "JSON",
-        "CSV",
-        "YAML",
-        "XML"
-      ],
-      "dateModify": "18.12.2021"
+      "dateModify": ""
     }]}`, (err) => {
                 if (err) {
                     throw err;
