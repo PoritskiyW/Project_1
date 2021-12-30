@@ -7,13 +7,14 @@ function parse(formatStr) {
     let file;
     let result;
 
-    switch (formatStr){
+    switch (formatStr) {
         case 'XML':
             file = fs.readFileSync('./data/questions.xml', 'utf-8');
             break;
         case 'JSON':
             file = fs.readFileSync('./data/questions.json', 'utf-8');
             result = parseJSON(file);
+
             break;
         case 'YAML':
             file = fs.readFileSync('./data/questions.yaml', 'utf-8');
@@ -25,16 +26,17 @@ function parse(formatStr) {
     return result;
 }
 
+
 function writeFile(formatArray, jsonData) {
     let file;
 
     for (let i = 0; i < formatArray.length; i++) {
-        switch (formatArray[i]){
+        switch (formatArray[i]) {
             case 'XML':
                 file = fs.readFileSync('./data/questions.xml', 'utf-8');
                 fs.writeFile('./data/questions.xml', getXML(), (e) => {
 
-                    if(e) {
+                    if (e) {
                         throw e;
                     } else {
                         console.log('success');
@@ -146,47 +148,46 @@ questions: // Тут всегда должен быть идентификато
 */
 
 
-function parseYAML(file) {
-
-    let result = [];
-
-
-    let YAMLArr = file.split('\n');
-    let fileSystemArr = [];
-
-    for (let i = 0; i < YAMLArr.length; i++) {
-        let partResult = YAMLArr[i].replace(' ', '').split(':');
-
-        if (partResult[0] === 'question') {
-            this.question = partResult[1];
-        } else if (partResult[0] === 'theme') {
-            this.theme = partResult[1];
-        } else if (partResult[0] === 'answer') {
-
-            if (partResult[1] === 'true') {
-                this.answer = true;
-            } else {
-                this.answer = false;
-            }
-        } else if (partResult[0] === 'fileSystem') {
-            for (let j = 1; j < 6; j++) {
-                partResult = YAMLArr[i + j].replace('-', '').replaceAll(' ', '');
-
-                if (partResult.includes(':')) {
-                    break;
-                } else {
-                    fileSystemArr.push(partResult);
-                }
-            }
-            this.fileSystem = fileSystemArr;
-
-        } else if (partResult[0] === 'dateModify') {
-            this.dateModify = partResult[1];
-        }
-    }
-}
-
-
+// function parseYAML(file) {
+//
+//     let result = [];
+//
+//
+//     let YAMLArr = file.split('\n');
+//     let fileSystemArr = [];
+//
+//     for (let i = 0; i < YAMLArr.length; i++) {
+//         let partResult = YAMLArr[i].replace(' ', '').split(':');
+//
+//         if (partResult[0] === 'question') {
+//             this.question = partResult[1];
+//         } else if (partResult[0] === 'theme') {
+//             this.theme = partResult[1];
+//         } else if (partResult[0] === 'answer') {
+//
+//             if (partResult[1] === 'true') {
+//                 this.answer = true;
+//             } else {
+//                 this.answer = false;
+//             }
+//         } else if (partResult[0] === 'fileSystem') {
+//             for (let j = 1; j < 6; j++) {
+//                 partResult = YAMLArr[i + j].replace('-', '').replaceAll(' ', '');
+//
+//                 if (partResult.includes(':')) {
+//                     break;
+//                 } else {
+//                     fileSystemArr.push(partResult);
+//                 }
+//             }
+//             this.fileSystem = fileSystemArr;
+//
+//         } else if (partResult[0] === 'dateModify') {
+//             this.dateModify = partResult[1];
+//         }
+//         return partResult
+//     }
+// }
 
 getCSV = function () {
 
@@ -288,29 +289,45 @@ parseXML = function (XMLStr) {
     this.dateModify = JSONObj.dateModify;*/
 }
 
+function parseYAML(file) {
+    const resultArr = [];
+    const strArr = file.split('-')
 
+    for(let i = 1; i < strArr.length; i++){
+        let obj = {}
+        let partResult = strArr[i].split('\n')
 
-getYAML = function () {
-
-    let JSONObj = this.valueOf();
-    let result = ``;
-
-    for (const JSONKey in JSONObj) {
-        if (typeof JSONObj[JSONKey] !== "function") {
-            if (typeof JSONObj[JSONKey] === "object") {
-                let partData = JSONObj[JSONKey]
-                let partResult = `${JSONKey}: \n`;
-                for (let i = 0; i < partData.length; i++) {
-
-                    partResult += `    - ${partData[i]} \n`
+        for (let j = 0; j < partResult.length; j++) {
+            if (partResult[j] !== '') {
+                let stringResult = partResult[j].split(': ')
+                if (stringResult[0].replaceAll(' ', '') === 'id') {
+                    obj[stringResult[0].replaceAll(' ', '')] = Number.parseInt(stringResult[1])
+                } else if (stringResult[0].replaceAll(' ', '') === 'answer') {
+                    obj[stringResult[0].replaceAll(' ', '')] = stringResult[1] !== 'false'
+                } else if (stringResult[0].replaceAll(' ', '') === 'dateModify') {
+                    obj[stringResult[0].replaceAll(' ', '')] = Date.parse(stringResult[1])
                 }
-                result += partResult;
-            } else {
-                result += `${JSONKey}: ${JSONObj[JSONKey]} \n`
+                else {
+                    obj[stringResult[0].replaceAll(' ', '')] = stringResult[1];
+                }
             }
         }
+        resultArr.push(obj);
     }
-    return result;
+    return JSON.stringify(resultArr)
+}
+
+function getYAML(file) { //Предназначена для добавления 1 вопроса в файл
+    let JSONObj = file
+
+    let result = `\n- id: ${JSONObj.id}
+  question: ${JSONObj.question}
+  theme: ${JSONObj.theme}
+  answer: ${JSONObj.answer}
+  dateModify: ${JSONObj.dateModify}`
+
+    fs.appendFileSync('../../data/questions.yaml', result);
+    return result
 }
 
 module.exports = {parse, writeFile};
