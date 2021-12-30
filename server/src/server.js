@@ -5,7 +5,7 @@ const dataFill = require('./modules/dataFill');
 //const question = require('./../data/questions.json');
 //const person = require('./../data/developers.json');
 //TODO: Переделать чтение и запись файлов на папку дата + убрать require на файле
-//const parse = require('./modules/questionData')
+const questionData = require('./modules/questionData')
 
 const server = express();
 
@@ -64,5 +64,6 @@ server.get('/', (req, res) => {
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     dataFill();
+    questionData("CSV");
 });
 
