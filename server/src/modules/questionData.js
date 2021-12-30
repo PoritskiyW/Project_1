@@ -7,13 +7,14 @@ function parse(formatStr) {
     let file;
     let result;
 
-    switch (formatStr){
+    switch (formatStr) {
         case 'XML':
             file = fs.readFileSync('./data/questions.xml', 'utf-8');
             break;
         case 'JSON':
             file = fs.readFileSync('./data/questions.json', 'utf-8');
             result = parseJSON(file);
+
             break;
         case 'YAML':
             file = fs.readFileSync('./data/questions.yaml', 'utf-8');
@@ -33,12 +34,12 @@ function writeFile(formatArray, jsonData) {
     let file;
 
     for (let i = 0; i < formatArray.length; i++) {
-        switch (formatArray[i]){
+        switch (formatArray[i]) {
             case 'XML':
                 file = fs.readFileSync('./data/questions.xml', 'utf-8');
                 fs.writeFile('./data/questions.xml', getXML(), (e) => {
 
-                    if(e) {
+                    if (e) {
                         throw e;
                     } else {
                         console.log('success');
@@ -189,6 +190,45 @@ questions: // Тут всегда должен быть идентификато
    // При записи в файл мы из JSON получаем формат представленный выше.
 */
 
+function parseYAML(file) {
+    const resultArr = [];
+    const strArr = file.split('-')
 
+    for(let i = 1; i < strArr.length; i++){
+        let obj = {}
+        let partResult = strArr[i].split('\n')
+
+        for (let j = 0; j < partResult.length; j++) {
+            if (partResult[j] !== '') {
+                let stringResult = partResult[j].split(': ')
+                if (stringResult[0].replaceAll(' ', '') === 'id') {
+                    obj[stringResult[0].replaceAll(' ', '')] = Number.parseInt(stringResult[1])
+                } else if (stringResult[0].replaceAll(' ', '') === 'answer') {
+                    obj[stringResult[0].replaceAll(' ', '')] = stringResult[1] !== 'false'
+                } else if (stringResult[0].replaceAll(' ', '') === 'dateModify') {
+                    obj[stringResult[0].replaceAll(' ', '')] = Date.parse(stringResult[1])
+                }
+                else {
+                    obj[stringResult[0].replaceAll(' ', '')] = stringResult[1];
+                }
+            }
+        }
+        resultArr.push(obj);
+    }
+    return JSON.stringify(resultArr)
+}
+
+function getYAML(file) { //Предназначена для добавления 1 вопроса в файл
+    let JSONObj = file
+
+    let result = `\n- id: ${JSONObj.id}
+  question: ${JSONObj.question}
+  theme: ${JSONObj.theme}
+  answer: ${JSONObj.answer}
+  dateModify: ${JSONObj.dateModify}`
+
+    fs.appendFileSync('../../data/questions.yaml', result);
+    return result
+}
 
 module.exports = parse;
