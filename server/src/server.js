@@ -20,10 +20,6 @@ server.get('/', (req, res) => {
     res.status(200);
 });
 
-// server.get('/download', (req, res) => {
-//     res.download(path.resolve(__dirname, 'static', './../../web/dist/views/home.html'));
-//     res.status(200);
-// });
 //home
 // server.get('/home', (req, res) => {
 //     res.json(person.person);
