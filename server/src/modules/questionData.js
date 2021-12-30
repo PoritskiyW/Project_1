@@ -231,4 +231,113 @@ function getYAML(file) { //Предназначена для добавлени�
     return result
 }
 
+
+/*<?xml version="1.0" encoding="UTF-8" ?> // Обязательно
+<root> //Обязательно
+    <questions> //Обязательно
+        <question>
+            <id>1</id>
+            <question>questionAsk1</question>
+            <theme>theme1</theme>
+            <answer>true</answer>
+            <dateModify></dateModify>
+        </question>
+        <question>
+            <id>1</id>
+            <question>questionAsk1</question>
+            <theme>theme1</theme>
+            <answer>true</answer>
+            <dateModify></dateModify>
+        </question>
+        <question>
+            <id>1</id>
+            <question>questionAsk1</question>
+            <theme>theme1</theme>
+            <answer>true</answer>
+            <dateModify></dateModify>
+        </question>
+    </questions> //Обязательно
+</root>*/ //Обязательно*/
+
+const JSONTest = {
+    "id": 56,
+    "question": "questionadasdad1",
+    "theme": "themasdasdae1",
+    "answer": "trasdasdaue",
+    "dateModify": "asdasdasd"
+}
+
+function getXML(JSONObj) { //Предназначена для добавления 1 вопроса в XML
+
+    let result = `<item>
+    <id>${JSONObj.id}</id>
+    <question>${JSONObj.question}</question>
+    <theme>${JSONObj.theme}</theme>
+    <answer>${JSONObj.answer}</answer>
+    <dateModify>${JSONObj.dateModify}</dateModify>
+</item>`
+
+    const fileXML = fs.readFileSync('../../data/questions.xml', "utf-8");
+
+    const index = fileXML.lastIndexOf('</questions>') - 1;
+    const leftSide = fileXML.slice(0, index + 1);
+    const rightSide = fileXML.slice(index + 1, fileXML.length);
+    const resultStr = leftSide + result + rightSide;
+
+    fs.writeFile('../../data/questions.xml', resultStr, (e) => {
+        if (e) {
+            throw e;
+        }
+    })
+}
+
+console.log(parseXML(fs.readFileSync('../../data/questions.xml', "utf-8")));
+
+function parseXML(file) {
+
+    const resultArr = [];
+
+    let bufferStr = file.replaceAll('<?xml version="1.0" encoding="UTF-8" ?>', '');
+    bufferStr = bufferStr.replaceAll('<root>', '');
+    bufferStr = bufferStr.replaceAll('<questions>', '');
+    bufferStr = bufferStr.replaceAll('</questions>', '');
+    bufferStr = bufferStr.replaceAll('</root>', '');
+    bufferStr = bufferStr = bufferStr.replaceAll('</item>', '');
+
+    const bufferArr = bufferStr.split('<item>');
+
+    for (let i = 1; i < bufferArr.length; i++) {
+        let questionObj = {};
+
+        const trimmedObj = bufferArr[i].trim();
+        let objArr = trimmedObj.split('\n');
+        for (let j = 0; j < objArr.length; j++) {
+
+            if(objArr[j] !== ''){
+                const partIndex = objArr[j].indexOf('</')
+                let partResult = objArr[j].slice(0, partIndex);
+                partResult = partResult.replace('<', '');
+                partResult = partResult.replace('>', ':');
+
+                const paramArr = partResult.split(':');
+                const paramName = paramArr[0].replaceAll(' ', '');
+                const paramValue = paramArr[1];
+
+                if(paramName === 'id'){
+                    questionObj[paramName] = Number.parseInt(paramValue);
+                } else if(paramName === 'answer') {
+                    questionObj[paramName] = paramValue === 'true';
+                } else if(paramName === 'dateModify') {
+                    questionObj[paramName] = Date.parse(paramValue);
+                } else {
+                    questionObj[paramName] = paramValue;
+                }
+            }
+        }
+        resultArr.push(questionObj);
+    }
+    return JSON.stringify(resultArr);
+}
+
+
 module.exports = parse;
