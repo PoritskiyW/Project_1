@@ -1,20 +1,16 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors');
 const dataFill = require('./modules/dataFill');
 const filter = require('./modules/parsers');
 const writeFile = require('./modules/serializers');
 const deleteQuestion = require('./modules/deleteQuestion');
-const developersData = require('./modules/developersData');
+const developersData = require('./../data/developers.json');
 const generateUID = require('./modules/UIDgeneration');
 
 const server = express();
 
 //const PORT = process.env.PORT || 3000;
 const PORT = 3000;
-
-server.use(cors); //'Access-Control-Allow-Origin'
-server.use(express.json());
 
 //Respond to request with index.html
 server.get('/', (req, response) => {
@@ -24,7 +20,8 @@ server.get('/', (req, response) => {
 
 //Respond to get request with developers.json
 server.get('/home', (req, response) => {
-    response.json(developersData());
+    response.json(developersData.person);
+    //console.log('request person');
     response.status(200);
     response.end();
 })
