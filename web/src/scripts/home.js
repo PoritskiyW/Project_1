@@ -1,10 +1,10 @@
 function getPerson() {
-    fetch('https://localhost:3000/home')
+    fetch('http://localhost:3000/home')
         .then((response) => {
-            console.log(response.json())
             return response.json();
         })
         .then((data) => {
+            //console.log(data)
           return fillForm(data);// отрисовка home page
         })
         .catch(error => {

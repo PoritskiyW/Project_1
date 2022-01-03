@@ -9,9 +9,9 @@ const generateUID = require('./modules/UIDgeneration');
 
 const server = express();
 
-//const PORT = process.env.PORT || 3000;
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
+server.use(express.static('../web/dist'));
 //Respond to request with index.html
 server.get('/', (req, response) => {
     response.sendFile(path.resolve(path.resolve(), 'static', './../../web/dist/views/home.html'));
@@ -21,11 +21,10 @@ server.get('/', (req, response) => {
 //Respond to get request with developers.json
 server.get('/home', (req, response) => {
     response.json(developersData.person);
-    //console.log('request person');
+    console.log('request person');
     response.status(200);
     response.end();
 })
-
 //server.patch()
 
 //Respond to get request with filtered questions in json view
