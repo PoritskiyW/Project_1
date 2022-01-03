@@ -2,68 +2,61 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const dataFill = require('./modules/dataFill');
-//const question = require('./../data/questions.json');
-//const person = require('./../data/developers.json');
-//TODO: Переделать чтение и запись файлов на папку дата + убрать require на файле
-const questionData = require('./modules/questionData')
+const filter = require('./modules/parsers');
+const writeFile = require('./modules/serializers');
+const deleteQuestion = require('./modules/deleteQuestion');
+const developersData = require('./modules/developersData');
+const generateUID = require('./modules/UIDgeneration');
 
 const server = express();
 
-const PORT = process.env.PORT || 3000;
+//const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-//'Access-Control-Allow-Origin'
-server.use(cors);
+server.use(cors); //'Access-Control-Allow-Origin'
 server.use(express.json());
 
-server.get('/', (req, res) => {
-    res.sendFile(path.resolve(path.resolve(), 'static', './../../web/dist/views/home.html'));
-    res.status(200);
+//Respond to request with index.html
+server.get('/', (req, response) => {
+    response.sendFile(path.resolve(path.resolve(), 'static', './../../web/dist/views/home.html'));
+    response.status(200);
 });
 
-//home
-// server.get('/home', (req, res) => {
-//     res.json(person.person);
-//     console.log('request person');
-// })
-// //question
-// //handle get request for questions.html
-// server.get('/questions', (request, response) => {
-//     response.json(question.questions);
-//     console.log('request questions');
-// })
-//
-// //handle post request to add question
-// server.post('/addQuestion', (request, response) => {
-//     const addQuestion = {
-//         id: question.questions.length + 1,
-//         questionAsk: request.body.questionAsk,
-//         theme: request.body.theme,
-//         answer: request.body.boolean,
-//         fileSystem: request.body.fileSystem,
-//         dateModify: new Date() //Дату добавлять на фронте и передавать в JSON на бэк
-//     };
-//     question.questions.push(addQuestion);
-//     console.log(request.body);
-//     return response.json(addQuestion);
-// });
-//
-// //handle delete question data
-// server.delete('/deleteQuestion', (request, response) => {
-//     const index = question.questions.findIndex(el => el.id);
-//     if (index >= 0) {
-//         const el = question.questions[index];
-//         question.questions.splice(index, 1);
-//         response.json(el);
-//         response.end();
-//     } else {
-//         response.status(404);
-//         response.end();
-//     }
-// })
+//Respond to get request with developers.json
+server.get('/home', (req, response) => {
+    response.json(developersData());
+    response.status(200);
+    response.end();
+})
+
+//server.patch()
+
+//Respond to get request with filtered questions in json view
+//Request has to contain theme and file system in body (json)
+server.get('/questions', (request, response) => {
+    response.json(filter(request.body.fileSystem)); /* question filters => (file system, theme)*/
+    response.status(200);
+    response.end();
+})
+
+//Add question in file systems
+//Request has to contain question data
+server.post('/addQuestion', (request, response) => {
+    request.body.question.id = generateUID();
+    writeFile(request.body.fileSystem, request.body.question) /* question{asdnljaslabfLIUFDLABDu} filters => (file system)*/
+    response.status(200);
+    response.end();
+});
+
+//handle delete question data
+server.delete('/deleteQuestion', (request, response) => {
+    deleteQuestion(request.body.id);
+    response.status(200);
+    response.end();
+})
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     dataFill();
-    questionData("CSV");
 });
 
