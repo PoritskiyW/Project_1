@@ -1,19 +1,25 @@
 //get question list with server
-function getQuestionsList() {
-    fetch('http://localhost:3000/questions')
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data);
-            return questionsList(data);
-        })
-        .catch(error => {
-            throw(error);
-        })
+
+// Пример отправки POST запроса:
+async function postData(url = '', data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    return await response.json(); // parses JSON response into native JavaScript objects
 }
 
-getQuestionsList();
+postData('https://localhost:3000/questions', {filters: {
+        fileSystem: "JSON",
+        theme: "all"
+    }})
+    .then((data) => {
+        console.log(data); // JSON data parsed by `response.json()` call
+    })
 
 // draw question list
 function questionsList(data) {

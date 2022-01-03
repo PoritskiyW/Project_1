@@ -4,7 +4,6 @@ function getPerson() {
             return response.json();
         })
         .then((data) => {
-            //console.log(data)
           return fillForm(data);// отрисовка home page
         })
         .catch(error => {

@@ -4,12 +4,16 @@ const dataFill = require('./modules/dataFill');
 const filter = require('./modules/parsers');
 const writeFile = require('./modules/serializers');
 const deleteQuestion = require('./modules/deleteQuestion');
-const developersData = require('./../data/developers.json');
 const generateUID = require('./modules/UIDgeneration');
+const developersData = require('./modules/developersData');
+const CORS = require('cors');
+
+
 
 const server = express();
 
 const PORT = process.env.PORT || 3000;
+server.use(CORS);
 
 server.use(express.static('../web/dist'));
 //Respond to request with index.html
@@ -20,8 +24,7 @@ server.get('/', (req, response) => {
 
 //Respond to get request with developers.json
 server.get('/home', (req, response) => {
-    response.json(developersData.person);
-    console.log('request person');
+    response.json(developersData());
     response.status(200);
     response.end();
 })
@@ -29,8 +32,10 @@ server.get('/home', (req, response) => {
 
 //Respond to get request with filtered questions in json view
 //Request has to contain theme and file system in body (json)
-server.get('/questions', (request, response) => {
-    response.json(filter(request.body.fileSystem)); /* question filters => (file system, theme)*/
+server.post('/questions', (request, response) => {
+    response.json(filter(request.body.filters.fileSystem, request.body.filters.theme));
+    console.log(response)
+    console.log(request)
     response.status(200);
     response.end();
 })
