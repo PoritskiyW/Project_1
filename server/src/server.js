@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 server.use(express.static('../web/dist'));
 //Respond to request with index.html
 server.get('/', (req, response) => {
-    response.sendFile(path.resolve(path.resolve(), 'static', './../../web/dist/views/home.html'));
+    response.sendFile(path.resolve(path.resolve(), 'static', './../../web/dist/home.html'));
     response.status(200);
 });
 
