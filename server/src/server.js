@@ -6,14 +6,12 @@ const writeFile = require('./modules/serializers');
 const deleteQuestion = require('./modules/deleteQuestion');
 const generateUID = require('./modules/UIDgeneration');
 const developersData = require('./modules/developersData');
-const CORS = require('cors');
-
-
+//const CORS = require('cors');
 
 const server = express();
 
 const PORT = process.env.PORT || 3000;
-server.use(CORS);
+//server.use(CORS);
 
 server.use(express.static('../web/dist'));
 //Respond to request with index.html
