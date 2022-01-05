@@ -7,6 +7,8 @@
 html {
   text-align: center;
   margin: 10px auto;
+  background: lightblue;
+  color: blue;
 }
 
 header {
@@ -42,7 +44,7 @@ header {
         &__about {
           position: relative;
           list-style: none;
-          width: 70px;
+          width: 90px;
           height: 70px;
           z-index: 1;
 
@@ -64,42 +66,37 @@ header {
             font-size: 1.5em;
             text-align: center;
             transition: 0.5s;
-            color: black;
+            color: white;
+            opacity: 0;
           }
 
           &--text {
             position: absolute;
-            color: black;
+            color: white;
             font-weight: 400;
             font-size: 0.75em;
             letter-spacing: 0.05em;
             transition: 0.5s;
-            opacity: 0;
             transform: translateY(20px);
           }
 
           &.active {
+            background: #06d0d0;
+            border: 2px solid blue;
+            transition: 0.5s;
+            border-radius: 5px;
 
             .lists {
-
               &__home,
               &__question,
               &__about {
-                top: 1%;
-                position: absolute;
-                width: 70px;
-                height: 70px;
-                background: #06d0d0;
-                //border-radius: 50%;
-                border: 6px solid black;
-                transition: 0.5s;
-
                 &--icon {
                   transform: translateY(-20px);
+                  opacity: 1;
+                  margin-top: 5px;
                 }
 
                 &--text {
-                  opacity: 1;
                   transform: translateY(5px);
                 }
               }
