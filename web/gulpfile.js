@@ -37,10 +37,16 @@ gulpfile.task('copy:js', function (cb) {
 //     cb()
 // })
 
+gulpfile.task('copy:png', function (cb) {
+    gulp.src('./src/images/*.png')
+        .pipe(gulp.dest('./dist/images'))
+    cb()
+})
+
 gulpfile.task('watch', function () {
-    gulpfile.watch(['./src/**/*.scss', './src/scripts/**/*.js', './src/components/views/**/*.html'],
-        gulpfile.series(['clean', 'copy:html', 'sass', 'copy:js']));
+    gulpfile.watch(['./src/**/*.scss', './src/scripts/**/*.js', './src/components/views/**/*.html', 'copy:png'],
+        gulpfile.series(['clean', 'copy:html', 'sass', 'copy:js', 'copy:png']));
 
 })
 
-gulpfile.task('default', gulpfile.series(['clean', 'copy:html',  'sass', 'copy:js']))
+gulpfile.task('default', gulpfile.series(['clean', 'copy:html',  'sass', 'copy:js', 'copy:png']))

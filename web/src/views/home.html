@@ -10,10 +10,11 @@
     <title>Home</title>
 </head>
 <body>
+<section class="bg-ex-snowflake">
 <header class="header">
     <img class="header__logo" alt="logo" style="border-radius: 10px; width: 80px;"
          src="https://img.genial.ly/5f89a55dbce4d50f7480c1f6/6503b195-b167-4705-b96b-97243ce67c21.gif?602d5d218af1fa10335c4fdf&1639939212268"/>
-    <p class="header__team">Джаваскриптизеры</p>
+    <p class="header__team">Холодные</p>
     <nav class="header__navigation navigation">
         <span class="navigation__link" onclick="route('page-home')">HOME</span>
         <span class="navigation__link" onclick="route('page-questions')">QUESTIONS</span>
@@ -56,29 +57,29 @@
         <abbr title="Add new question">+</abbr>
     </button>
     <section class="page-questions__add add">
-                <p class="add__question" id="question-list">There are no questions</p>
+<!--                <p class="add__question" id="question-list">There are no questions</p>-->
         <!--        //test ==>-->
-<!--        <ul>-->
-<!--            <li>-->
-<!--                <button type="submit" class="question__delete" onclick="deleteQuestion()">x</button>-->
-<!--            </li>-->
-<!--            <li class="question__ask">Question: ggggggggggggggggggggggggggggggggggggg gggggggggggggggggggggggggggggggggggggg ggggg-->
-<!--                gggggggggggggggggggggggg gjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj-->
-<!--                jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb bbbbbbbbbbbbbbbbbb-->
-<!--            </li>-->
-<!--            <li>Answer: ${el.answer}</li>-->
-<!--            <li>Theme question: ${el.theme}</li>-->
-<!--            <li class="question__date">Date: ${el.dateModify}</li>-->
-<!--        </ul>-->
-<!--        <ul>-->
-<!--            <li>-->
-<!--                <button type="submit" class="question__delete" onclick="deleteQuestion()">x</button>-->
-<!--            </li>-->
-<!--            <li>Question: ${el.questionAsk}</li>-->
-<!--            <li>Answer: ${el.answer}</li>-->
-<!--            <li>Theme question: ${el.theme}</li>-->
-<!--            <li class="question__date">${el.dateModify}</li>-->
-<!--        </ul>-->
+        <ul>
+            <li>
+                <button type="submit" class="question__delete" onclick="deleteQuestion()">x</button>
+            </li>
+            <li class="question__ask">Question: ggggggggggggggggggggggggggggggggggggg gggggggggggggggggggggggggggggggggggggg ggggg
+                gggggggggggggggggggggggg gjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+                jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb bbbbbbbbbbbbbbbbbb
+            </li>
+            <li>Answer: ${el.answer}</li>
+            <li>Theme question: ${el.theme}</li>
+            <li class="question__date">Date: ${el.dateModify}</li>
+        </ul>
+        <ul>
+            <li>
+                <button type="submit" class="question__delete" onclick="deleteQuestion()">x</button>
+            </li>
+            <li>Question: ${el.questionAsk}</li>
+            <li>Answer: ${el.answer}</li>
+            <li>Theme question: ${el.theme}</li>
+            <li class="question__date">${el.dateModify}</li>
+        </ul>
     </section>
     <section class="modal" id="modal">
         <div class="modal_content">
@@ -140,7 +141,7 @@
         <div class="page-about__content info">
             <h2 class="info__title">Description about project</h2>
             <div class="info__description">
-                Командой разработчиков "Джаваскриптизеры" был создан вводный проект для ознакомления с Front-End
+                Командой разработчиков "Холодные" был создан вводный проект для ознакомления с Front-End
                 направлением в сфере IT.
                 Перед командой стояла задача - разработать проект прилагая к этому максимум усилий,
                 при этом было запрещено использовать библиотеки.
@@ -155,6 +156,7 @@
             <span class="forms__form-four">XML</span>
         </div>
     </div>
+</section>
 </section>
 
 <script type="text/javascript" src="./index.js"></script>
