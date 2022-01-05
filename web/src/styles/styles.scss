@@ -23,26 +23,146 @@ header {
     -webkit-text-stroke: 1px $main-color;
   }
 
-  nav {
+  .navigation {
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 70px;
+    border-radius: 10px;
+
+    &__list {
+      display: flex;
+      width: 350px;
+
+      .lists {
+
+        &__home,
+        &__question,
+        &__about {
+          position: relative;
+          list-style: none;
+          width: 70px;
+          height: 70px;
+          z-index: 1;
+
+          &--link {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+          }
+
+          &--icon {
+            position: relative;
+            display: block;
+            line-height: 75px;
+            font-size: 1.5em;
+            text-align: center;
+            transition: 0.5s;
+            color: black;
+          }
+
+          &--text {
+            position: absolute;
+            color: black;
+            font-weight: 400;
+            font-size: 0.75em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            opacity: 0;
+            transform: translateY(20px);
+          }
+
+          &.active {
+
+            .lists {
+
+              &__home,
+              &__question,
+              &__about {
+                top: 1%;
+                position: absolute;
+                width: 70px;
+                height: 70px;
+                background: #06d0d0;
+                //border-radius: 50%;
+                border: 6px solid black;
+                transition: 0.5s;
+
+                &--icon {
+                  transform: translateY(-20px);
+                }
+
+                &--text {
+                  opacity: 1;
+                  transform: translateY(5px);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
-a {
-  text-decoration: none;
-  background-color: $main-color;
-  border: 5px double;
-  text-transform: uppercase;
-  color: white;
-  padding: 7px 15px;
-  margin: 10px 5px;
-  cursor: pointer;
+.lists__indicator {
+  top: 1%;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: #06d0d0;
+  //border-radius: 50%;
+  border: 6px solid black;
+  transition: 0.5s;
 
-  &:hover {
-    background-color: black;
-    color: $main-color;
-    border: 5px double $main-color;
+  //&::before {
+  //  content: '';
+  //  position: absolute;
+  //  top: 50%;
+  //  left: -22px;
+  //  width: 20px;
+  //  height: 20px;
+  //  background: transparent;
+  //  border-top-right-radius: 20px;
+  //  box-shadow: 0 -10px 0 0 black;
+  //}
+  //
+  //&::after {
+  //  content: '';
+  //  position: absolute;
+  //  top: 50%;
+  //  right: -22px;
+  //  width: 20px;
+  //  height: 20px;
+  //  background: transparent;
+  //  border-top-left-radius: 20px;
+  //  box-shadow: 0 -10px 0 0 black;
+  //}
+}
+
+.lists {
+  &__home,
+  &__question,
+  &__about {
+    &:nth-child(1).active ~ .indicator {
+
+      transform: translateX((70px * 0));
+    }
+
+    &:nth-child(2).active ~ .indicator {
+
+      transform: translateX((70px * 1));
+    }
+
+    &:nth-child(3).active ~ .indicator {
+      transform: translateX((70px * 2));
+    }
   }
 }
 
@@ -99,4 +219,5 @@ select {
 abbr {
   text-decoration: auto
 }
+
 

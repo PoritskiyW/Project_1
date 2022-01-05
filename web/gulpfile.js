@@ -39,7 +39,7 @@ gulpfile.task('copy:gif', function (cb) {
 
 gulpfile.task('watch', function () {
 
-    gulpfile.watch(['./src/**/*.scss', './src/scripts/**/*.js', './src/components/*.html', './src/images/*.gif'],
+    gulpfile.watch(['./src/**/*.scss', './src/scripts/**/*.js', './src/views/*.html', './src/images/*.gif'],
         gulpfile.series(['clean', 'sass', 'copy:html', 'copy:js', 'copy:gif']));
 
 })

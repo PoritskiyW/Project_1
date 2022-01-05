@@ -15,9 +15,36 @@
          src="https://img.genial.ly/5f89a55dbce4d50f7480c1f6/6503b195-b167-4705-b96b-97243ce67c21.gif?602d5d218af1fa10335c4fdf&1639939212268"/>
     <p class="header__team">Джаваскриптизеры</p>
     <nav class="header__navigation navigation">
-        <span class="navigation__link" onclick="route('page-home')">HOME</span>
-        <span class="navigation__link" onclick="route('page-questions')">QUESTIONS</span>
-        <span class="navigation__link" onclick="route('page-about')">ABOUT</span>
+        <ul class="navigation__list lists">
+            <li class="lists__home active" onclick="route('page-home')">
+                <a class="lists__home--link" href="#">
+                    <span class="lists__home--icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </span>
+                    <span class="lists__home--text">HOME</span>
+                </a>
+            </li>
+            <li class="lists__question" onclick="route('page-questions')">
+                <a class="lists__question--link" href="#">
+                    <span class="lists__question--icon">
+                        <ion-icon name="receipt-outline"></ion-icon>
+                    </span>
+                    <span class="lists__question--text">QUESTIONS</span>
+                </a>
+            </li>
+            <li class="lists__about" onclick="route('page-about')">
+                <a class="lists__about--link" href="#">
+                    <span class="lists__about--icon">
+                        <ion-icon name="help-circle-outline"></ion-icon>
+                    </span>
+                    <span class="lists__about--text">ABOUT</span>
+                </a>
+            </li>
+<!--            <div class="lists__indicator"></div>-->
+        </ul>
+<!--        <span class="navigation__link" onclick="route('page-home')">HOME</span>-->
+<!--        <span class="navigation__link" onclick="route('page-questions')">QUESTIONS</span>-->
+<!--        <span class="navigation__link" onclick="route('page-about')">ABOUT</span>-->
     </nav>
 </header>
 
@@ -158,5 +185,7 @@
 </section>
 
 <script type="text/javascript" src="../index.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
