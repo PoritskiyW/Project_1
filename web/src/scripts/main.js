@@ -15,5 +15,7 @@ function route(id) {
 }
 
 window.onload = () => {
-    route('page-home');
+    console.log(localStorage)
+    myLocalStorage();
+        route('page-home');
 }

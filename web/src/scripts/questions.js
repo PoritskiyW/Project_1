@@ -53,6 +53,7 @@ function closedModal() {
     myModal.style.display = 'none';
     route('page-questions');
 }
+
 // modal delete question   TODO: open modal
 function modalDeleteQuestion() {
     const myModal = document.getElementById("deleteQuestion");
@@ -64,18 +65,43 @@ function myLocalStorage() {
     const myTheme = document.getElementById('theme');
     const myFileSystem = document.getElementById('file-system');
 
+    myFileSystem.value = localStorage.getItem("fileSystem") || myFileSystem.value; // пулучаем value из локалстореджа
+    localStorage.setItem("fileSystem", myFileSystem.value); // cетим в локал сторедж, нужно для первого запуска приложения, пока нет ничего в localStorage.
+    myTheme.value = localStorage.getItem("theme") || myTheme.value;
+    localStorage.setItem("theme", myTheme.value);
+   //Object.values(JSON.parse(localStorage.getItem('search')));
 
-    const myObj = {
-        fileSystem: myFileSystem.value,
-        theme: myTheme.value
-    }
-
-    localStorage.setItem('search', JSON.stringify(myObj));
-
-    document.querySelector('.add__question').innerHTML =
-        Object.values(JSON.parse(localStorage.getItem('search')));
-    return true;
+//     function fileSystem() {
+//         const myObj = {
+//             fileSystem: myFileSystem.value,
+//             theme: myTheme.value
+//         }
+//         localStorage.setItem('search', JSON.stringify(myObj));
+//
+//         document.querySelector('.add__question').innerHTML =
+//             Object.values(JSON.parse(localStorage.getItem('search')));
+//         return true;
+//     }
+//
+//     if (Object.values(JSON.parse(localStorage.getItem('search')))) {
+//         document.getElementById('file-system').value =
+//             Object.values(JSON.parse(localStorage.getItem('search')))[0]
+//     }
+//     if (Object.values(JSON.parse(localStorage.getItem('search')))) {
+//         document.getElementById('theme').value =
+//             Object.values(JSON.parse(localStorage.getItem('search')))[1]
+//     }
+//
+//     document.querySelector('.add__question').innerHTML = `
+//     ${Object.values(JSON.parse(localStorage.getItem('search')))}`
 }
+
+//{
+//   "filters": {
+//     "theme": "CSS",
+//     "fileSystem": "JSON"
+//   }
+// }
 
 //post questions
 function postQuestions() {
@@ -98,8 +124,8 @@ function postQuestions() {
     fetch('http://localhost:3000/addQuestion', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        }, body: JSON.stringify({
+            'Cotent-Type': 'application/json;charset=utf-8'
+        }, bodyn: JSON.stringify({
             questionAsk: questionAsk,
             theme: theme,
             answer: answer,
