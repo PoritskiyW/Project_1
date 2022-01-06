@@ -1,17 +1,43 @@
 @import "_variables";
 
 * {
+  margin: 0;
   box-sizing: border-box;
 }
 
 html {
   text-align: center;
-  margin: 10px auto;
-  background: lightblue;
-  color: blue;
+
+
+  @media(min-width: 768px) {
+    background-color: lightblue;
+  }
+}
+
+.bg-ex-snowflake {
+  height: 98vh;
+  margin-top: -10px;
+  background: url('./images/snowflake.png'); /* Путь к картинке */
+  background-position: 0 0;
+  background-repeat: repeat;
+  animation: animated-snowflake 60s linear infinite;
+
+  @media(min-width: 768px) {
+    background: url('./images/snowflake1.png');
+  }
+
+  @media(min-width: 1080px) {
+    background: url('./images/snowflake2.png');
+  }
+}
+@keyframes animated-snowflake {
+  from { background-position: -800px 0; }
+  to { background-position: 0 800px; }
+
 }
 
 header {
+  margin: 10px auto;
   @media (min-width: 768px) {
     display: flex;
     justify-content: flex-end;
@@ -172,7 +198,7 @@ header {
 select {
   color: white;
   border: 5px double;
-  background: darkorange;
+  background: $main-color;
   padding: 7px 15px;
   margin: 5px 0;
   cursor: pointer;

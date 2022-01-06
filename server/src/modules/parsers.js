@@ -25,19 +25,19 @@ function parse(formatStr) {
 
     switch (formatStr) {
         case 'XML':
-            file = fs.readFileSync('./data/questions.xml', 'utf-8');
+            file = fs.readFileSync(__dirname, '..', '..', 'data', 'questions.xml', 'utf-8');
             result = parseXML(file);
             break;
         case 'JSON':
-            file = fs.readFileSync('./data/questions.json', 'utf-8');
+            file = fs.readFileSync(__dirname, '..', '..', 'data', 'questions.json', 'utf-8');
             result = parseJSON(file);
             break;
         case 'YAML':
-            file = fs.readFileSync('./data/questions.yaml', 'utf-8');
+            file = fs.readFileSync(__dirname, '..', '..', 'data', 'questions.yaml', 'utf-8');
             result = parseYAML(file);
             break;
         case 'CSV':
-            file = fs.readFileSync('./data/questions.csv', 'utf-8');
+            file = fs.readFileSync(__dirname, '..', '..', 'data', 'questions.csv', 'utf-8');
             result = parseCSV(file);
             break;
     }
