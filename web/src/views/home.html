@@ -16,9 +16,32 @@
          src="./images/logo.png" alt="logo"/>
     <p class="header__team">Холодные</p>
     <nav class="header__navigation navigation">
-        <span class="navigation__link" onclick="route('page-home')">HOME</span>
-        <span class="navigation__link" onclick="route('page-questions')">QUESTIONS</span>
-        <span class="navigation__link" onclick="route('page-about')">ABOUT</span>
+        <ul class="navigation__list lists">
+            <li class="lists__home active" onclick="route('page-home')">
+                <a class="lists__home--link" href="#">
+                    <span class="lists__home--icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </span>
+                    <span class="lists__home--text">HOME</span>
+                </a>
+            </li>
+            <li class="lists__question" onclick="route('page-questions')">
+                <a class="lists__question--link" href="#">
+                    <span class="lists__question--icon">
+                        <ion-icon name="receipt-outline"></ion-icon>
+                    </span>
+                    <span class="lists__question--text">QUESTIONS</span>
+                </a>
+            </li>
+            <li class="lists__about" onclick="route('page-about')">
+                <a class="lists__about--link" href="#">
+                    <span class="lists__about--icon">
+                        <ion-icon name="help-circle-outline"></ion-icon>
+                    </span>
+                    <span class="lists__about--text">ABOUT</span>
+                </a>
+            </li>
+        </ul>
     </nav>
 </header>
 
@@ -178,6 +201,9 @@
 </section>
 </section>
 
-<script type="text/javascript" src="./index.js"></script>
+<script type="text/javascript" src="../index.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
 </html>
