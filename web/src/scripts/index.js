@@ -426,7 +426,7 @@ function init(state) {
     questionsFilter(STATE, 'csv', 'CSS');
 
     addListener('routeHome', 'click', () => route('page-home'));
-    addListener('routeQuestion' ,'click', () => route('page-question'));
+    addListener('routeQuestion' ,'click', () => route('page-questions'));
     addListener('routeAbout', 'click', () => route('page-about'));
 
     const list = document.querySelectorAll('.home, .question, .about');
