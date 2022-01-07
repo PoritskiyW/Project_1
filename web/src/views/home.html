@@ -6,7 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="./index.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <title>Home</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
             <p class="header__team">Холодные</p>
         </div>
         <nav class="header__navigation navigation">
-            <button  type="button" class="navigation__button home active" id="routeHome">
+            <button type="button" class="navigation__button home active" id="routeHome">
                 <i class="fas fa-house-user"></i>
                 <span class="navigation__button--title">HOME</span>
             </button>
@@ -82,33 +83,32 @@
                 <option value="SCSS">SCSS</option>
             </select>
             <button type="button" class="button" id="local-storage">Search</button>
-            <button class="add button" id="show-question" type="button">
+            <button class="add button" id="show-question" onclick="modalQuestion()" type="button">
                 <abbr title="Add new question">+</abbr>
             </button>
         </div>
         <section class="page-questions__add add">
             <p class="add__question" id="question-list">There are no questions</p>
         </section>
-
         <section class="modal" id="modal">
             <div class="modal_content">
-                <form class="form-questions" id="get-form-questions">
+                <div class="form-questions">
                     <button class="form-questions__exit" onclick="closedModal()" type="button">x</button>
-                    <label class="form-questions__title" for="form-questions__question">Questions:</label>
-                    <textarea name="details" maxlength='250' autofocus tabindex="0" id="form-questions__question"
+                    <label class="form-questions__title" for="form-questions__question">Question:</label>
+                    <textarea name="details" maxlength='255' autofocus tabindex="0" id="form-questions__question"
                               placeholder="Your question ..." cols="30" rows="5"></textarea>
                     <select id="modalTheme">
                         <option selected disabled>Select theme</option>
                         <option value="HTML">HTML</option>
                         <option value="CSS">CSS</option>
-                        <option value="JAVASCRIPT">JAVASCRIPT</option>
+                        <option value="JS">JS</option>
                         <option value="GIT">GIT</option>
-                        <option value="REACT">REACT</option>
+                        <option value="SCSS">SCSS</option>
                     </select>
-                    <div class="form-questions__title">Answer</div>
+                    <label class="form-questions__title">Answer</label>
                     <div class="form-questions__buttons-group">
                         <label>
-                            <input type="radio" name="boolean" value="True">True
+                            <input type="radio" name="boolean" value="true">True
                         </label>
                         <label>
                             <input type="radio" name="boolean" value="false">False
@@ -117,24 +117,23 @@
                     <label class="form-questions__title">File system</label>
                     <div class="form-questions__type questions__type">
                         <label>
-                            <input type="checkbox" id="questions__type--JSON" name="fileSystem">JSON
+                            <input type="checkbox" name="fileSystem" value="jsonD">JSON
                         </label>
                         <label>
-                            <input type="checkbox" id="question__type-CSV" name="fileSystem">CSV
+                            <input type="checkbox" name="fileSystem" value="csv">CSV
                         </label>
                         <label>
-                            <input type="checkbox" id="question__type-XML" name="fileSystem">XML
+                            <input type="checkbox" name="fileSystem" value="xml">XML
                         </label>
                         <label>
-                            <input type="checkbox" id="question__type-YAML" name="fileSystem">YAML
+                            <input type="checkbox" name="fileSystem" value="yaml">YAML
                         </label>
                     </div>
                     <div class="form-questions__buttons-group">
-                        <button class="button form-questions__cancel" onclick="closedModal()" type="button">cancel
-                        </button>
-                        <button class="button" type="button" disabled="disabled" onclick="postQuestions()">save</button>
+                        <button class="button form-questions__cancel" id="close-modal" type="button">cancel</button>
+                        <button class="button form-questions__cancel" type="button" id="post-question" >save</button>
                     </div>
-                </form>
+                </div>
             </div>
         </section>
         <section class="modal" id="deleteQuestion">

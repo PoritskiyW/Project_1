@@ -40,7 +40,7 @@ function getNodeValue(id) {
 }
 
 //POST REQUEST FUNCTION
-function postData(url = '', data = {}) {
+function postData(url = '/end', data = {}) {
     const response = fetch(url, {
         method: 'POST',
         headers: {
@@ -240,8 +240,8 @@ function getXML(JSONObj) { //Предназначена для добавлен�
 
 ///////////////////////////////////////////////////////////////////
 //UID generation area
-function generate() {
-    //const file = fs.readFileSync('./data/idFileSystems.json', 'utf-8');
+function generate(state) {
+
     const _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
     let UID = '';
 
@@ -291,16 +291,6 @@ function openModal() {
     btn.onclick = function() {
         modal.style.display = "grid";
     }
-
-    // span.onclick = function() {
-    //     modal.style.display = "none";
-    // }
-
-    // window.onclick = function(event) {
-    //     if (event.target === modal) {
-    //         modal.style.display = "none";
-    //     }
-    // }
 }
 
 function openModal2() {
@@ -311,16 +301,6 @@ function openModal2() {
     btn.onclick = function() {
         modal.style.display = "grid";
     }
-
-    // span.onclick = function() {
-    //     modal.style.display = "none";
-    // }
-    //
-    // window.onclick = function(event) {
-    //     if (event.target === modal) {
-    //         modal.style.display = "none";
-    //     }
-    // }
 }
 
 function changing() {
@@ -446,20 +426,18 @@ function questionsList(data) {
 }
 
 function modalQuestion() {
-    const myModal = document.getElementById('modal');
-    myModal.style.display = 'grid';
+    const modalWindow = document.getElementById('modal');
+    modalWindow.style.display = 'grid';
 }
 
 function closedModal() {
-    const myModal = document.getElementById('modal');
-    myModal.style.display = 'none';
-    route('page-questions');
+    const modalWindow = document.getElementById('modal');
+    modalWindow.style.display = 'none';
 }
 
-// modal delete question   TODO: open modal
 function modalDeleteQuestion() {
-    const myModal = document.getElementById("deleteQuestion");
-    myModal.style.display = 'grid';
+    const modalWindow = document.getElementById("deleteQuestion");
+    modalWindow.style.display = 'grid';
 }
 
 function getLocalStorage() {
@@ -488,15 +466,31 @@ function searchButtonHandler(state) {
     questionsFilter(state, filters.fileSystem, filters.theme);
 }
 
-//post questions
-function postQuestions() {
-    const myModal = document.getElementById('modal');
-    const questionAsk = document.getElementById('form-questions__question').value;
-    const theme = document.getElementById('form-questions__theme').value;
-    const answer = document.forms['get-form-questions'].getElementsByClassName('radio');
+function postQuestions(state) {
+    const question = document.getElementById('form-questions__question').value;
+    const theme = document.getElementById('modalTheme').value;
+    const answer = document.querySelector('input[name="' + "boolean" + '"]:checked').value;
 
-    const checkbox = document.querySelector('#cheched');
-    const fileSystem = [checkbox];
+    const fileSystemsArray = document.querySelectorAll('input[name=fileSystem]');
+    let fileSystem = [];
+    for (let i = 0; i < fileSystemsArray.length; i++) {
+        const item = fileSystemsArray[i]
+        if (item.checked){
+            fileSystem.push(item.value);
+        }
+    }
+    const dateModify = Date.now();
+
+    const result = { //TODO: ID
+        question: question,
+        theme: theme,
+        answer: answer,
+        fileSystem:fileSystem,
+        dateModify: dateModify
+    }
+
+
+    closedModal()
 }
 
 function deleteQuestion(id) {
@@ -529,7 +523,6 @@ function init(state) {
     const filters = getLocalStorage();
     questionsFilter(STATE, filters.fileSystem, filters.theme);
 
-
     addListener('routeHome', 'click', () => route('page-home'));
     addListener('routeQuestion' ,'click', () => route('page-questions'));
     addListener('routeAbout', 'click', () => route('page-about'));
@@ -542,12 +535,11 @@ function init(state) {
     }
     list.forEach((item) =>
         item.addEventListener('click', activeLink));
-    // addListener('modal-home-2', 'click', openModal2());
-    // addListener('modal-home', 'click', openModal());
-    // addListener('modal-body', 'load', changing());
 
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
-    addListener('show-question', 'click', () => modalQuestion());
-    addListener('delete-question', 'click', () => deleteQuestion());
+    //addListener('show-question', 'click', () => modalQuestion());
+    addListener('delete-question', 'click', deleteQuestion.bind(null, STATE));
+    addListener('post-question', 'click', postQuestions.bind(null, STATE));
+    addListener('close-modal', 'click', () => closedModal());
 
 }
