@@ -35,82 +35,7 @@ body {
   to {
     background-position: 0 800px;
   }
-
 }
-
-.header {
-  background: darkblue;
-  margin: 10px auto;
-  @media (min-width: 600px) {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__logo {
-    display: flex;
-    justify-content: center;
-
-    @media(min-width: 768px) {
-      justify-content: flex-end;
-    }
-  }
-
-  &__team {
-    margin: auto 10px;
-    font-size: 30px;
-    text-transform: uppercase;
-    background: linear-gradient(
-                    90deg, white 0%, #1515c3 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .navigation {
-    display: flex;
-    justify-content: center;
-    border-radius: 10px;
-
-    &__button {
-      background: none;
-      min-height: 50px;
-      border: none;
-      transition: 0.5s;
-      height: 60px;
-      cursor: pointer;
-      transition-duration: 2s;
-      margin: 0 10px;
-      color: white;
-      font-weight: 800;
-
-      i {
-        visibility: hidden;
-      }
-
-      &.active {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        width: 90px;
-        border-radius: 50%;
-        background: lightcyan;
-        color: blue;
-        box-shadow: 0 1px 5px 5px white;
-
-        i {
-          visibility: visible;
-          transform: translateY(15px);
-        }
-
-        .navigation__button--title {
-          transform: translateY(20px);
-          display: inline-block;
-        }
-      }
-    }
-  }
-}
-
 
 .button {
   background-color: $main-color;
@@ -126,49 +51,6 @@ body {
     color: $main-color;
     border: 5px double $main-color;
   }
-}
-
-#info-developer {
-  display: flex;
-  justify-content: center;
-  margin: 30px 20px;
-  flex-wrap: wrap;
-
-  img {
-    width: 150px;
-    border: 3px solid $main-color;
-    border-radius: 15px;
-    box-shadow: 0 0 25px 10px;
-    margin: 0 auto 20px;
-  }
-
-  section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border: 1px solid;
-    border-radius: 10px;
-    margin: 5px;
-    width: 100%;
-    padding: 10px;
-
-    @media (min-width: 768px) {
-      width: 350px;
-    }
-
-    @media(min-width: 1024px) {
-      width: 480px;
-    }
-
-    @media(min-width: 1200px) {
-      width: 24%;
-    }
-  }
-
-  div, p {
-    margin: 5px 0;
-  }
-
 }
 
 select {

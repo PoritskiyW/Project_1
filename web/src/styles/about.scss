@@ -3,14 +3,18 @@
   &__content {
 
     .info {
-      margin-top: 30px;
-      color: darkorange;
+      background: linear-gradient(
+                      90deg, #00009C 0%, #9915D6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       position: relative;
       font-size: 20px;
       letter-spacing: 0.045em;
       line-height: 40px;
       font-family: monospace;
       font-weight: 400;
+      margin: 30px;
+      text-align: left;
 
       &__title {
         text-align: center;

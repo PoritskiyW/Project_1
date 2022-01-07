@@ -34,7 +34,7 @@
     </header>
 
     <section class="page-home" id="page-home">
-        <div id="info-developer"></div>
+        <section class="page-home__developers" id="info-developer"></section>
         <button class="add button" id="modal-home-2" type="button">Select user</button>
         <div id="my-modal-home-2" class="modal">
             <div class="modal_content">
@@ -95,7 +95,7 @@
         <section class="modal" id="modal">
             <div class="modal_content">
                 <form class="form-questions" id="get-form-questions">
-                    <button class="form-questions__exit" onclick="closedModal()" type="submit">x</button>
+                    <button class="form-questions__exit" onclick="closedModal()" type="button">x</button>
                     <label class="form-questions__title" for="form-questions__question">Questions:</label>
                     <textarea name="details" maxlength='250' autofocus tabindex="0" id="form-questions__question"
                               placeholder="Your question ..." cols="30" rows="5"></textarea>
@@ -132,9 +132,9 @@
                         </label>
                     </div>
                     <div class="form-questions__buttons-group">
-                        <button class="button form-questions__cancel" onclick="closedModal()" type="submit">cancel
+                        <button class="button form-questions__cancel" onclick="closedModal()" type="button">cancel
                         </button>
-                        <button class="button" type="submit" disabled="disabled" onclick="postQuestions()">save</button>
+                        <button class="button" type="button" disabled="disabled" onclick="postQuestions()">save</button>
                     </div>
                 </form>
             </div>

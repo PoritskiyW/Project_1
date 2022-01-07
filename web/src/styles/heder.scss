@@ -1,0 +1,72 @@
+.header {
+  background: darkblue;
+  margin: 10px auto;
+  @media (min-width: 600px) {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+
+    @media(min-width: 768px) {
+      justify-content: flex-end;
+    }
+  }
+
+  &__team {
+    margin: auto 10px;
+    font-size: 30px;
+    text-transform: uppercase;
+    background: linear-gradient(
+                    90deg, white 0%, #1515c3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+
+    &__button {
+      background: none;
+      min-height: 50px;
+      border: none;
+      transition: 0.5s;
+      height: 60px;
+      cursor: pointer;
+      transition-duration: 2s;
+      margin: 0 10px;
+      color: white;
+      font-weight: 800;
+
+      i {
+        visibility: hidden;
+      }
+
+      &.active {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 90px;
+        border-radius: 50%;
+        background: lightcyan;
+        color: blue;
+        box-shadow: 0 1px 5px 5px white;
+
+        i {
+          visibility: visible;
+          transform: translateY(15px);
+        }
+
+        .navigation__button--title {
+          transform: translateY(20px);
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
