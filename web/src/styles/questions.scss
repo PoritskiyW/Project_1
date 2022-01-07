@@ -1,99 +1,118 @@
 @import "_variables";
 
-.page-questions__add {
-  border: 2px solid;
-  text-align: left;
-  padding: 10px 20px;
+.page-questions {
 
-  ul {
-    position: relative;
-    transition-duration: 2s;
-    border: 1px solid;
-    list-style-type: none;
-    padding: 10px;
+  &__filters {
+    display: flex;
+    margin: 10px;
+  }
 
-    &:hover {
-      background: aliceblue;
+  &__add {
+    border: 3px solid blue;
+    border-radius: 15px;
+    text-align: left;
+    padding: 10px 20px;
+    margin: 10px;
+
+    ul {
+      position: relative;
+      transition-duration: 2s;
+      border: 1px solid;
+      border-radius: 15px;
+      list-style-type: none;
+      padding: 10px;
+      margin: 10px 0;
+      color: blue;
+      font-size: 16px;
+      cursor: pointer;
+
+      &:hover {
+        background: aliceblue;
+      }
+
+      &:hover .question__delete {
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        border: 1px solid;
+        border-radius: 10px;
+        color: white;
+        background: lightblue;
+      }
+
+      .question {
+        &__ask {
+          max-height: 60px;
+          overflow: hidden;
+          display: -webkit-box;
+          //add height > 3 line? add: (...) and hidden text
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          transition-duration: 4s;
+
+          &:hover {
+            display: block;
+            max-height: 100%;
+          }
+        }
+
+        &__delete {
+          transition-duration: 5s;
+          display: none;
+        }
+
+        &__date {
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+        }
+      }
     }
+  }
 
-    &:hover .question__delete {
-      display: inline-block;
-      position: absolute;
-      right: 10px;
+  .form-questions {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    // background: white url(https://en.js.cx/clipart/prompt.png) no-repeat left 5px;
+    position: relative;
+    text-align: left;
+    width: 60vw;
+    background: white;
+
+    input {
       cursor: pointer;
     }
 
-    .question {
-      &__ask {
-        max-height: 60px;
-        overflow: hidden;
-        display: -webkit-box;
-        //add height > 3 line? add: (...) and hidden text
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        transition-duration: 4s;
-
-        &:hover {
-          display: block;
-          max-height: 100%;
-        }
-      }
-
-      &__delete {
-        transition-duration: 5s;
-        display: none;
-      }
-
-      &__date {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-      }
-    }
-  }
-}
-
-.form-questions {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  // background: white url(https://en.js.cx/clipart/prompt.png) no-repeat left 5px;
-  position: relative;
-  text-align: left;
-  width: 60vw;
-  background: white;
-
-  input {
-    cursor: pointer;
-  }
-
-  &__input {
-    border: 3px double $main-color;
-
-    &:focus,
-    &:focus-visible {
-      outline: skyblue;
+    &__input {
       border: 3px double $main-color;
+
+      &:focus,
+      &:focus-visible {
+        outline: skyblue;
+        border: 3px double $main-color;
+      }
+    }
+
+    &__exit {
+      position: absolute;
+      right: 10px;
+    }
+
+    &__title {
+      display: block;
+      text-align: left;
+      padding: 5px;
+    }
+
+    &__buttons-group {
+      text-align: left;
     }
   }
 
-  &__exit {
-    position: absolute;
-    right: 10px;
+  //fixed height textarea
+  textarea[name="details"] {
+    resize: none;
   }
-
-  &__title {
-    display: block;
-    text-align: left;
-    padding: 5px;
-  }
-
-  &__buttons-group {
-    text-align: left;
-  }
-}
-
-//fixed height textarea
-textarea[name="details"] {
-  resize: none;
 }

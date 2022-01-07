@@ -264,17 +264,21 @@ function fillForm(devData) {
 
     for (let i = 0; i < devData.length; i++) {
         const item = devData[i];
-        let mySection = document.createElement('section');
+        let mySection = document.createElement('ul');
         mySection.id = `${item.id}`;
         mySection.innerHTML = `
-<!--        <img src="${item.images}" alt='person'/>-->
-        <p>Name: ${item.name}</p>
-        <p>Surname: ${item.surname}</p>
-        <p>Gender: ${item.sex}</p>
-        <p>Age: ${item.age}</p>
-        <p>Birthday: ${item.birthday}</p>
-        <p>Locations: ${item.locations}</p>
-        <p>Hobby: ${item.hobby}</p>`;
+        <li class="img">
+            <div class="img__content">
+                <img src="${item.images}" alt='person'/>
+            </div>
+        </li>
+        <li>Name: ${item.name}</li>
+        <li>Surname: ${item.surname}</li>
+        <li>Gender: ${item.sex}</li>
+        <li>Age: ${item.age}</li>
+        <li>Birthday: ${item.birthday}</li>
+        <li>Locations: ${item.locations}</li>
+        <li>Hobby: ${item.hobby}</li>`;
         infoDeveloper.appendChild(mySection);
     }
 }
@@ -525,13 +529,25 @@ function init(state) {
     const filters = getLocalStorage();
     questionsFilter(STATE, filters.fileSystem, filters.theme);
 
-    // addListener('route-page-home', 'click', route('page-home'));
-    // addListener('route-page-questions', 'click', route('page-questions'));
-    // addListener('route-page-about', 'click', route('page-about'));
+
+    addListener('routeHome', 'click', () => route('page-home'));
+    addListener('routeQuestion' ,'click', () => route('page-questions'));
+    addListener('routeAbout', 'click', () => route('page-about'));
+
+    const list = document.querySelectorAll('.home, .question, .about');
+    function activeLink() {
+        list.forEach((item) =>
+            item.classList.remove('active'));
+        this.classList.add('active');
+    }
+    list.forEach((item) =>
+        item.addEventListener('click', activeLink));
     // addListener('modal-home-2', 'click', openModal2());
     // addListener('modal-home', 'click', openModal());
     // addListener('modal-body', 'load', changing());
+
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
     addListener('show-question', 'click', () => modalQuestion());
-    //addListener('delete-question', 'click', deleteQuestion());
+    addListener('delete-question', 'click', () => deleteQuestion());
+
 }

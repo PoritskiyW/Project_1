@@ -6,47 +6,34 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="./index.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <title>Home</title>
 </head>
 <body>
 <section class="bg-ex-snowflake">
     <header class="header">
-        <img class="header__logo" alt="logo" style="border-radius: 10px; width: 80px;"
-             src="./images/logo.png" alt="logo"/>
-        <p class="header__team">Холодные</p>
+        <div class="header__logo">
+            <img class="header__logo" alt="logo" style="border-radius: 10px; width: 70px"
+                 src="./images/logo.png" alt="logo"/>
+            <p class="header__team">Холодные</p>
+        </div>
         <nav class="header__navigation navigation">
-            <nav class="header__navigation navigation">
-                <ul class="navigation__list lists">
-                    <li class="lists__home active" onclick="route('page-home')">
-                        <a class="lists__home--link" href="#">
-                    <span class="lists__home--icon">
-                        <ion-icon name="home-outline"></ion-icon>
-                    </span>
-                            <span class="lists__home--text">HOME</span>
-                        </a>
-                    </li>
-                    <li class="lists__question" onclick="route('page-questions')">
-                        <a class="lists__question--link" href="#">
-                    <span class="lists__question--icon">
-                        <ion-icon name="receipt-outline"></ion-icon>
-                    </span>
-                            <span class="lists__question--text">QUESTIONS</span>
-                        </a>
-                    </li>
-                    <li class="lists__about" onclick="route('page-about')">
-                        <a class="lists__about--link" href="#">
-                    <span class="lists__about--icon">
-                        <ion-icon name="help-circle-outline"></ion-icon>
-                    </span>
-                            <span class="lists__about--text">ABOUT</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <button  type="button" class="navigation__button home active" id="routeHome">
+                <i class="fas fa-house-user"></i>
+                <span class="navigation__button--title">HOME</span>
+            </button>
+            <button type="button" class="navigation__button question" id="routeQuestion">
+                <i class="fas fa-question-circle"></i>
+                <span class="navigation__button--title">QUESTIONS</span>
+            </button>
+            <button type="button" class="navigation__button about" id="routeAbout">
+                <i class="far fa-address-card"></i>
+                <span class="navigation__button--title">ABOUT</span>
+            </button>
         </nav>
     </header>
     <section class="page-home" id="page-home">
-        <div id="info-developer"></div>
+        <section class="page-home__developers" id="info-developer"></section>
         <button class="add button" id="modal-home-2" type="button">Select user</button>
         <div id="my-modal-home-2" class="modal">
             <div class="modal_content">
@@ -77,38 +64,36 @@
         </div>
     </section>
     <section class="page-questions" id="page-questions">
-        <select name="file-system" id="file-system">
-            <option disabled>Select file system</option>
-            <option selected value="jsonD">JSON</option>
-            <option value="yaml">YAML</option>
-            <option value="csv">CSV</option>
-            <option value="xml">XML</option>
-        </select>
-        <select id="theme">
-            <option disabled>Select theme</option>
-            <option selected value="all">ALL</option>
-            <option value="HTML">HTML</option>
-            <option value="CSS">CSS</option>
-            <option value="JS">JS</option>
-            <option value="GIT">GIT</option>
-            <option value="SCSS">SCSS</option>
-        </select>
-        <button type="button" class="button" id="local-storage">Search</button>
-        <button class="add button" id="show-question" type="button">
-<!--            <abbr title="Add new question">+</abbr>-->
-            +++++++
-        </button>
+        <div class="page-questions__filters">
+            <select name="file-system" id="file-system">
+                <option disabled>Select file system</option>
+                <option selected value="jsonD">JSON</option>
+                <option value="yaml">YAML</option>
+                <option value="csv">CSV</option>
+                <option value="xml">XML</option>
+            </select>
+            <select id="theme">
+                <option disabled>Select theme</option>
+                <option selected value="all">ALL</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JS">JS</option>
+                <option value="GIT">GIT</option>
+                <option value="SCSS">SCSS</option>
+            </select>
+            <button type="button" class="button" id="local-storage">Search</button>
+            <button class="add button" id="show-question" type="button">
+                <abbr title="Add new question">+</abbr>
+            </button>
+        </div>
         <section class="page-questions__add add">
-            <p class="add__question" id="question-list--empty">There are no questions</p>
-            <ul id="question-list">
-
-            </ul>
+            <p class="add__question" id="question-list">There are no questions</p>
         </section>
 
         <section class="modal" id="modal">
             <div class="modal_content">
                 <form class="form-questions" id="get-form-questions">
-                    <button class="form-questions__exit" onclick="closedModal()" type="submit">x</button>
+                    <button class="form-questions__exit" onclick="closedModal()" type="button">x</button>
                     <label class="form-questions__title" for="form-questions__question">Questions:</label>
                     <textarea name="details" maxlength='250' autofocus tabindex="0" id="form-questions__question"
                               placeholder="Your question ..." cols="30" rows="5"></textarea>
@@ -145,9 +130,9 @@
                         </label>
                     </div>
                     <div class="form-questions__buttons-group">
-                        <button class="button form-questions__cancel" onclick="closedModal()" type="submit">cancel
+                        <button class="button form-questions__cancel" onclick="closedModal()" type="button">cancel
                         </button>
-                        <button class="button" type="submit" disabled="disabled" onclick="postQuestions()">save</button>
+                        <button class="button" type="button" disabled="disabled" onclick="postQuestions()">save</button>
                     </div>
                 </form>
             </div>
@@ -184,8 +169,5 @@
 </section>
 
 <script type="text/javascript" src="../index.js"></script>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
 </body>
 </html>

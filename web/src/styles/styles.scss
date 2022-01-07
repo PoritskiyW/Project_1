@@ -5,13 +5,10 @@
   box-sizing: border-box;
 }
 
-html {
+body {
+  background-image: url('./images/background.png');
+  color: blue;
   text-align: center;
-
-
-  @media(min-width: 768px) {
-    background-color: lightblue;
-  }
 }
 
 .bg-ex-snowflake {
@@ -30,127 +27,13 @@ html {
     background: url('./images/snowflake2.png');
   }
 }
+
 @keyframes animated-snowflake {
-  from { background-position: -800px 0; }
-  to { background-position: 0 800px; }
-
-}
-
-header {
-  margin: 10px auto;
-  @media (min-width: 768px) {
-    display: flex;
-    justify-content: flex-end;
+  from {
+    background-position: -800px 0;
   }
-
-  .header__team {
-    margin: auto 50px;
-    font-size: 20px;
-    text-transform: uppercase;
-    color: white;
-    -webkit-text-stroke: 1px $main-color;
-  }
-
-  .navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 400px;
-    height: 70px;
-    border-radius: 10px;
-
-    &__list {
-      display: flex;
-      width: 350px;
-
-      .lists {
-
-        &__home,
-        &__question,
-        &__about {
-          position: relative;
-          list-style: none;
-          width: 90px;
-          height: 70px;
-          z-index: 1;
-
-          &--link {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            width: 100%;
-            text-align: center;
-            font-weight: 500;
-          }
-
-          &--icon {
-            position: relative;
-            display: block;
-            line-height: 75px;
-            font-size: 1.5em;
-            text-align: center;
-            transition: 0.5s;
-            color: white;
-            opacity: 0;
-          }
-
-          &--text {
-            position: absolute;
-            color: white;
-            font-weight: 400;
-            font-size: 0.75em;
-            letter-spacing: 0.05em;
-            transition: 0.5s;
-            transform: translateY(20px);
-          }
-
-          &.active {
-            background: #06d0d0;
-            border: 2px solid blue;
-            transition: 0.5s;
-            border-radius: 5px;
-
-            .lists {
-              &__home,
-              &__question,
-              &__about {
-                &--icon {
-                  transform: translateY(-20px);
-                  opacity: 1;
-                  margin-top: 5px;
-                }
-
-                &--text {
-                  transform: translateY(5px);
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.lists {
-  &__home,
-  &__question,
-  &__about {
-    &:nth-child(1).active ~ .indicator {
-
-      transform: translateX((70px * 0));
-    }
-
-    &:nth-child(2).active ~ .indicator {
-
-      transform: translateX((70px * 1));
-    }
-
-    &:nth-child(3).active ~ .indicator {
-      transform: translateX((70px * 2));
-    }
+  to {
+    background-position: 0 800px;
   }
 }
 
@@ -160,7 +43,7 @@ header {
   text-transform: uppercase;
   color: white;
   padding: 7px 15px;
-  margin: 10px 5px;
+  margin: 5px;
   cursor: pointer;
 
   &:hover {
@@ -170,37 +53,12 @@ header {
   }
 }
 
-#info-developer {
-  display: flex;
-  justify-content: space-evenly;
-  margin: 30px auto;
-  flex-wrap: wrap;
-
-  img {
-    width: 150px;
-    border: 3px solid $main-color;
-    border-radius: 15px;
-    box-shadow: 0 0 25px 10px;
-    margin: 0 auto 20px;
-  }
-
-  section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  div, p {
-    margin: 5px auto;
-  }
-}
-
 select {
   color: white;
   border: 5px double;
   background: $main-color;
   padding: 7px 15px;
-  margin: 5px 0;
+  margin: 5px;
   cursor: pointer;
 }
 
