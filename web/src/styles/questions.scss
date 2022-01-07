@@ -15,6 +15,7 @@
     margin: 10px;
 
     ul {
+      background-color: white;
       position: relative;
       transition-duration: 2s;
       border: 1px solid;
@@ -27,7 +28,8 @@
       cursor: pointer;
 
       &:hover {
-        background: aliceblue;
+        background: darkblue;
+        color: white;
       }
 
       &:hover .question__delete {
@@ -49,7 +51,7 @@
           //add height > 3 line? add: (...) and hidden text
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
-          transition-duration: 4s;
+          transition-duration: 0.5s;
 
           &:hover {
             display: block;
@@ -58,7 +60,7 @@
         }
 
         &__delete {
-          transition-duration: 5s;
+          transition-duration: 0.5s;
           display: none;
         }
 
