@@ -7,11 +7,7 @@
 
 html {
   text-align: center;
-
-
-  @media(min-width: 768px) {
-    background-color: lightblue;
-  }
+  background-image: url('./images/background.png');
 }
 
 .bg-ex-snowflake {
@@ -30,129 +26,90 @@ html {
     background: url('./images/snowflake2.png');
   }
 }
+
 @keyframes animated-snowflake {
-  from { background-position: -800px 0; }
-  to { background-position: 0 800px; }
+  from {
+    background-position: -800px 0;
+  }
+  to {
+    background-position: 0 800px;
+  }
 
 }
 
-header {
+.header {
+  background: darkblue;
   margin: 10px auto;
-  @media (min-width: 768px) {
+  @media (min-width: 600px) {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 
-  .header__team {
-    margin: auto 50px;
-    font-size: 20px;
+  &__logo {
+    display: flex;
+    justify-content: center;
+
+    @media(min-width: 768px) {
+      justify-content: flex-end;
+    }
+  }
+
+  &__team {
+    margin: auto 10px;
+    font-size: 30px;
     text-transform: uppercase;
-    color: white;
-    -webkit-text-stroke: 1px $main-color;
+    background: linear-gradient(
+                    90deg, white 0%, #1515c3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .navigation {
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 400px;
-    height: 70px;
     border-radius: 10px;
 
-    &__list {
-      display: flex;
-      width: 350px;
+    &__button {
+      background: none;
+      min-height: 50px;
+      border: none;
+      transition: 0.5s;
+      height: 60px;
+      cursor: pointer;
+      transition-duration: 2s;
+      margin: 0 10px;
+      color: white;
+      font-weight: 800;
 
-      .lists {
+      i {
+        visibility: hidden;
+      }
 
-        &__home,
-        &__question,
-        &__about {
-          position: relative;
-          list-style: none;
-          width: 90px;
-          height: 70px;
-          z-index: 1;
+      &.active {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 90px;
+        border-radius: 50%;
+        background: lightcyan;
+        color: blue;
+        box-shadow: 0 1px 5px 5px white;
 
-          &--link {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            width: 100%;
-            text-align: center;
-            font-weight: 500;
-          }
+        i {
+          visibility: visible;
+          transform: translateY(15px);
+        }
 
-          &--icon {
-            position: relative;
-            display: block;
-            line-height: 75px;
-            font-size: 1.5em;
-            text-align: center;
-            transition: 0.5s;
-            color: white;
-            opacity: 0;
-          }
-
-          &--text {
-            position: absolute;
-            color: white;
-            font-weight: 400;
-            font-size: 0.75em;
-            letter-spacing: 0.05em;
-            transition: 0.5s;
-            transform: translateY(20px);
-          }
-
-          &.active {
-            background: #06d0d0;
-            border: 2px solid blue;
-            transition: 0.5s;
-            border-radius: 5px;
-
-            .lists {
-              &__home,
-              &__question,
-              &__about {
-                &--icon {
-                  transform: translateY(-20px);
-                  opacity: 1;
-                  margin-top: 5px;
-                }
-
-                &--text {
-                  transform: translateY(5px);
-                }
-              }
-            }
-          }
+        .navigation__button--title {
+          transform: translateY(20px);
+          display: inline-block;
         }
       }
     }
   }
 }
 
-.lists {
-  &__home,
-  &__question,
-  &__about {
-    &:nth-child(1).active ~ .indicator {
-
-      transform: translateX((70px * 0));
-    }
-
-    &:nth-child(2).active ~ .indicator {
-
-      transform: translateX((70px * 1));
-    }
-
-    &:nth-child(3).active ~ .indicator {
-      transform: translateX((70px * 2));
-    }
-  }
-}
 
 .button {
   background-color: $main-color;
@@ -172,8 +129,8 @@ header {
 
 #info-developer {
   display: flex;
-  justify-content: space-evenly;
-  margin: 30px auto;
+  justify-content: center;
+  margin: 30px 20px;
   flex-wrap: wrap;
 
   img {
@@ -188,11 +145,29 @@ header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 5px;
+    width: 100%;
+    padding: 10px;
+
+    @media (min-width: 768px) {
+      width: 350px;
+    }
+
+    @media(min-width: 1024px) {
+      width: 480px;
+    }
+
+    @media(min-width: 1200px) {
+      width: 24%;
+    }
   }
 
   div, p {
-    margin: 5px auto;
+    margin: 5px 0;
   }
+
 }
 
 select {

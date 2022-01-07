@@ -6,7 +6,7 @@ function addListener (id, eventType, callback){
 }
 
 function route(id) {
-    console.log(id);
+    //console.log(id);
     //get all pages + our page from argument
     setNodeHidden('page-home', true);
     setNodeHidden('page-questions', true);
@@ -425,9 +425,18 @@ function init(state) {
     console.log(STATE)
     questionsFilter(STATE, 'csv', 'CSS');
 
-    // addListener('route-page-home', 'click', route('page-home'));
-    // addListener('route-page-questions', 'click', route('page-questions'));
-    // addListener('route-page-about', 'click', route('page-about'));
+    addListener('routeHome', 'click', () => route('page-home'));
+    addListener('routeQuestion' ,'click', () => route('page-question'));
+    addListener('routeAbout', 'click', () => route('page-about'));
+
+    const list = document.querySelectorAll('.home, .question, .about');
+    function activeLink() {
+        list.forEach((item) =>
+            item.classList.remove('active'));
+        this.classList.add('active');
+    }
+    list.forEach((item) =>
+        item.addEventListener('click', activeLink));
     // addListener('modal-home-2', 'click', openModal2());
     // addListener('modal-home', 'click', openModal());
     // addListener('modal-body', 'load', changing());

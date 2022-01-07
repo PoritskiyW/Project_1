@@ -6,43 +6,30 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="./index.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <title>Home</title>
 </head>
 <body>
 <section class="bg-ex-snowflake">
     <header class="header">
-        <img class="header__logo" alt="logo" style="border-radius: 10px; width: 80px;"
-             src="./images/logo.png" alt="logo"/>
-        <p class="header__team">Холодные</p>
+        <div class="header__logo">
+            <img class="header__logo" alt="logo" style="border-radius: 10px; width: 70px"
+                 src="./images/logo.png" alt="logo"/>
+            <p class="header__team">Холодные</p>
+        </div>
         <nav class="header__navigation navigation">
-            <nav class="header__navigation navigation">
-                <ul class="navigation__list lists">
-                    <li class="lists__home active" onclick="route('page-home')">
-                        <a class="lists__home--link" href="#">
-                    <span class="lists__home--icon">
-                        <ion-icon name="home-outline"></ion-icon>
-                    </span>
-                            <span class="lists__home--text">HOME</span>
-                        </a>
-                    </li>
-                    <li class="lists__question" onclick="route('page-questions')">
-                        <a class="lists__question--link" href="#">
-                    <span class="lists__question--icon">
-                        <ion-icon name="receipt-outline"></ion-icon>
-                    </span>
-                            <span class="lists__question--text">QUESTIONS</span>
-                        </a>
-                    </li>
-                    <li class="lists__about" onclick="route('page-about')">
-                        <a class="lists__about--link" href="#">
-                    <span class="lists__about--icon">
-                        <ion-icon name="help-circle-outline"></ion-icon>
-                    </span>
-                            <span class="lists__about--text">ABOUT</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <button  type="button" class="navigation__button home active" id="routeHome">
+                <i class="fas fa-house-user"></i>
+                <span class="navigation__button--title">HOME</span>
+            </button>
+            <button type="button" class="navigation__button question" id="routeQuestion">
+                <i class="fas fa-question-circle"></i>
+                <span class="navigation__button--title">QUESTIONS</span>
+            </button>
+            <button type="button" class="navigation__button about" id="routeAbout">
+                <i class="far fa-address-card"></i>
+                <span class="navigation__button--title">ABOUT</span>
+            </button>
         </nav>
     </header>
 
@@ -81,14 +68,14 @@
     <section class="page-questions" id="page-questions">
         <select name="file-system" id="file-system">
             <option disabled>Select file system</option>
-            <option selected value="JSON">JSON</option>
-            <option value="YML">YAML</option>
-            <option value="CVS">CSV</option>
-            <option value="XML">XML</option>
+            <option selected value="jsonD">JSON</option>
+            <option value="yaml">YAML</option>
+            <option value="csv">CSV</option>
+            <option value="xml">XML</option>
         </select>
         <select id="theme">
             <option disabled>Select theme</option>
-            <option selected value="ALL">ALL</option>
+            <option selected value="all">ALL</option>
             <option value="HTML">HTML</option>
             <option value="CSS">CSS</option>
             <option value="JS">JS</option>
@@ -186,8 +173,5 @@
 </section>
 
 <script type="text/javascript" src="../index.js"></script>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
 </body>
 </html>
