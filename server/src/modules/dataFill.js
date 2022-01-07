@@ -63,7 +63,7 @@ function createDataDir() {
                     throw err;
                 }
             });
-            fs.writeFile('./data/questions.yaml', `questions: `, (err) => {
+            fs.writeFile('./data/questions.yaml', `---\nquestions: `, (err) => {
                 if (err) {
                     throw err;
                 }
@@ -87,16 +87,6 @@ function createDataDir() {
                     throw err;
                 }
             });
-            fs.writeFile('./data/idFileSystems.json', `
-            {
-            "json": [],
-            "xml": [],
-            "yaml": [],
-            "csv": []}`, (err) => {
-                if (err) {
-                    throw err;
-                }
-            })
         }
     });
 }
