@@ -6,7 +6,6 @@ function addListener (id, eventType, callback){
 }
 
 function route(id) {
-    //console.log(id);
     //get all pages + our page from argument
     setNodeHidden('page-home', true);
     setNodeHidden('page-questions', true);
@@ -111,15 +110,18 @@ function parseYAML(obj) {
         for (let j = 0; j < partResult.length; j++) {
             if (partResult[j] !== '') {
                 let stringResult = partResult[j].split(': ');
-                if (stringResult[0].replaceAll(' ', '') === 'id') {
-                    obj[stringResult[0].replaceAll(' ', '')] = Number.parseInt(stringResult[1]);
-                } else if (stringResult[0].replaceAll(' ', '') === 'answer') {
-                    obj[stringResult[0].replaceAll(' ', '')] = stringResult[1] !== 'false';
-                } else if (stringResult[0].replaceAll(' ', '') === 'dateModify') {
-                    obj[stringResult[0].replaceAll(' ', '')] = Date.parse(stringResult[1]);
-                }
-                else {
-                    obj[stringResult[0].replaceAll(' ', '')] = stringResult[1];
+                if (stringResult.length > 1){
+                    if (stringResult[0].replaceAll(' ', '') === 'id') {
+                        obj[stringResult[0].replaceAll(' ', '')] = Number.parseInt(stringResult[1]);
+                    } else if (stringResult[0].replaceAll(' ', '') === 'answer') {
+                        obj[stringResult[0].replaceAll(' ', '')] = stringResult[1] !== 'false';
+                    } else if (stringResult[0].replaceAll(' ', '') === 'dateModify') {
+                        obj[stringResult[0].replaceAll(' ', '')] = Date.parse(stringResult[1]);
+                    }
+                    else {
+                        stringResult[1] = stringResult[1].trim();
+                        obj[stringResult[0].replaceAll(' ', '')] = stringResult[1];
+                    }
                 }
             }
         }
@@ -337,18 +339,93 @@ function changing() {
 
 /////////////////////////////////////////////////////////////////
 //page-questions area
-function questionsFilter(state, fileSystem, theme) {
-
+function questionsFilter(state, fileSystem = 'jsonD', theme = 'all') {
     if (theme === 'all') {
         questionsList(state[fileSystem].questions);
-        console.log(state[fileSystem])
     } else {
         questionsList(state[fileSystem].questions.filter(question => question.theme === theme));
     }
 }
 
+function fillThemes (state) {
+
+    const filters = getLocalStorage();
+    let themes = [];
+    themes.push('all');
+
+    let jsonQuestions = state.jsonD.questions;
+    let xmlQuestions = state.xml.questions;
+    let yamlQuestions = state.yaml.questions;
+    let csvQuestions = state.csv.questions;
+
+    for (let i = 0; i < jsonQuestions.length; i++) {
+        if(!themes.includes(jsonQuestions[i].theme)) {
+            themes.push(jsonQuestions[i].theme);
+        }
+    }
+    for (let i = 0; i < xmlQuestions.length; i++) {
+        if(!themes.includes(xmlQuestions[i].theme)) {
+            themes.push(xmlQuestions[i].theme);
+        }
+    }
+    for (let i = 0; i < yamlQuestions.length; i++) {
+        if(!themes.includes(yamlQuestions[i].theme)) {
+            themes.push(yamlQuestions[i].theme);
+        }
+    }
+    for (let i = 0; i < csvQuestions.length; i++) {
+        if(!themes.includes(csvQuestions[i].theme)) {
+            themes.push(csvQuestions[i].theme);
+        }
+    }
+
+
+    const themesList = document.getElementById('theme');
+    themesList.innerHTML = `<option disabled>Select theme</option>`;
+
+    for (let i = 0; i < themes.length; i++) {
+        const item = themes[i];
+        if (item === filters.theme){
+            let option = document.createElement('option');
+            option.value = item;
+            option.innerHTML = `<option selected>${item.toUpperCase()}</option>`;
+            themesList.appendChild(option);
+        } else {
+            let option = document.createElement('option');
+            option.value = item;
+            option.innerHTML = `<option>${item.toUpperCase()}</option>`;
+            themesList.appendChild(option);
+        }
+    }
+}
+
+function fillFileSystems () {
+    let filters = getLocalStorage();
+    const fileSystems = document.getElementById('file-system');
+    fileSystems.innerHTML = '<option disabled>Select file system</option>'
+
+    const fileSystemsObj = {jsonD: 'JSON',
+        xml:'XML',
+        yaml:'YAML',
+        csv:'CSV'
+};
+    for (const key in fileSystemsObj) {
+        if (filters.fileSystem === key){
+            let option = document.createElement('option');
+            option.value = key;
+            option.selected = true;
+            option.textContent = `${fileSystemsObj[key]}`;
+            fileSystems.appendChild(option);
+        } else {
+            let option = document.createElement('option');
+            option.value = key;
+            option.textContent = `${fileSystemsObj[key]}`;
+            fileSystems.appendChild(option);
+        }
+    }
+}
+
 function questionsList(data) {
-    console.log(data)
     const questionList = document.getElementById('question-list');
     questionList.innerHTML = '';
 
@@ -385,14 +462,30 @@ function modalDeleteQuestion() {
     myModal.style.display = 'grid';
 }
 
-function myLocalStorage() {
-    const myTheme = document.getElementById('theme');
-    const myFileSystem = document.getElementById('file-system');
+function getLocalStorage() {
+    const filters = localStorage.getItem('filters');
 
-    myFileSystem.value = localStorage.getItem("fileSystem") || myFileSystem.value; // пулучаем value из локалстореджа
-    localStorage.setItem("fileSystem", myFileSystem.value); // cетим в локал сторедж, нужно для первого запуска приложения, пока нет ничего в localStorage.
-    myTheme.value = localStorage.getItem("theme") || myTheme.value;
-    localStorage.setItem("theme", myTheme.value);
+    if (filters) {
+        return JSON.parse(filters);
+    }
+    return false;
+}
+
+function setLocalStorage() {
+    const theme = document.getElementById('theme').value;
+    const fileSystem = document.getElementById('file-system').value;
+    let filters = {};
+
+    filters.theme = theme;
+    filters.fileSystem = fileSystem;
+    filters = JSON.stringify(filters);
+    localStorage.setItem('filters', filters);
+}
+
+function searchButtonHandler(state) {
+    setLocalStorage();
+    const filters = getLocalStorage();
+    questionsFilter(state, filters.fileSystem, filters.theme);
 }
 
 //post questions
@@ -426,8 +519,16 @@ window.onload = () => {
 function init(state) {
     const STATE = state;
     fillForm(STATE.dev.person);
-    console.log(STATE)
-    questionsFilter(STATE, 'csv', 'all');
+    fillFileSystems();
+    fillThemes(STATE);
+
+    if (!getLocalStorage()){
+        setLocalStorage();
+    }
+
+    const filters = getLocalStorage();
+    questionsFilter(STATE, filters.fileSystem, filters.theme);
+
 
     addListener('routeHome', 'click', () => route('page-home'));
     addListener('routeQuestion' ,'click', () => route('page-questions'));
@@ -444,7 +545,9 @@ function init(state) {
     // addListener('modal-home-2', 'click', openModal2());
     // addListener('modal-home', 'click', openModal());
     // addListener('modal-body', 'load', changing());
-    // addListener('local-storage', 'click', myLocalStorage());
+
+    addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
     addListener('show-question', 'click', () => modalQuestion());
     addListener('delete-question', 'click', () => deleteQuestion());
+
 }
