@@ -66,31 +66,30 @@
     </section>
 
     <section class="page-questions" id="page-questions">
-        <select name="file-system" id="file-system">
-            <option disabled>Select file system</option>
-            <option selected value="jsonD">JSON</option>
-            <option value="yaml">YAML</option>
-            <option value="csv">CSV</option>
-            <option value="xml">XML</option>
-        </select>
-        <select id="theme">
-            <option disabled>Select theme</option>
-            <option selected value="all">ALL</option>
-            <option value="HTML">HTML</option>
-            <option value="CSS">CSS</option>
-            <option value="JS">JS</option>
-            <option value="GIT">GIT</option>
-            <option value="SCSS">SCSS</option>
-        </select>
-        <button type="button" class="button" id="local-storage">Search</button>
-        <button class="add button" id="show-question" type="button">
-            <abbr title="Add new question">+</abbr>
-        </button>
+        <div class="page-questions__filters">
+            <select name="file-system" id="file-system">
+                <option disabled>Select file system</option>
+                <option selected value="jsonD">JSON</option>
+                <option value="yaml">YAML</option>
+                <option value="csv">CSV</option>
+                <option value="xml">XML</option>
+            </select>
+            <select id="theme">
+                <option disabled>Select theme</option>
+                <option selected value="all">ALL</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JS">JS</option>
+                <option value="GIT">GIT</option>
+                <option value="SCSS">SCSS</option>
+            </select>
+            <button type="button" class="button" id="local-storage">Search</button>
+            <button class="add button" id="show-question" type="button">
+                <abbr title="Add new question">+</abbr>
+            </button>
+        </div>
         <section class="page-questions__add add">
-            <p class="add__question" id="question-list--empty">There are no questions</p>
-            <ul id="question-list">
-
-            </ul>
+            <p class="add__question" id="question-list">There are no questions</p>
         </section>
 
         <section class="modal" id="modal">

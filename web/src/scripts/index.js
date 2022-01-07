@@ -423,7 +423,7 @@ function init(state) {
     const STATE = state;
     fillForm(STATE.dev.person);
     console.log(STATE)
-    questionsFilter(STATE, 'csv', 'CSS');
+    questionsFilter(STATE, 'csv', 'all');
 
     addListener('routeHome', 'click', () => route('page-home'));
     addListener('routeQuestion' ,'click', () => route('page-questions'));
