@@ -368,6 +368,7 @@ function fillThemes (state) {
         if (item === filters.theme){
             let option = document.createElement('option');
             option.value = item;
+            option.selected = true;
             option.innerHTML = `<option selected>${item.toUpperCase()}</option>`;
             themesList.appendChild(option);
         } else {
