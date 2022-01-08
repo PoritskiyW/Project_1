@@ -83,8 +83,14 @@
     width: 60vw;
     background: white;
 
+    label {
+      font-weight: 800;
+      padding: 10px;
+    }
+
     input {
       cursor: pointer;
+      margin: 5px;
     }
 
     &__input {
@@ -100,6 +106,10 @@
     &__exit {
       position: absolute;
       right: 10px;
+      border-radius: 50%;
+      border: 3px solid;
+      color: white;
+      background-color: blue;
     }
 
     &__title {
@@ -109,12 +119,17 @@
     }
 
     &__buttons-group {
-      text-align: left;
+      text-align: right;
     }
   }
 
   //fixed height textarea
   textarea[name="details"] {
     resize: none;
+    border: 1px solid;
+    color: blue;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 5px;
   }
 }

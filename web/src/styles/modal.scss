@@ -9,10 +9,19 @@
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.6);
 
-  &_content {
+  &__content {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .delete {
+      &__context {
+        background-color: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: end;
+      }
+    }
   }
 
   .close {

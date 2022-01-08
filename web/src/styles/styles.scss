@@ -40,6 +40,7 @@ body {
 .button {
   background-color: $main-color;
   border: 5px double;
+  border-radius: 25px;
   text-transform: uppercase;
   color: white;
   padding: 7px 15px;
@@ -56,6 +57,7 @@ body {
 select {
   color: white;
   border: 5px double;
+  border-radius: 25px;
   background: $main-color;
   padding: 7px 15px;
   margin: 5px;
