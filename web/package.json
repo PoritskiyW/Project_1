@@ -15,6 +15,11 @@
   "scripts": {
     "cmd": "gulp",
     "build": "yarn cmd default",
-    "watch": "yarn cmd watch"
+    "watch": "yarn cmd watch",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "jest": "^27.4.7"
   }
 }
