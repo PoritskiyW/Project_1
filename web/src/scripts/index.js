@@ -19,6 +19,7 @@ function routeModal(id) {
     setNodeHidden('user3', true);
     setNodeHidden('user4', true);
     setNodeHidden(id, false);
+    document.getElementById('route1').classList.add('active');
 }
 
 
@@ -302,8 +303,8 @@ function modalUser(devData) {
      for (let i = 0; i < devData.length; i++) {
             const item = devData[i];
             const button = document.createElement('button');
-            button.className  = "navigation__button";
             button.id = `route${item.id}`;
+            button.className = `navigation__button user${item.id}`;
             button.innerHTML = `${item.name}`;
 
             header.appendChild(button);
@@ -527,6 +528,8 @@ function init(state) {
     fillFileSystems();
     fillThemes(STATE);
 
+    routeModal('user1');
+
     if (!getLocalStorage()){
         setLocalStorage();
     }
@@ -538,11 +541,19 @@ function init(state) {
     addListener('routeQuestion' ,'click', () => route('page-questions'));
     addListener('routeAbout', 'click', () => route('page-about'));
 
-    addListener('route1', 'click', () => route('user1'));
-    addListener('route2' ,'click', () => route('user2'));
-    addListener('route3', 'click', () => route('user3'));
-    addListener('route3', 'click', () => route('user4'));
+    addListener('route1', 'click', () => routeModal('user1'));
+    addListener('route2' ,'click', () => routeModal('user2'));
+    addListener('route3', 'click', () => routeModal('user3'));
+    addListener('route4', 'click', () => routeModal('user4'));
 
+      const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
+        function activeLinkModal() {
+            listModal.forEach((item) =>
+                item.classList.remove('active'));
+            this.classList.add('active');
+        }
+        listModal.forEach((item) =>
+            item.addEventListener('click', activeLinkModal));
 
     const list = document.querySelectorAll('.home, .question, .about');
     function activeLink() {
