@@ -429,7 +429,7 @@ function postQuestions(state) {
             fileSystem.push(item.value);
         }
     }
-    const dateModify = Date.now();
+    let dateModify = new Date().toISOString().substring(0, 10);
 
     const result = {
         id: generate(state),
