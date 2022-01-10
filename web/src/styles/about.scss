@@ -32,24 +32,17 @@
       overflow: hidden;
       text-transform: initial;
       text-align: center;
-
-      &:before {
-        content: '';
-        position: absolute;
-        filter: blur(5px);
-        top: 8px;
-        left: auto;
-        width: 350px;
-        height: 26px;
-        mix-blend-mode: multiply;
-        background-image: repeating-linear-gradient(-45deg, transparent, transparent 1em, #036efa 1em, #1183f3 50%), repeating-linear-gradient(45deg, #fdfc00, #f5ff00 1em, #FFF 1em, #BFE2FF 50%);
-        background-size: 3em 3em, 2em 2em;
-        animation-name: ani;
-        animation-duration: 10s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-      }
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: repeating-linear-gradient(
+                      -45deg, transparent, transparent 1em, black 1em, red 50%), repeating-linear-gradient(
+                      45deg, red , black 1em, red 1em, black 50%);
+      background-size: 3em 3em, 2em 2em;
+      animation-name: ani;
+      animation-duration: 10s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
     }
   }
 }

@@ -233,13 +233,13 @@ function modalUser(devData) {
             <div class="img__content">
                 <img src="${item.images}" alt='person'/>
             </div>
-            <label>Name: <input placeholder=${item.name}></label>
-            <label>Surname: <input placeholder=${item.surname}></label>
-            <label>Gender: <input placeholder=${item.sex}></label>
-            <label>Age: <input placeholder=${item.age}></label>
-            <label>Birthday: <input placeholder=${item.birthday}></label>
-            <label>Locations: <input placeholder=${item.locations}></label>
-            <label>Hobby: <input placeholder=${item.hobby}></label>`;
+            <label>Name: <input type='text'  maxlength="20" placeholder=${item.name}></label>
+            <label>Surname: <input type='text'  maxlength="20" placeholder=${item.surname}></label>
+            <label>Gender: <input type='text' maxlength="20" placeholder=${item.sex}></label>
+            <label>Age: <input type='number'  min="0" max="100" placeholder=${item.age}></label>
+            <label>Birthday: <input type="date"  value='${item.birthday}'></label>
+            <label>Locations: <input type='text'  maxlength="20" placeholder=${item.locations}></label>
+            <label>Hobby: <input type='text' maxlength="100"  placeholder=${item.hobby}></label>`;
 
         infoDeveloper.appendChild(mySection);
     }

@@ -12,7 +12,7 @@ function createDataDir() {
       "surname": "Poritskiy",
       "age": 23,
       "sex": "Male",
-      "birthday": "October 29, 1998",
+      "birthday": "1998-10-29",
       "locations": "Kharkov",
       "hobby": "music, anime, hiking",
       "images": "Viacheslav.jpg"
@@ -23,7 +23,7 @@ function createDataDir() {
       "surname": "Bereziuk",
       "age": 26,
       "sex": "Female",
-      "birthday": "July 20, 1995",
+      "birthday": "1995-07-20",
       "locations": "Kharkov",
       "hobby": "Travel, gum, cinema, hiking, music",
       "images": "Viacheslav.jpg"
@@ -34,7 +34,7 @@ function createDataDir() {
       "surname": "Antonow",
       "age": 18,
       "sex": "Male",
-      "birthday": "July 24, 2003",
+      "birthday": "2003-07-24",
       "locations": "Kharkov",
       "hobby": "games, music, reading, technologies",
       "images": "Viacheslav.jpg"
@@ -45,7 +45,7 @@ function createDataDir() {
       "surname": "Spirin",
       "age": 21,
       "sex": "Male",
-      "birthday": "May 2, 2000",
+      "birthday": "2000-05-02",
       "locations": "Kharkov",
       "hobby": "MMO games",
       "images": "Viacheslav.jpg"
