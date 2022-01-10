@@ -83,53 +83,63 @@
     width: 60vw;
     background: white;
 
-    label {
-      font-weight: 800;
-      padding: 10px;
-    }
+    .disabled {
+      background-color: grey;
 
-    input {
-      cursor: pointer;
-      margin: 5px;
-    }
-
-    &__input {
-      border: 3px double $main-color;
-
-      &:focus,
-      &:focus-visible {
-        outline: skyblue;
-        border: 3px double $main-color;
-      }
-    }
-
-    &__exit {
-      position: absolute;
-      right: 10px;
-      border-radius: 50%;
-      border: 3px solid;
-      color: white;
-      background-color: blue;
-    }
-
-    &__title {
-      display: block;
-      text-align: left;
-      padding: 5px;
-    }
-
-    &__buttons-group {
-      text-align: right;
-    }
+      &:hover {
+        cursor: not-allowed;
+        color: white;
+        border: 5px double white;
   }
+}
 
-  //fixed height textarea
-  textarea[name="details"] {
-    resize: none;
-    border: 1px solid;
-    color: blue;
-    border-radius: 15px;
-    padding: 10px;
-    margin: 5px;
+label {
+  font-weight: 800;
+  padding: 10px;
+}
+
+input {
+  cursor: pointer;
+  margin: 5px;
+}
+
+&__input {
+  border: 3px double $main-color;
+
+  &:focus,
+  &:focus-visible {
+    outline: skyblue;
+    border: 3px double $main-color;
   }
+}
+
+&__exit {
+  position: absolute;
+  right: 10px;
+  border-radius: 50%;
+  border: 3px solid;
+  color: white;
+  background-color: blue;
+}
+
+&__title {
+  display: block;
+  text-align: left;
+  padding: 5px;
+}
+
+&__buttons-group {
+  text-align: right;
+}
+}
+
+//fixed height textarea
+textarea[name="details"] {
+resize: none;
+border: 1px solid;
+color: blue;
+border-radius: 15px;
+padding: 10px;
+margin: 5px;
+}
 }
