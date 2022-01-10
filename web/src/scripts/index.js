@@ -1,4 +1,4 @@
-const { parseCSV, parseXML, parseYAML} = require('./parsers')
+//const { parseCSV, parseXML, parseYAML} = require('./parsers')
 
 function addListener (id, eventType, callback){
     const node = document.getElementById(id);
@@ -358,6 +358,16 @@ function questionsList(data) {
 function openModal(id) {
     const modalWindow = document.getElementById(id);
     modalWindow.style.display = 'grid';
+
+     const radio = document.querySelectorAll('input[name="fileSystem"]');
+     const filters = getLocalStorage();
+        for (let i = 0; i < radio.length; i++) {
+            const item = radio[i];
+            item.checked = false;
+            if(filters.fileSystem ===  item.value) {
+               item.checked = true;
+            }
+        }
 }
 
 function closedModal(id) {
@@ -452,11 +462,6 @@ function postQuestions(state) {
 }
 
 function cleanForm () {
-    const radio = document.querySelectorAll('input[name="fileSystem"]');
-    for (let i = 0; i < radio.length; i++) {
-        const item = radio[i];
-        item.checked = false;
-    }
     const boolean = document.querySelectorAll('input[name="boolean"]');
     for (let i = 0; i < boolean.length; i++) {
         const item = boolean[i];
@@ -556,7 +561,6 @@ function init(state) {
         item.addEventListener('click', activeLink));
 
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
-    addListener('show-question', 'click', () => modalQuestion());
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
     addListener('show-question', 'click', () => openModal('modal'));
     addListener('close-modal', 'click', () => closedModal('modal'));
