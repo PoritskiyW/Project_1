@@ -37,28 +37,4 @@
       text-decoration: none;
     }
   }
-
-  &-body {
-    padding: 2px 16px;
-    margin-bottom: 100px;
-  }
-
-  &__edit-1,
-  &__edit-2,
-  &__edit-3,
-  &__edit-4 {
-    background-color: #FF8C00FF;
-    border: 5px double;
-    text-transform: uppercase;
-    color: white;
-    padding: 7px 15px;
-    margin: 10px 5px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: black;
-      color: #FF8C00FF;
-      border: 5px double #FF8C00FF;
-    }
-  }
 }

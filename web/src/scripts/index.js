@@ -283,40 +283,6 @@ function fillForm(devData) {
     }
 }
 
-function openModal() {
-    const modal = document.getElementById("my-modal-home");
-    const btn = document.getElementById("modal-home");
-    const span = document.getElementsByClassName("close-modal")[0];
-
-    btn.onclick = function() {
-        modal.style.display = "grid";
-    }
-}
-
-function openModal2() {
-    const modal = document.getElementById("my-modal-home-2");
-    const btn = document.getElementById("modal-home-2");
-    const span = document.getElementsByClassName("close-modal-2")[0];
-
-    btn.onclick = function() {
-        modal.style.display = "grid";
-    }
-}
-
-function changing() {
-    const user = document.getElementById('user');
-    switch (user) {
-        case 'Team-lead':
-            break;
-        case 'Tech-lead':
-            break;
-        case 'User-1':
-            break;
-        case 'User-2':
-            break;
-    }
-}
-
 /////////////////////////////////////////////////////////////////
 //page-questions area
 function questionsFilter(state, fileSystem = 'jsonD', theme = 'all') {
@@ -415,7 +381,7 @@ function questionsList(data) {
 
         myUl.id = `${el.id}`;
         myUl.innerHTML = `
-            <li><button type='submit' class='question__delete' onclick='modalDeleteQuestion()'>x</button></li>
+            <li><button type='submit' class='question__delete' id="deleteQuestion">x</button></li>
             <li>Question: ${el.question}</li>
             <li>Answer: ${el.answer}</li>
             <li>Theme: ${el.theme}</li>
@@ -426,20 +392,16 @@ function questionsList(data) {
     })
 }
 
-function modalQuestion() {
-    const modalWindow = document.getElementById('modal');
+function modalQuestion(id) {
+    const modalWindow = document.getElementById(id);
     modalWindow.style.display = 'grid';
 }
 
-function closedModal() {
-    const modalWindow = document.getElementById('modal');
+function closedModal(id) {
+    const modalWindow = document.getElementById(id);
     modalWindow.style.display = 'none';
 }
 
-function modalDeleteQuestion() {
-    const modalWindow = document.getElementById("deleteQuestion");
-    modalWindow.style.display = 'grid';
-}
 
 function getLocalStorage() {
     const filters = localStorage.getItem('filters');
@@ -491,7 +453,7 @@ function postQuestions(state) {
     }
 
 
-    closedModal()
+    closedModal('modal')
 }
 
 function deleteQuestion(id) {
@@ -538,9 +500,12 @@ function init(state) {
         item.addEventListener('click', activeLink));
 
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
-    //addListener('show-question', 'click', () => modalQuestion());
     addListener('delete-question', 'click', deleteQuestion.bind(null, STATE));
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
-    addListener('close-modal', 'click', () => closedModal());
+    addListener('show-question', 'click', () => modalQuestion('modal'));
+    addListener('close-modal', 'click', () => closedModal('modal'));
+    addListener('closedQuestion', 'click', () => closedModal('modal'));
+    addListener('deleteQuestion', 'click', () => modalQuestion('deleteQuestionModal'));
+    addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
 
 }
