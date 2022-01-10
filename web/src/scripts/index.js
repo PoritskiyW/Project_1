@@ -295,16 +295,20 @@ function fillForm(devData) {
 function modalUser(devData) {
     const infoDeveloper = document.getElementById('developerModal');
     infoDeveloper.innerHTML = '';
+    const header = document.createElement('header');
+    header.className = "header";
+
 
      for (let i = 0; i < devData.length; i++) {
             const item = devData[i];
             const button = document.createElement('button');
-            button.className  = "button";
+            button.className  = "navigation__button";
             button.id = `route${item.id}`;
             button.innerHTML = `${item.name}`;
 
-            infoDeveloper.appendChild(button);
+            header.appendChild(button);
      }
+     infoDeveloper.appendChild(header);
 
     for (let i = 0; i < devData.length; i++) {
         const item = devData[i];
