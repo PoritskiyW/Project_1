@@ -35,34 +35,18 @@
     </header>
     <section class="page-home" id="page-home">
         <section class="page-home__developers" id="info-developer"></section>
-        <button class="add button" id="modal-home-2" type="button">Select user</button>
-        <div id="my-modal-home-2" class="modal">
-            <div class="modal_content">
-                <div class="modal_header">
-                    <span class="close-modal-2">×</span>
-                    <h1>Select user for changing </h1>
-                </div>
-                <div class="modal-body">
-                    <select id="user">
-                        <option disabled>Select user:</option>
-                        <option selected value="Team-lead">Team-lead</option>
-                        <option value="Tech-lead">Tech-lead</option>
-                        <option value="User-1">User-1</option>
-                        <option value="User-2">User-2</option>
-                    </select>
-                    <button type="submit" id="modal-home" class="button">Submit</button>
-                    <div id="my-modal-home" class="modal">
-                        <div class="modal_content">
-                            <div class="modal_header">
-                                <span class="close-modal">×</span>
-                                <h1>Change info about users </h1>
-                            </div>
-                            <div class="modal-body" id="modal-body"></div>
-                        </div>
+        <button class="button" id="selectUser" type="button">Select user</button>
+        <section class="modal" id="developer">
+            <div class="modal__content">
+                <section class="form-developer">
+                    <div id="developerModal"></div>
+                    <div>
+                        <button class="button" id="saveDeveloper" type="button">save</button>
+                        <button class="button" id="cancelDeveloper" type="button">cancel</button>
                     </div>
-                </div>
+                </section>
             </div>
-        </div>
+        </section>
     </section>
     <section class="page-questions" id="page-questions">
         <div class="page-questions__filters">
@@ -91,9 +75,9 @@
             <p class="add__question" id="question-list">There are no questions</p>
         </section>
         <section class="modal" id="modal">
-            <div class="modal_content">
+            <div class="modal__content">
                 <div class="form-questions">
-                    <button class="form-questions__exit" onclick="closedModal()" type="button">x</button>
+                    <button class="form-questions__exit" id="closedQuestion" type="button">x</button>
                     <label class="form-questions__title" for="form-questions__question">Question:</label>
                     <textarea name="details" maxlength='255' autofocus tabindex="0" id="form-questions__question"
                               placeholder="Your question ..." cols="30" rows="5"></textarea>
@@ -105,8 +89,8 @@
                         <option value="GIT">GIT</option>
                         <option value="SCSS">SCSS</option>
                     </select>
-                    <label class="form-questions__title">Answer</label>
-                    <div class="form-questions__buttons-group">
+                    <label class="form-questions__title">Answer:</label>
+                    <div>
                         <label>
                             <input type="radio" name="boolean" value="true">True
                         </label>
@@ -114,7 +98,7 @@
                             <input type="radio" name="boolean" value="false">False
                         </label>
                     </div>
-                    <label class="form-questions__title">File system</label>
+                    <label class="form-questions__title">File system:</label>
                     <div class="form-questions__type questions__type">
                         <label>
                             <input type="checkbox" name="fileSystem" value="jsonD">JSON
@@ -136,7 +120,14 @@
                 </div>
             </div>
         </section>
-        <section class="modal" id="deleteQuestion">
+        <section class="modal" id="deleteQuestionModal">
+            <div class="modal__content delete">
+               <div class="delete__context">
+                   <p>Are you sure you want to delete this question?</p>
+                   <button class="button" type="button">confirm</button>
+                   <button class="button" id="cancelDelete" type="button">cancel</button>
+               </div>
+            </div>
         </section>
     </section>
     <section class="page-about" id="page-about">

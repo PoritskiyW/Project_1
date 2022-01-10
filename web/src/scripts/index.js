@@ -13,6 +13,16 @@ function route(id) {
     setNodeHidden(id, false);
 }
 
+function routeModal(id) {
+    setNodeHidden('user1', true);
+    setNodeHidden('user2', true);
+    setNodeHidden('user3', true);
+    setNodeHidden('user4', true);
+    setNodeHidden(id, false);
+    document.getElementById('route1').classList.add('active');
+}
+
+
 function setNodeHidden(id, value) {
     const node = document.getElementById(id);
     if (node) {
@@ -299,17 +309,42 @@ function fillForm(devData) {
     }
 }
 
-function changing() {
-    const user = document.getElementById('user');
-    switch (user) {
-        case 'Team-lead':
-            break;
-        case 'Tech-lead':
-            break;
-        case 'User-1':
-            break;
-        case 'User-2':
-            break;
+
+function modalUser(devData) {
+    const infoDeveloper = document.getElementById('developerModal');
+    infoDeveloper.innerHTML = '';
+    const header = document.createElement('header');
+    header.className = "header";
+
+
+     for (let i = 0; i < devData.length; i++) {
+            const item = devData[i];
+            const button = document.createElement('button');
+            button.id = `route${item.id}`;
+            button.className = `navigation__button user${item.id}`;
+            button.innerHTML = `${item.name}`;
+
+            header.appendChild(button);
+     }
+     infoDeveloper.appendChild(header);
+
+    for (let i = 0; i < devData.length; i++) {
+        const item = devData[i];
+        const mySection = document.createElement('section');
+        mySection.id = `user${item.id}`;
+        mySection.innerHTML = `
+            <div class="img__content">
+                <img src="${item.images}" alt='person'/>
+            </div>
+            <label>Name: <input placeholder=${item.name}></label>
+            <label>Surname: <input placeholder=${item.surname}></label>
+            <label>Gender: <input placeholder=${item.sex}></label>
+            <label>Age: <input placeholder=${item.age}></label>
+            <label>Birthday: <input placeholder=${item.birthday}></label>
+            <label>Locations: <input placeholder=${item.locations}></label>
+            <label>Hobby: <input placeholder=${item.hobby}></label>`;
+
+        infoDeveloper.appendChild(mySection);
     }
 }
 
@@ -364,6 +399,7 @@ function fillThemes (state) {
         if (item === filters.theme){
             let option = document.createElement('option');
             option.value = item;
+            option.selected = true;
             option.innerHTML = `<option selected>${item.toUpperCase()}</option>`;
             themesList.appendChild(option);
         } else {
@@ -410,7 +446,9 @@ function questionsList(data) {
 
         myUl.id = `${el.id}`;
         myUl.innerHTML = `
-            <li><button type='submit' class='question__delete' id="${el.id}">x</button></li>
+
+            <li><button type='submit' class='question__delete' id="deleteQuestion">x</button></li>
+
             <li>Question: ${el.question}</li>
             <li>Answer: ${el.answer}</li>
             <li>Theme: ${el.theme}</li>
@@ -420,13 +458,13 @@ function questionsList(data) {
     })
 }
 
-function modalQuestion() {
-    const modalWindow = document.getElementById('modal');
+function openModal(id) {
+    const modalWindow = document.getElementById(id);
     modalWindow.style.display = 'grid';
 }
 
-function closedModal() {
-    const modalWindow = document.getElementById('modal');
+function closedModal(id) {
+    const modalWindow = document.getElementById(id);
     modalWindow.style.display = 'none';
     cleanForm();
 }
@@ -494,7 +532,7 @@ function postQuestions(state) {
         fileSystem:fileSystem,
         dateModify: dateModify
     }
-
+    
     for (let i = 0; i < fileSystem.length; i++) {
         switch (fileSystem[i]){
             case 'jsonD':
@@ -511,7 +549,7 @@ function postQuestions(state) {
                 break;
         }
     }
-    closedModal();
+    closedModal('modal')
     const filters = getLocalStorage();
     questionsFilter(state, filters.fileSystem, filters.theme);
 }
@@ -580,8 +618,11 @@ window.onload = () => {
 function init(state) {
     const STATE = state;
     fillForm(STATE.dev.person);
+    modalUser(STATE.dev.person);
     fillFileSystems();
     fillThemes(STATE);
+
+    routeModal('user1');
 
     if (!getLocalStorage()){
         setLocalStorage();
@@ -593,6 +634,20 @@ function init(state) {
     addListener('routeHome', 'click', () => route('page-home'));
     addListener('routeQuestion' ,'click', () => route('page-questions'));
     addListener('routeAbout', 'click', () => route('page-about'));
+
+    addListener('route1', 'click', () => routeModal('user1'));
+    addListener('route2' ,'click', () => routeModal('user2'));
+    addListener('route3', 'click', () => routeModal('user3'));
+    addListener('route4', 'click', () => routeModal('user4'));
+
+      const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
+        function activeLinkModal() {
+            listModal.forEach((item) =>
+                item.classList.remove('active'));
+            this.classList.add('active');
+        }
+        listModal.forEach((item) =>
+            item.addEventListener('click', activeLinkModal));
 
     const list = document.querySelectorAll('.home, .question, .about');
     function activeLink() {
@@ -606,6 +661,12 @@ function init(state) {
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
     addListener('show-question', 'click', () => modalQuestion());
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
-    addListener('close-modal', 'click', () => closedModal());
+    addListener('show-question', 'click', () => openModal('modal'));
+    addListener('close-modal', 'click', () => closedModal('modal'));
+    addListener('closedQuestion', 'click', () => closedModal('modal'));
+    addListener('deleteQuestion', 'click', () => openModal('deleteQuestionModal'));
+    addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
 
+    addListener('selectUser', 'click', () => openModal('developer'));
+    addListener('cancelDeveloper', 'click', () => closedModal('developer'));
 }
