@@ -191,7 +191,7 @@ function parseXML(obj) {
 ///////////////////////////////////////////////////////////////////
 //get data serialized obj
 function getJSON(obj) {
-
+    return JSON.stringify(obj);
 }
 
 function getCSV(JSONObj) {
@@ -232,7 +232,7 @@ function getXML(JSONObj) { //Предназначена для добавлен�
     <theme>${JSONObj.theme}</theme>
     <answer>${JSONObj.answer}</answer>
     <dateModify>${JSONObj.dateModify}</dateModify>
-</item>`
+    </item>`
 
     const fileXML = fs.readFileSync('../../data/questions.xml', "utf-8");
 
@@ -252,6 +252,23 @@ function getXML(JSONObj) { //Предназначена для добавлен�
 //UID generation area
 function generate(state) {
 
+    let idArray = [];
+
+    const questionsArray = []
+    questionsArray.push(state.xml.questions);
+    questionsArray.push(state.csv.questions);
+    questionsArray.push(state.jsonD.questions);
+    questionsArray.push(state.yaml.questions);
+
+    for (let i = 0; i < questionsArray.length; i++) {
+        const partialArray = questionsArray[i];
+        for (let j = 0; j < partialArray.length; j++) {
+            if (!idArray.includes(partialArray.id)){
+                idArray.push(partialArray.id);
+            }
+        }
+    }
+
     const _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
     let UID = '';
 
@@ -259,7 +276,7 @@ function generate(state) {
         UID += _sym[Math.floor(Math.random() * (_sym.length))];
     }
 
-    if(file.includes(UID)){
+    if(idArray.includes(UID)){
         UID = generate();
     }
     return UID;
@@ -267,7 +284,6 @@ function generate(state) {
 
 ///////////////////////////////////////////////////////////////////
 //page-home area
-
 function fillForm(devData) {
     const infoDeveloper = document.getElementById('info-developer');
     infoDeveloper.innerHTML = '';
@@ -292,6 +308,7 @@ function fillForm(devData) {
         infoDeveloper.appendChild(mySection);
     }
 }
+
 
 function modalUser(devData) {
     const infoDeveloper = document.getElementById('developerModal');
@@ -335,9 +352,9 @@ function modalUser(devData) {
 //page-questions area
 function questionsFilter(state, fileSystem = 'jsonD', theme = 'all') {
     if (theme === 'all') {
-        questionsList(state[fileSystem].questions);
+        questionsList(state[fileSystem].questions, state);
     } else {
-        questionsList(state[fileSystem].questions.filter(question => question.theme === theme));
+        questionsList(state[fileSystem].questions.filter(question => question.theme === theme), state);
     }
 }
 
@@ -429,12 +446,13 @@ function questionsList(data) {
 
         myUl.id = `${el.id}`;
         myUl.innerHTML = `
+
             <li><button type='submit' class='question__delete' id="deleteQuestion">x</button></li>
+
             <li>Question: ${el.question}</li>
             <li>Answer: ${el.answer}</li>
             <li>Theme: ${el.theme}</li>
             <li class='question__date'>Date: ${el.dateModify}</li>`
-
         questionList.appendChild(myUl);
         return questionList;
     })
@@ -448,6 +466,21 @@ function openModal(id) {
 function closedModal(id) {
     const modalWindow = document.getElementById(id);
     modalWindow.style.display = 'none';
+    cleanForm();
+}
+
+function modalDeleteQuestion() {
+    const modalWindow = document.getElementById("deleteQuestion");
+    modalWindow.style.display = 'grid';
+
+    const addModal = document.getElementById('deleteQuestion');
+    addModal.innerHTML = '';
+
+    `<div className="modal_content">
+        <p>Are you sure you want to delete this question?</p>
+        <button className="button" type="button" id="delete-question">confirm</button>
+        <button className="button" type="button">cancel</button>
+    </div>`
 }
 
 function getLocalStorage() {
@@ -491,24 +524,86 @@ function postQuestions(state) {
     }
     const dateModify = Date.now();
 
-    const result = { //TODO: ID
+    const result = {
+        id: generate(state),
         question: question,
         theme: theme,
         answer: answer,
         fileSystem:fileSystem,
         dateModify: dateModify
     }
-
-
+    
+    for (let i = 0; i < fileSystem.length; i++) {
+        switch (fileSystem[i]){
+            case 'jsonD':
+                state.jsonD.questions.push(result);
+                break;
+            case 'csv':
+                state.csv.questions.push(result);
+                break;
+            case 'xml':
+                state.xml.questions.push(result);
+                break;
+            case 'yaml':
+                state.yaml.questions.push(result);
+                break;
+        }
+    }
     closedModal('modal')
+    const filters = getLocalStorage();
+    questionsFilter(state, filters.fileSystem, filters.theme);
 }
 
-function deleteQuestion(id) {
-    const deleteMethod = {
-        method: 'DELETE',
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8' // Indicates the content
-        } // No need to have body, because we don't send nothing to the server.
+function cleanForm () {
+    const radio = document.querySelectorAll('input[name="fileSystem"]');
+    for (let i = 0; i < radio.length; i++) {
+        const item = radio[i];
+        item.checked = false;
+    }
+    const boolean = document.querySelectorAll('input[name="boolean"]');
+    for (let i = 0; i < boolean.length; i++) {
+        const item = boolean[i];
+        item.checked = false;
+    }
+    const theme = document.getElementById('modalTheme').getElementsByTagName('option');
+    for (let i = 0; i < theme.length; i++) {
+        const item = theme[i];
+        if (item.disabled){
+            item.selected = true;
+        }
+    }
+    const question = document.getElementById('form-questions__question');
+    question.value = '';
+}
+
+function deleteQuestion(id, state) {
+
+    const questionsArray = []
+    questionsArray.push(state.xml.questions);
+    questionsArray.push(state.csv.questions);
+    questionsArray.push(state.jsonD.questions);
+    questionsArray.push(state.yaml.questions);
+
+    for (let i = 0; i < questionsArray.length; i++) {
+        const partialArray = questionsArray[i];
+        for (let j = 0; j < partialArray.length; j++) {
+            if (partialArray.id === id){
+                switch (i){
+                    case 0:
+                        state.xml.questions.splice(j,j);
+                        break;
+                    case 1:
+                        console.log(state.csv.questions.splice(j,j));
+                        break;
+                    case 2:
+                        state.jsonD.questions.splice(j,j);
+                        break;
+                    case 3:
+                        state.yaml.questions.splice(j,j);
+                        break;
+                }
+            }
+        }
     }
 }
 
@@ -564,7 +659,7 @@ function init(state) {
         item.addEventListener('click', activeLink));
 
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
-    addListener('delete-question', 'click', deleteQuestion.bind(null, STATE));
+    addListener('show-question', 'click', () => modalQuestion());
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
     addListener('show-question', 'click', () => openModal('modal'));
     addListener('close-modal', 'click', () => closedModal('modal'));
