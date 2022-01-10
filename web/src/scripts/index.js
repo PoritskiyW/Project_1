@@ -181,7 +181,7 @@ function parseXML(obj) {
 ///////////////////////////////////////////////////////////////////
 //get data serialized obj
 function getJSON(obj) {
-
+    return JSON.stringify(obj);
 }
 
 function getCSV(JSONObj) {
