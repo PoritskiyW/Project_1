@@ -13,6 +13,15 @@ function route(id) {
     setNodeHidden(id, false);
 }
 
+function routeModal(id) {
+    setNodeHidden('user1', true);
+    setNodeHidden('user2', true);
+    setNodeHidden('user3', true);
+    setNodeHidden('user4', true);
+    setNodeHidden(id, false);
+}
+
+
 function setNodeHidden(id, value) {
     const node = document.getElementById(id);
     if (node) {
@@ -283,6 +292,40 @@ function fillForm(devData) {
     }
 }
 
+function modalUser(devData) {
+    const infoDeveloper = document.getElementById('developerModal');
+    infoDeveloper.innerHTML = '';
+
+     for (let i = 0; i < devData.length; i++) {
+            const item = devData[i];
+            const button = document.createElement('button');
+            button.className  = "button";
+            button.id = `route${item.id}`;
+            button.innerHTML = `${item.name}`;
+
+            infoDeveloper.appendChild(button);
+     }
+
+    for (let i = 0; i < devData.length; i++) {
+        const item = devData[i];
+        const mySection = document.createElement('section');
+        mySection.id = `user${item.id}`;
+        mySection.innerHTML = `
+            <div class="img__content">
+                <img src="${item.images}" alt='person'/>
+            </div>
+            <label>Name: <input placeholder=${item.name}></label>
+            <label>Surname: <input placeholder=${item.surname}></label>
+            <label>Gender: <input placeholder=${item.sex}></label>
+            <label>Age: <input placeholder=${item.age}></label>
+            <label>Birthday: <input placeholder=${item.birthday}></label>
+            <label>Locations: <input placeholder=${item.locations}></label>
+            <label>Hobby: <input placeholder=${item.hobby}></label>`;
+
+        infoDeveloper.appendChild(mySection);
+    }
+}
+
 /////////////////////////////////////////////////////////////////
 //page-questions area
 function questionsFilter(state, fileSystem = 'jsonD', theme = 'all') {
@@ -476,6 +519,7 @@ window.onload = () => {
 function init(state) {
     const STATE = state;
     fillForm(STATE.dev.person);
+    modalUser(STATE.dev.person);
     fillFileSystems();
     fillThemes(STATE);
 
@@ -489,6 +533,12 @@ function init(state) {
     addListener('routeHome', 'click', () => route('page-home'));
     addListener('routeQuestion' ,'click', () => route('page-questions'));
     addListener('routeAbout', 'click', () => route('page-about'));
+
+    addListener('route1', 'click', () => route('user1'));
+    addListener('route2' ,'click', () => route('user2'));
+    addListener('route3', 'click', () => route('user3'));
+    addListener('route3', 'click', () => route('user4'));
+
 
     const list = document.querySelectorAll('.home, .question, .about');
     function activeLink() {
@@ -508,4 +558,6 @@ function init(state) {
     addListener('deleteQuestion', 'click', () => modalQuestion('deleteQuestionModal'));
     addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
 
+    addListener('selectUser', 'click', () => modalQuestion('developer'));
+    addListener('cancelDeveloper', 'click', () => closedModal('developer'));
 }
