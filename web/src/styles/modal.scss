@@ -13,6 +13,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: animationModal;
+    animation-duration: 0.5s;
+
+    /* Add Animation */
+    @-webkit-keyframes animationModal {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    @keyframes animationModal {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
 
     .delete {
       &__context {

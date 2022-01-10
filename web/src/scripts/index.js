@@ -440,7 +440,7 @@ function questionsList(data) {
     })
 }
 
-function modalQuestion(id) {
+function openModal(id) {
     const modalWindow = document.getElementById(id);
     modalWindow.style.display = 'grid';
 }
@@ -449,7 +449,6 @@ function closedModal(id) {
     const modalWindow = document.getElementById(id);
     modalWindow.style.display = 'none';
 }
-
 
 function getLocalStorage() {
     const filters = localStorage.getItem('filters');
@@ -567,12 +566,12 @@ function init(state) {
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
     addListener('delete-question', 'click', deleteQuestion.bind(null, STATE));
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
-    addListener('show-question', 'click', () => modalQuestion('modal'));
+    addListener('show-question', 'click', () => openModal('modal'));
     addListener('close-modal', 'click', () => closedModal('modal'));
     addListener('closedQuestion', 'click', () => closedModal('modal'));
-    addListener('deleteQuestion', 'click', () => modalQuestion('deleteQuestionModal'));
+    addListener('deleteQuestion', 'click', () => openModal('deleteQuestionModal'));
     addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
 
-    addListener('selectUser', 'click', () => modalQuestion('developer'));
+    addListener('selectUser', 'click', () => openModal('developer'));
     addListener('cancelDeveloper', 'click', () => closedModal('developer'));
 }
