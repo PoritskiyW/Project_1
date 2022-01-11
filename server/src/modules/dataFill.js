@@ -63,7 +63,7 @@ function createDataDir() {
                     throw err;
                 }
             });
-            fs.writeFile('./data/questions.yaml', `---\nquestions: `, (err) => {
+            fs.writeFile('./data/questions.yaml', `---\nquestions: \n`, (err) => {
                 if (err) {
                     throw err;
                 }
