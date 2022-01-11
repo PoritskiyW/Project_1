@@ -1,0 +1,71 @@
+@import "_variables";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('./images/background.png');
+  color: blue;
+  text-align: center;
+}
+
+.bg-ex-snowflake {
+  height: 98vh;
+  margin-top: -10px;
+  background: url('./images/snowflake.png'); /* Путь к картинке */
+  background-position: 0 0;
+  background-repeat: repeat;
+  animation: animated-snowflake 60s linear infinite;
+
+  @media(min-width: 768px) {
+    background: url('./images/snowflake1.png');
+  }
+
+  @media(min-width: 1080px) {
+    background: url('./images/snowflake2.png');
+  }
+}
+
+@keyframes animated-snowflake {
+  from {
+    background-position: -800px 0;
+  }
+  to {
+    background-position: 0 800px;
+  }
+}
+
+.button {
+  background-color: $main-color;
+  border: 5px double;
+  border-radius: 25px;
+  text-transform: uppercase;
+  color: white;
+  padding: 7px 15px;
+  margin: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: black;
+    color: $main-color;
+    border: 5px double $main-color;
+  }
+}
+
+select {
+  color: white;
+  border: 5px double;
+  border-radius: 25px;
+  background: $main-color;
+  padding: 7px 15px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+abbr {
+  text-decoration: auto
+}
+
+
