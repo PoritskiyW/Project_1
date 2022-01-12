@@ -122,33 +122,6 @@ function questionsList(data) {
     })
 }
 
-//test
-// function closedModalQuestion() {
-//     const event = MouseEvent('click', document.getElementById('form-questions'));
-//
-//     const modal = document.getElementById('modal');
-//     if (event.target.className = 'form-questions') {
-//         modal.style.display = "none";
-//     }
-//
-// }
-
-// function modalDeleteQuestion() {
-//     const modalWindow = document.getElementById("deleteQuestion");
-//     modalWindow.style.display = 'grid';
-//
-//     const addModal = document.getElementById('deleteQuestion');
-//     addModal.innerHTML = '';
-//
-//     `<div className="modal_content">
-//         <p>Are you sure you want to delete this question?</p>
-//         <button className="button" type="button" id="delete-question">confirm</button>
-//         <button className="button" type="button">cancel</button>
-//     </div>`
-//
-//     console.log(111)
-// }
-
 function searchButtonHandler(state) {
     setLocalStorage();
     const filters = getLocalStorage();
@@ -179,62 +152,33 @@ function postQuestions(state) {
         dateModify: dateModify
     }
 
+    const requestBody = {};
+
     for (let i = 0; i < fileSystem.length; i++) {
         switch (fileSystem[i]){
             case 'jsonD':
                 state.jsonD.questions.push(result);
-                postData('./end',{"jsonD": state.jsonD.questions});
+                requestBody.jsonD = JSON.stringify(state.jsonD);
                 break;
             case 'csv':
                 state.csv.questions.push(result);
-                postData('./end',{"csv": state.csv.questions});
+                requestBody.csv = getCSV(state.csv.questions);
                 break;
             case 'xml':
                 state.xml.questions.push(result);
-                postData('./end',{"xml": state.xml.questions})
+                requestBody.xml = getXML(state.xml.questions);
                 break;
             case 'yaml':
                 state.yaml.questions.push(result);
-                postData('./end',{"yaml": state.yaml.questions})
+                requestBody.yaml = getYAML(state.yaml.questions);
                 break;
         }
     }
     closedModal('modal')
     const filters = getLocalStorage();
     questionsFilter(state, filters.fileSystem, filters.theme);
-  //  addListener('deleteQuestion', 'click', openModalDelete);
+    postData('/end', requestBody);
 }
-
-// function deleteQuestion(id, state) {
-//
-//     const questionsArray = []
-//     questionsArray.push(state.xml.questions);
-//     questionsArray.push(state.csv.questions);
-//     questionsArray.push(state.jsonD.questions);
-//     questionsArray.push(state.yaml.questions);
-//
-//     for (let i = 0; i < questionsArray.length; i++) {
-//         const partialArray = questionsArray[i];
-//         for (let j = 0; j < partialArray.length; j++) {
-//             if (partialArray.id === id){
-//                 switch (i){
-//                     case 0:
-//                         state.xml.questions.splice(j,j);
-//                         break;
-//                     case 1:
-//                         console.log(state.csv.questions.splice(j,j));
-//                         break;
-//                     case 2:
-//                         state.jsonD.questions.splice(j,j);
-//                         break;
-//                     case 3:
-//                         state.yaml.questions.splice(j,j);
-//                         break;
-//                 }
-//             }
-//         }
-//     }
-// }
 
 function changeTextArea(e) {
     const button = document.getElementById('post-question');
