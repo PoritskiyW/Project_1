@@ -16,12 +16,6 @@ function postData(url = '/end', data) {
     return response.json();
 }
 
-// function addQuestion(state) {
-//     const jsonD = {"jsonD": (state.jsonD)};
-//
-//     postData('/end', jsonD);
-// }
-
 //GET REQUEST FUNCTION
 function getData() {
     fetch('/init')
@@ -59,9 +53,7 @@ function openModal(id) {
 }
 
 function openModalDelete() {
-
     console.log(document.getElementsByClassName('modalDelete')[0])
-    //  setDisplayClass(myClass);
     const button = document.getElementsByClassName('modalDelete')[0];
     button.style.display = 'grid';
 }
@@ -134,14 +126,13 @@ function addAllListeners(STATE) {
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
     addListener('selectUser', 'click', () => openModal('developer'));
     addListener('show-question', 'click', () => openModal('modal'));
-    //modal delete question
 
+    //modal delete question
     document.querySelector('.question__delete').onclick = function(e) {
         if (e.target.matches('.question__delete')) {
            console.log(111111111)
         }
     };
-
     const elem = document.getElementsByClassName('question__delete')[0];
     elem.addEventListener('click', openModalDelete);
    // addListener('deleteQuestion', 'click', openModalDelete);
@@ -149,24 +140,20 @@ function addAllListeners(STATE) {
    // addListener('modal', 'click', closedModalQuestion());
     //lists
     const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
-
     function activeLinkModal() {
         listModal.forEach((item) =>
             item.classList.remove('active'));
         this.classList.add('active');
     }
-
     listModal.forEach((item) =>
         item.addEventListener('click', activeLinkModal));
 
     const list = document.querySelectorAll('.home, .question, .about');
-
     function activeLink() {
         list.forEach((item) =>
             item.classList.remove('active'));
         this.classList.add('active');
     }
-
     list.forEach((item) =>
         item.addEventListener('click', activeLink));
 }
