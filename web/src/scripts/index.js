@@ -1,3 +1,8 @@
+const modalState = {
+    isVisibleModal: false,
+    isVisibleDevelopers: false
+}
+
 function route(id) {
     //get all pages + our page from argument
     setNodeHidden('page-home', true);
@@ -40,6 +45,8 @@ function fillState(obj) {
 
 function openModal(id) {
     setDisplay(id, 'grid');
+    document.addEventListener('click', closeModal);
+    modalState.isVisibleModal = true;
 
     const radio = document.querySelectorAll('input[name="fileSystem"]');
     const filters = getLocalStorage();
@@ -49,6 +56,17 @@ function openModal(id) {
         if (filters.fileSystem === item.value) {
             item.checked = true;
         }
+    }
+}
+
+const closeModal = (e) => {
+    const modal = document.getElementById('modal');
+    const target = document.getElementsByClassName('form-questions')[0];
+    const showButton = document.getElementById('show-question');
+    const clickPath = e.composedPath();
+    if (modalState.isVisibleModal && !clickPath.includes(target) && !clickPath.includes(showButton)) {
+        modal.style.display = "none";
+        modalState.isVisibleModal = false;
     }
 }
 
@@ -130,14 +148,14 @@ function addAllListeners(STATE) {
     //modal delete question
     document.querySelector('.question__delete').onclick = function(e) {
         if (e.target.matches('.question__delete')) {
-           console.log(111111111)
+            console.log(111111111)
         }
     };
     const elem = document.getElementsByClassName('question__delete')[0];
     elem.addEventListener('click', openModalDelete);
-   // addListener('deleteQuestion', 'click', openModalDelete);
+    // addListener('deleteQuestion', 'click', openModalDelete);
     //  addListener('deleteQuestion', 'click', modalDeleteQuestion());
-   // addListener('modal', 'click', closedModalQuestion());
+    // addListener('modal', 'click', closedModalQuestion());
     //lists
     const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
     function activeLinkModal() {
