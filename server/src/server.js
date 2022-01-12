@@ -3,11 +3,13 @@ const path = require('path');
 const dataFill = require('./modules/dataFill');
 const getData = require('./modules/fileReading');
 const postData = require('./modules/fileWriting');
+const bodyParser = require('body-parser');
 
 const server = express();
 const PORT = process.env.PORT || 3000;
 
 server.use(express.static('../web/dist'));
+server.use(bodyParser.json());
 
 //Respond to request with index.html
 server.get('/', (req, response) => {
@@ -22,7 +24,7 @@ server.get('/init', (request, response) => {
 })
 
 server.post('/end', (request, response) => {
-    postData(request.body);
+    postData(request.body)
     response.status(200);
     response.end();
 })

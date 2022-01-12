@@ -33,7 +33,10 @@ function getYAML(data) {
 
 function getXML(data) { //Предназначена для добавления 1 вопроса в XML
     let result = `<?xml version="1.0" encoding="UTF-8" ?>
-<root>`
+
+      <root>
+      <questions>`
+
 
     for (let i = 0; i < data.length; i++) {
         const partialResult = data[i];
@@ -46,7 +49,9 @@ function getXML(data) { //Предназначена для добавления
 </item>`
         result = result + resultBlock;
     }
-    result = result + `</root>`;
+
+    result = result + `</questions></root>`;
+
     return result;
 }
 

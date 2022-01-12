@@ -1,3 +1,8 @@
+const modalState = {
+    isVisibleModal: false,
+    isVisibleDevelopers: false
+}
+
 function route(id) {
     //get all pages + our page from argument
     setNodeHidden('page-home', true);
@@ -7,15 +12,19 @@ function route(id) {
 }
 
 //POST REQUEST FUNCTION
-function postData(url = '/end', data = {}) {
-    const response = fetch(url, {
-        method: 'POST',
+function postData(url = '/end', data) {
+    fetch(url, {
+        method: "post",
         headers: {
+            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
+        //make sure to serialize your JSON body
         body: JSON.stringify(data)
-    });
-    return response.json();
+    })
+        .then( (response) => {
+            console.log(response);
+        });
 }
 
 //GET REQUEST FUNCTION
@@ -42,6 +51,8 @@ function fillState(obj) {
 
 function openModal(id) {
     setDisplay(id, 'grid');
+    document.addEventListener('click', closeModal);
+    modalState.isVisibleModal = true;
 
     const radio = document.querySelectorAll('input[name="fileSystem"]');
     const filters = getLocalStorage();
@@ -52,6 +63,23 @@ function openModal(id) {
             item.checked = true;
         }
     }
+}
+
+const closeModal = (e) => {
+    const modal = document.getElementById('modal');
+    const target = document.getElementsByClassName('form-questions')[0];
+    const showButton = document.getElementById('show-question');
+    const clickPath = e.composedPath();
+    if (modalState.isVisibleModal && !clickPath.includes(target) && !clickPath.includes(showButton)) {
+        modal.style.display = "none";
+        modalState.isVisibleModal = false;
+    }
+}
+
+function openModalDelete() {
+    console.log(document.getElementsByClassName('modalDelete')[0])
+    const button = document.getElementsByClassName('modalDelete')[0];
+    button.style.display = 'grid';
 }
 
 function closedModal(id) {
@@ -100,37 +128,6 @@ window.onload = () => {
     getData();
 }
 
-// function addAllListeners(STATE) {
-//     //main routes
-//     addListener('routeHome', 'click', () => route('page-home'));
-//     addListener('routeQuestion', 'click', () => route('page-questions'));
-//     addListener('routeAbout', 'click', () => route('page-about'));
-//     //modal window routes
-//     addListener('route1', 'click', () => routeModal('user1'));
-//     addListener('route2', 'click', () => routeModal('user2'));
-//     addListener('route3', 'click', () => routeModal('user3'));
-//     addListener('route4', 'click', () => routeModal('user4'));
-//     //modal window buttons
-//     addListener('post-question', 'click', postQuestions.bind(null, STATE));
-//     addListener('close-modal', 'click', () => closedModal('modal'));
-//     addListener('closedQuestion', 'click', () => closedModal('modal'));
-//     addListener('deleteQuestion', 'click', () => openModal('deleteQuestionModal'));
-//     addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
-//     addListener('cancelDeveloper', 'click', () => closedModal('developer'));
-//     //general buttons
-//     addListener('selectUser', 'click', () => openModal('developer'));
-//     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
-//     addListener('show-question', 'click', () => openModal('modal'));
-//     //lists
-//     const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
-//     activeLink(listModal);
-//     listModal.forEach((item) => item.addEventListener('click', activeLinkModal));
-//
-//     const list = document.querySelectorAll('.home, .question, .about');
-//     activeLink(list);
-//     list.forEach((item) => item.addEventListener('click', activeLink));
-// }
-
 function init(state) {
     const STATE = state;
     fillForm(STATE.dev.person);
@@ -158,21 +155,30 @@ function init(state) {
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
     addListener('close-modal', 'click', () => closedModal('modal'));
     addListener('closedQuestion', 'click', () => closedModal('modal'));
-    addListener('deleteQuestion', 'click', () => openModal('deleteQuestionModal'));
     addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
 
-    // addListener('cancelDeveloper1', 'click', () => closedModal('developer'));
-    // addListener('saveDeveloper1', 'click', () => saveDeveloperHandler.bind(null, STATE));
-    // addListener('cancelDeveloper2', 'click', () => closedModal('developer'));
-    // addListener('saveDeveloper2', 'click', () => saveDeveloperHandler.bind(null, STATE));
-    // addListener('cancelDeveloper3', 'click', () => closedModal('developer'));
-    // addListener('saveDeveloper3', 'click', () => saveDeveloperHandler.bind(null, STATE));
-    // addListener('cancelDeveloper4', 'click', () => closedModal('developer'));
-    // addListener('saveDeveloper4', 'click', () => saveDeveloperHandler.bind(null, STATE));
+    addListener('cancelDeveloper', 'click', () => closedModal('developer'));
+    // event in textArea
+    addListener('form-questions__question', 'input', (e) => changeTextArea(e));
+
     //general buttons
-    addListener('selectUser', 'click', () => openModal('developer'));
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
+    addListener('selectUser', 'click', () => openModal('developer'));
     addListener('show-question', 'click', () => openModal('modal'));
+
+    //modal delete question
+    document.querySelector('.question__delete').onclick = function(e) {
+        if (e.target.matches('.question__delete')) {
+            console.log(111111111)
+        }
+    };
+    const elem = document.getElementsByClassName('question__delete')[0];
+    elem.addEventListener('click', openModalDelete);
+
+    // addListener('deleteQuestion', 'click', openModalDelete);
+    //  addListener('deleteQuestion', 'click', modalDeleteQuestion());
+    // addListener('modal', 'click', closedModalQuestion());
+
     //lists
     const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
     function activeLinkModal() {
@@ -180,7 +186,10 @@ function init(state) {
             item.classList.remove('active'));
         this.classList.add('active');
     }
-    listModal.forEach((item) => item.addEventListener('click', activeLinkModal));
+
+    listModal.forEach((item) =>
+        item.addEventListener('click', activeLinkModal));
+
 
     const list = document.querySelectorAll('.home, .question, .about');
     function activeLink() {
@@ -188,5 +197,22 @@ function init(state) {
             item.classList.remove('active'));
         this.classList.add('active');
     }
-    list.forEach((item) => item.addEventListener('click', activeLink));
+    list.forEach((item) =>
+        item.addEventListener('click', activeLink));
 }
+
+// function init(state) {
+//     const STATE = state;
+//     fillForm(STATE.dev.person);
+//     modalUser(STATE.dev.person);
+//     fillFileSystems();
+//     fillThemes(STATE);
+//
+//     routeModal('user1');
+//
+//     if (!getLocalStorage()) {
+//         setLocalStorage();
+//
+//     }
+//     list.forEach((item) => item.addEventListener('click', activeLink));
+// }
