@@ -1,4 +1,5 @@
 function getCSV(data) {
+
     let result = 'id|||question|||theme|||answer|||dateModify\n'
 
     for (let i = 0; i < data.length; i++) {
@@ -16,15 +17,15 @@ function getCSV(data) {
 }
 
 function getYAML(data) {
-    let result = '---\nquestions: \n'
+    let result = '---\r\nquestions:\r'
 
     for (let i = 0; i < data.length; i++) {
         const partialResult = data[i];
-        const resultBlock = `\n - id: ${partialResult.id}
-           question: ${partialResult.question}
-           theme: ${partialResult.theme}
-           answer: ${partialResult.answer}
-           dateModify: ${partialResult.dateModify}`
+        const resultBlock = `\n - id: ${partialResult.id}\r
+ question: '${partialResult.question}'\r
+ theme: ${partialResult.theme}\r
+ answer: '${partialResult.answer}'\r
+ dateModify: ${partialResult.dateModify}\r`
         result = result + resultBlock;
     }
     return result;
@@ -32,20 +33,31 @@ function getYAML(data) {
 
 function getXML(data) { //Предназначена для добавления 1 вопроса в XML
     let result = `<?xml version="1.0" encoding="UTF-8" ?>
+
       <root>
       <questions>`
 
+
     for (let i = 0; i < data.length; i++) {
         const partialResult = data[i];
-        let resultBlock = '\n' + `    <item>
-      <id>${partialResult.id}</id>
-      <question>${partialResult.question}</question>
-      <theme>${partialResult.theme}</theme>
-      <answer>${partialResult.answer}</answer>
-      <dateModify>${partialResult.dateModify}</dateModify>
-    </item>`
+        let resultBlock = '\n' + `<item>
+<id>${partialResult.id}</id>
+<question>${partialResult.question}</question>
+<theme>${partialResult.theme}</theme>
+<answer>${partialResult.answer}</answer>
+<dateModify>${partialResult.dateModify}</dateModify>
+</item>`
         result = result + resultBlock;
     }
+
     result = result + `</questions></root>`;
+
     return result;
 }
+
+
+module.exports = {
+    getXML,
+    getCSV,
+    getYAML
+};
