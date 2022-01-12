@@ -100,36 +100,36 @@ window.onload = () => {
     getData();
 }
 
-function addAllListeners(STATE) {
-    //main routes
-    addListener('routeHome', 'click', () => route('page-home'));
-    addListener('routeQuestion', 'click', () => route('page-questions'));
-    addListener('routeAbout', 'click', () => route('page-about'));
-    //modal window routes
-    addListener('route1', 'click', () => routeModal('user1'));
-    addListener('route2', 'click', () => routeModal('user2'));
-    addListener('route3', 'click', () => routeModal('user3'));
-    addListener('route4', 'click', () => routeModal('user4'));
-    //modal window buttons
-    addListener('post-question', 'click', postQuestions.bind(null, STATE));
-    addListener('close-modal', 'click', () => closedModal('modal'));
-    addListener('closedQuestion', 'click', () => closedModal('modal'));
-    addListener('deleteQuestion', 'click', () => openModal('deleteQuestionModal'));
-    addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
-    addListener('cancelDeveloper', 'click', () => closedModal('developer'));
-    //general buttons
-    addListener('selectUser', 'click', () => openModal('developer'));
-    addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
-    addListener('show-question', 'click', () => openModal('modal'));
-    //lists
-    const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
-    activeLink(listModal);
-    listModal.forEach((item) => item.addEventListener('click', activeLinkModal));
-
-    const list = document.querySelectorAll('.home, .question, .about');
-    activeLink(list);
-    list.forEach((item) => item.addEventListener('click', activeLink));
-}
+// function addAllListeners(STATE) {
+//     //main routes
+//     addListener('routeHome', 'click', () => route('page-home'));
+//     addListener('routeQuestion', 'click', () => route('page-questions'));
+//     addListener('routeAbout', 'click', () => route('page-about'));
+//     //modal window routes
+//     addListener('route1', 'click', () => routeModal('user1'));
+//     addListener('route2', 'click', () => routeModal('user2'));
+//     addListener('route3', 'click', () => routeModal('user3'));
+//     addListener('route4', 'click', () => routeModal('user4'));
+//     //modal window buttons
+//     addListener('post-question', 'click', postQuestions.bind(null, STATE));
+//     addListener('close-modal', 'click', () => closedModal('modal'));
+//     addListener('closedQuestion', 'click', () => closedModal('modal'));
+//     addListener('deleteQuestion', 'click', () => openModal('deleteQuestionModal'));
+//     addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
+//     addListener('cancelDeveloper', 'click', () => closedModal('developer'));
+//     //general buttons
+//     addListener('selectUser', 'click', () => openModal('developer'));
+//     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
+//     addListener('show-question', 'click', () => openModal('modal'));
+//     //lists
+//     const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
+//     activeLink(listModal);
+//     listModal.forEach((item) => item.addEventListener('click', activeLinkModal));
+//
+//     const list = document.querySelectorAll('.home, .question, .about');
+//     activeLink(list);
+//     list.forEach((item) => item.addEventListener('click', activeLink));
+// }
 
 function init(state) {
     const STATE = state;
@@ -145,5 +145,48 @@ function init(state) {
     }
     const filters = getLocalStorage();
     questionsFilter(STATE, filters.fileSystem, filters.theme);
-    addAllListeners(STATE);
+    //main routes
+    addListener('routeHome', 'click', () => route('page-home'));
+    addListener('routeQuestion', 'click', () => route('page-questions'));
+    addListener('routeAbout', 'click', () => route('page-about'));
+    //modal window routes
+    addListener('route1', 'click', () => routeModal('user1'));
+    addListener('route2', 'click', () => routeModal('user2'));
+    addListener('route3', 'click', () => routeModal('user3'));
+    addListener('route4', 'click', () => routeModal('user4'));
+    //modal window buttons
+    addListener('post-question', 'click', postQuestions.bind(null, STATE));
+    addListener('close-modal', 'click', () => closedModal('modal'));
+    addListener('closedQuestion', 'click', () => closedModal('modal'));
+    addListener('deleteQuestion', 'click', () => openModal('deleteQuestionModal'));
+    addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
+
+    // addListener('cancelDeveloper1', 'click', () => closedModal('developer'));
+    // addListener('saveDeveloper1', 'click', () => saveDeveloperHandler.bind(null, STATE));
+    // addListener('cancelDeveloper2', 'click', () => closedModal('developer'));
+    // addListener('saveDeveloper2', 'click', () => saveDeveloperHandler.bind(null, STATE));
+    // addListener('cancelDeveloper3', 'click', () => closedModal('developer'));
+    // addListener('saveDeveloper3', 'click', () => saveDeveloperHandler.bind(null, STATE));
+    // addListener('cancelDeveloper4', 'click', () => closedModal('developer'));
+    // addListener('saveDeveloper4', 'click', () => saveDeveloperHandler.bind(null, STATE));
+    //general buttons
+    addListener('selectUser', 'click', () => openModal('developer'));
+    addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
+    addListener('show-question', 'click', () => openModal('modal'));
+    //lists
+    const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
+    function activeLinkModal() {
+        listModal.forEach((item) =>
+            item.classList.remove('active'));
+        this.classList.add('active');
+    }
+    listModal.forEach((item) => item.addEventListener('click', activeLinkModal));
+
+    const list = document.querySelectorAll('.home, .question, .about');
+    function activeLink() {
+        list.forEach((item) =>
+            item.classList.remove('active'));
+        this.classList.add('active');
+    }
+    list.forEach((item) => item.addEventListener('click', activeLink));
 }
