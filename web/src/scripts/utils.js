@@ -1,7 +1,7 @@
 function addClassById(id, classId) {
-    const node = document.getElementById('route1');
+    const node = document.getElementById(id);
     if (node){
-        node.classList.add('active');
+        node.classList.add(classId);
         return true;
     }
     return false;

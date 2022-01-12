@@ -1,8 +1,8 @@
 function getCSV(data) {
-    const resultArr = [];
     let result = 'id|||question|||theme|||answer|||dateModify\n'
 
     for (let i = 0; i < data.length; i++) {
+        const resultArr = [];
         const partialData = data[i];
         resultArr.push(partialData.id);
         resultArr.push(partialData.question);
@@ -32,19 +32,20 @@ function getYAML(data) {
 
 function getXML(data) { //Предназначена для добавления 1 вопроса в XML
     let result = `<?xml version="1.0" encoding="UTF-8" ?>
-      <root>`
+      <root>
+      <questions>`
 
     for (let i = 0; i < data.length; i++) {
         const partialResult = data[i];
         let resultBlock = '\n' + `    <item>
-      <id>${JSONObj.id}</id>
-      <question>${JSONObj.question}</question>
-      <theme>${JSONObj.theme}</theme>
-      <answer>${JSONObj.answer}</answer>
-      <dateModify>${JSONObj.dateModify}</dateModify>
+      <id>${partialResult.id}</id>
+      <question>${partialResult.question}</question>
+      <theme>${partialResult.theme}</theme>
+      <answer>${partialResult.answer}</answer>
+      <dateModify>${partialResult.dateModify}</dateModify>
     </item>`
         result = result + resultBlock;
     }
-    result = result + `  </root>`;
+    result = result + `</questions></root>`;
     return result;
 }
