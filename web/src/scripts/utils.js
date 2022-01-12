@@ -32,6 +32,8 @@ function addListener (id, eventType, callback){
     const node = document.getElementById(id);
     if (node){
         node.addEventListener(eventType, callback);
+    } else {
+        console.log('not found')
     }
 }
 
@@ -70,8 +72,3 @@ function setDisplay(id, display){
     return false;
 }
 
-function activeLink(list) {
-    list.forEach((item) =>
-        item.classList.remove('active'));
-    this.classList.add('active');
-}
