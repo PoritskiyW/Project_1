@@ -7,12 +7,10 @@ function route(id) {
 }
 
 //POST REQUEST FUNCTION
-function postData(url = '/end', data = {}) {
+function postData(url = '/end', data) {
     const response = fetch(url, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(data)
     });
     return response.json();
@@ -52,6 +50,12 @@ function openModal(id) {
             item.checked = true;
         }
     }
+}
+
+function openModalDelete() {
+    console.log(document.getElementsByClassName('modalDelete')[0])
+    const button = document.getElementsByClassName('modalDelete')[0];
+    button.style.display = 'grid';
 }
 
 function closedModal(id) {
@@ -158,21 +162,28 @@ function init(state) {
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
     addListener('close-modal', 'click', () => closedModal('modal'));
     addListener('closedQuestion', 'click', () => closedModal('modal'));
-    addListener('deleteQuestion', 'click', () => openModal('deleteQuestionModal'));
     addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
 
-    // addListener('cancelDeveloper1', 'click', () => closedModal('developer'));
-    // addListener('saveDeveloper1', 'click', () => saveDeveloperHandler.bind(null, STATE));
-    // addListener('cancelDeveloper2', 'click', () => closedModal('developer'));
-    // addListener('saveDeveloper2', 'click', () => saveDeveloperHandler.bind(null, STATE));
-    // addListener('cancelDeveloper3', 'click', () => closedModal('developer'));
-    // addListener('saveDeveloper3', 'click', () => saveDeveloperHandler.bind(null, STATE));
-    // addListener('cancelDeveloper4', 'click', () => closedModal('developer'));
-    // addListener('saveDeveloper4', 'click', () => saveDeveloperHandler.bind(null, STATE));
+    addListener('cancelDeveloper', 'click', () => closedModal('developer'));
+    // event in textArea
+    addListener('form-questions__question', 'input', (e) => changeTextArea(e));
+
     //general buttons
-    addListener('selectUser', 'click', () => openModal('developer'));
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
+    addListener('selectUser', 'click', () => openModal('developer'));
     addListener('show-question', 'click', () => openModal('modal'));
+
+    //modal delete question
+    document.querySelector('.question__delete').onclick = function(e) {
+        if (e.target.matches('.question__delete')) {
+           console.log(111111111)
+        }
+    };
+    const elem = document.getElementsByClassName('question__delete')[0];
+    elem.addEventListener('click', openModalDelete);
+   // addListener('deleteQuestion', 'click', openModalDelete);
+    //  addListener('deleteQuestion', 'click', modalDeleteQuestion());
+   // addListener('modal', 'click', closedModalQuestion());
     //lists
     const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
     function activeLinkModal() {
@@ -180,13 +191,33 @@ function init(state) {
             item.classList.remove('active'));
         this.classList.add('active');
     }
-    listModal.forEach((item) => item.addEventListener('click', activeLinkModal));
+
+    listModal.forEach((item) =>
+        item.addEventListener('click', activeLinkModal));
+
 
     const list = document.querySelectorAll('.home, .question, .about');
     function activeLink() {
         list.forEach((item) =>
             item.classList.remove('active'));
         this.classList.add('active');
+    }
+    list.forEach((item) =>
+        item.addEventListener('click', activeLink));
+}
+
+function init(state) {
+    const STATE = state;
+    fillForm(STATE.dev.person);
+    modalUser(STATE.dev.person);
+    fillFileSystems();
+    fillThemes(STATE);
+
+    routeModal('user1');
+
+    if (!getLocalStorage()) {
+        setLocalStorage();
+
     }
     list.forEach((item) => item.addEventListener('click', activeLink));
 }

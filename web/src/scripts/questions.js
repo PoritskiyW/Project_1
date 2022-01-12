@@ -111,31 +111,43 @@ function questionsList(data) {
 
         myUl.id = `${el.id}`;
         myUl.innerHTML = `
-
             <li><button type='submit' class='question__delete' id="deleteQuestion">x</button></li>
-
             <li>Question: ${el.question}</li>
             <li>Answer: ${el.answer}</li>
             <li>Theme: ${el.theme}</li>
             <li class='question__date'>Date: ${el.dateModify}</li>`
+
         questionList.appendChild(myUl);
         return questionList;
     })
 }
 
-function modalDeleteQuestion() {
-    const modalWindow = document.getElementById("deleteQuestion");
-    modalWindow.style.display = 'grid';
+//test
+// function closedModalQuestion() {
+//     const event = MouseEvent('click', document.getElementById('form-questions'));
+//
+//     const modal = document.getElementById('modal');
+//     if (event.target.className = 'form-questions') {
+//         modal.style.display = "none";
+//     }
+//
+// }
 
-    const addModal = document.getElementById('deleteQuestion');
-    addModal.innerHTML = '';
-
-    `<div className="modal_content">
-        <p>Are you sure you want to delete this question?</p>
-        <button className="button" type="button" id="delete-question">confirm</button>
-        <button className="button" type="button">cancel</button>
-    </div>`
-}
+// function modalDeleteQuestion() {
+//     const modalWindow = document.getElementById("deleteQuestion");
+//     modalWindow.style.display = 'grid';
+//
+//     const addModal = document.getElementById('deleteQuestion');
+//     addModal.innerHTML = '';
+//
+//     `<div className="modal_content">
+//         <p>Are you sure you want to delete this question?</p>
+//         <button className="button" type="button" id="delete-question">confirm</button>
+//         <button className="button" type="button">cancel</button>
+//     </div>`
+//
+//     console.log(111)
+// }
 
 function searchButtonHandler(state) {
     setLocalStorage();
@@ -171,50 +183,64 @@ function postQuestions(state) {
         switch (fileSystem[i]){
             case 'jsonD':
                 state.jsonD.questions.push(result);
+                postData('./end',{"jsonD": state.jsonD.questions});
                 break;
             case 'csv':
                 state.csv.questions.push(result);
+                postData('./end',{"csv": state.csv.questions});
                 break;
             case 'xml':
                 state.xml.questions.push(result);
+                postData('./end',{"xml": state.xml.questions})
                 break;
             case 'yaml':
                 state.yaml.questions.push(result);
+                postData('./end',{"yaml": state.yaml.questions})
                 break;
         }
     }
     closedModal('modal')
     const filters = getLocalStorage();
     questionsFilter(state, filters.fileSystem, filters.theme);
+  //  addListener('deleteQuestion', 'click', openModalDelete);
 }
 
-function deleteQuestion(id, state) {
+// function deleteQuestion(id, state) {
+//
+//     const questionsArray = []
+//     questionsArray.push(state.xml.questions);
+//     questionsArray.push(state.csv.questions);
+//     questionsArray.push(state.jsonD.questions);
+//     questionsArray.push(state.yaml.questions);
+//
+//     for (let i = 0; i < questionsArray.length; i++) {
+//         const partialArray = questionsArray[i];
+//         for (let j = 0; j < partialArray.length; j++) {
+//             if (partialArray.id === id){
+//                 switch (i){
+//                     case 0:
+//                         state.xml.questions.splice(j,j);
+//                         break;
+//                     case 1:
+//                         console.log(state.csv.questions.splice(j,j));
+//                         break;
+//                     case 2:
+//                         state.jsonD.questions.splice(j,j);
+//                         break;
+//                     case 3:
+//                         state.yaml.questions.splice(j,j);
+//                         break;
+//                 }
+//             }
+//         }
+//     }
+// }
 
-    const questionsArray = []
-    questionsArray.push(state.xml.questions);
-    questionsArray.push(state.csv.questions);
-    questionsArray.push(state.jsonD.questions);
-    questionsArray.push(state.yaml.questions);
-
-    for (let i = 0; i < questionsArray.length; i++) {
-        const partialArray = questionsArray[i];
-        for (let j = 0; j < partialArray.length; j++) {
-            if (partialArray.id === id){
-                switch (i){
-                    case 0:
-                        state.xml.questions.splice(j,j);
-                        break;
-                    case 1:
-                        console.log(state.csv.questions.splice(j,j));
-                        break;
-                    case 2:
-                        state.jsonD.questions.splice(j,j);
-                        break;
-                    case 3:
-                        state.yaml.questions.splice(j,j);
-                        break;
-                }
-            }
-        }
+function changeTextArea(e) {
+    const button = document.getElementById('post-question');
+    if(e.target.value.length > 1) {
+        button.classList.remove('disabled');
+    } else {
+        button.classList.add('disabled');
     }
 }
