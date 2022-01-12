@@ -98,8 +98,8 @@ function parseXML(obj) {
     return result;
 }
 
-module.exports = {
-    parseCSV,
-    parseYAML,
-    parseXML
-}
+// module.exports = {
+//     parseCSV,
+//     parseYAML,
+//     parseXML
+// }
