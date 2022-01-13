@@ -61,7 +61,7 @@ function modalDeveloper(devData) {
                 <img src="${item.images}" alt='person'/>
             </div>
             <input type="file" name="AddImage" accept="image/*" >
-            <label>Name: <input type='text'  maxlength="20" placeholder=${item.name} name="Name" /></label>
+            <label>Name: <input type='text'  maxlength="10" placeholder=${item.name} name="Name" /></label>
             <label>Surname: <input type='text'  maxlength="20" placeholder=${item.surname} name="Surname" /></label>
             <label>Gender: <input type='text' maxlength="20" placeholder=${item.sex} name="Gender" /></label>
             <label>Age: <input type='number'  min="0" max="100" placeholder=${item.age} name="Age" /></label>
