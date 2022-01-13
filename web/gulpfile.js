@@ -44,11 +44,8 @@ gulpfile.task('copy:png', function (cb) {
 })
 
 gulpfile.task('watch', function () {
-
-    gulpfile.watch(['./src/**/*.scss', './src/scripts/**/*.js', './src/views/*.html', './src/images/*.gif'],
-        gulpfile.series(['clean', 'sass', 'copy:html', 'copy:js']));
-
-
+    gulpfile.watch(['./src/**/*.scss', './src/scripts/**/*.js', './src/views/*.html', './src/images/*.png'],
+        gulpfile.series(['clean', 'sass', 'copy:html', 'copy:js', 'copy:png']));
 })
 
 gulpfile.task('default', gulpfile.series(['clean', 'copy:html',  'sass', 'copy:js', 'copy:png']))

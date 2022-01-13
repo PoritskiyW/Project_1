@@ -1,5 +1,5 @@
 {
-  "name": "Project_1",
+  "name": "project",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/PoritskiyW/Project_1.git",
@@ -14,8 +14,8 @@
   },
   "scripts": {
     "cmd": "gulp",
-    "build": "yarn cmd default",
-    "watch": "yarn cmd watch",
+    "build": "yarn gulp default",
+    "watch": "yarn gulp watch",
     "test": "jest"
   },
   "devDependencies": {

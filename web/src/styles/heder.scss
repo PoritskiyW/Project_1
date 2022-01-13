@@ -1,10 +1,14 @@
 .header {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   background: darkblue;
   padding-top: 10px;
   margin-bottom: 10px;
 
   @media (min-width: 600px) {
     display: flex;
+    align-items: center;
     justify-content: space-between;
   }
 
@@ -15,6 +19,11 @@
     @media(min-width: 768px) {
       justify-content: flex-end;
     }
+  }
+
+  &__img {
+    border-radius: 10px;
+    width: 90px;
   }
 
   &__team {
@@ -71,7 +80,7 @@
         }
 
         .navigation__button--title {
-          transform: translateY(15px);
+          transform: translateY(20px);
           display: inline-block;
         }
       }
