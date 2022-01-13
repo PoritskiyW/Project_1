@@ -33,49 +33,53 @@ function fillForm(devData) {
 }
 
 function modalDeveloper(devData) {
+    let id = 0;
     const infoDeveloper = document.getElementById('developerModal');
     infoDeveloper.innerHTML = '';
     const header = document.createElement('header');
     header.className = "header";
-
 
     for (let i = 0; i < devData.length; i++) {
         const item = devData[i];
         const button = document.createElement('button');
         button.id = `route${item.id}`;
         button.className = `navigation__button user${item.id}`;
+        button.onclick = () => {
+            id = i;
+        };
         button.innerHTML = `${item.name}`;
-
         header.appendChild(button);
     }
     infoDeveloper.appendChild(header);
 
     for (let i = 0; i < devData.length; i++) {
         const item = devData[i];
-        const form = document.createElement('form');
-        form.id = `user${item.id}`;
-        form.name = `user`
-        form.enctype = 'multipart/form-data';
-        form.method = 'post'
-            form.innerHTML = `
+        const div = document.createElement('div');
+        div.id = `user${item.id}`;
+        div.innerHTML = `
             <div class="img__content">
                 <img src="${item.images}" alt='person'/>
-                <input type="file" name="AddImage" accept="image/*" >
             </div>
-            <label>Name: <input type='text'  maxlength="20" placeholder=${item.name} name="Name"></label>
-            <label>Surname: <input type='text'  maxlength="20" placeholder=${item.surname} name="Surname"></label>
-            <label>Gender: <input type='text' maxlength="20" placeholder=${item.sex} name="Gender"></label>
-            <label>Age: <input type='number'  min="0" max="100" placeholder=${item.age} name="Age"></label>
-            <label>Birthday: <input type="date"  value='${item.birthday}' name="Birthday"></label>
-            <label>Locations: <input type='text'  maxlength="20" placeholder=${item.locations} name="Locations"></label>
-            <label>Hobby: <input type='text' maxlength="100"  placeholder=${item.hobby} name="Hobby"></label>
-            `
-
-        infoDeveloper.appendChild(form);
+            <input type="file" name="AddImage" accept="image/*" >
+            <label>Name: <input type='text'  maxlength="20" placeholder=${item.name} name="Name" /></label>
+            <label>Surname: <input type='text'  maxlength="20" placeholder=${item.surname} name="Surname" /></label>
+            <label>Gender: <input type='text' maxlength="20" placeholder=${item.sex} name="Gender" /></label>
+            <label>Age: <input type='number'  min="0" max="100" placeholder=${item.age} name="Age" /></label>
+            <label>Birthday: <input type="date"  value='${item.birthday}' name="Birthday" /></label>
+            <label>Locations: <input type='text'  maxlength="20" placeholder=${item.locations} name="Locations" /></label>
+            <label>Hobby: <input type='text' maxlength="100"  placeholder='${item.hobby}' name="Hobby" /></label>`
+        infoDeveloper.appendChild(div);
     }
-}
 
-function postDeveloper(state) {
-    const user1 = document.getElementById('user1');
-    console.log(user1, state);
+    const container = document.getElementById('developerModal');
+    const inputs = container.querySelectorAll('input');
+    inputs.forEach(i => i.onchange = (e) => {
+        devData[id][e.target.name.toLowerCase()] = e.target.value;
+    });
+
+    document.getElementById('saveDeveloper').addEventListener('click', () => {
+        postData('/end', {dev: JSON.stringify({ person: devData })});
+        closedModal('developer');
+        fillForm(devData);
+    });
 }

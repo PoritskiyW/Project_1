@@ -1,7 +1,4 @@
-///////////////////////////////////////////////////////////////////
-//UID generation area
 function generate(state) {
-
     let idArray = [];
 
     const questionsArray = []

@@ -139,7 +139,6 @@ function addListenerAll(STATE) {
     addListener('route3', 'click', () => routeModal('user3'));
     addListener('route4', 'click', () => routeModal('user4'));
     //modal window buttons
-    addListener('saveDeveloper', 'click', postDeveloper.bind(null, STATE));
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
     addListener('close-modal', 'click', () => closedModal('modal'));
     addListener('closedQuestion', 'click', () => closedModal('modal'));
@@ -191,7 +190,6 @@ function init(state) {
     modalDeveloper(STATE.dev.person);
     fillFileSystems();
     fillThemes(STATE);
-
     routeModal('user1');
 
     if (!getLocalStorage()) {
@@ -201,3 +199,4 @@ function init(state) {
     questionsFilter(STATE, filters.fileSystem, filters.theme);
     addListenerAll(state);
 }
+
