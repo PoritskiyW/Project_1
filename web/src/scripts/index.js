@@ -128,20 +128,7 @@ window.onload = () => {
     getData();
 }
 
-function init(state) {
-    const STATE = state;
-    fillForm(STATE.dev.person);
-    modalUser(STATE.dev.person);
-    fillFileSystems();
-    fillThemes(STATE);
-
-    routeModal('user1');
-
-    if (!getLocalStorage()) {
-        setLocalStorage();
-    }
-    const filters = getLocalStorage();
-    questionsFilter(STATE, filters.fileSystem, filters.theme);
+function addListenerAll(STATE) {
     //main routes
     addListener('routeHome', 'click', () => route('page-home'));
     addListener('routeQuestion', 'click', () => route('page-questions'));
@@ -152,11 +139,11 @@ function init(state) {
     addListener('route3', 'click', () => routeModal('user3'));
     addListener('route4', 'click', () => routeModal('user4'));
     //modal window buttons
+    addListener('saveDeveloper', 'click', postDeveloper.bind(null, STATE));
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
     addListener('close-modal', 'click', () => closedModal('modal'));
     addListener('closedQuestion', 'click', () => closedModal('modal'));
     addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
-
     addListener('cancelDeveloper', 'click', () => closedModal('developer'));
     // event in textArea
     addListener('form-questions__question', 'input', (e) => changeTextArea(e));
@@ -174,7 +161,6 @@ function init(state) {
     };
     const elem = document.getElementsByClassName('question__delete')[0];
     elem.addEventListener('click', openModalDelete);
-
     // addListener('deleteQuestion', 'click', openModalDelete);
     //  addListener('deleteQuestion', 'click', modalDeleteQuestion());
     // addListener('modal', 'click', closedModalQuestion());
@@ -186,10 +172,8 @@ function init(state) {
             item.classList.remove('active'));
         this.classList.add('active');
     }
-
     listModal.forEach((item) =>
         item.addEventListener('click', activeLinkModal));
-
 
     const list = document.querySelectorAll('.home, .question, .about');
     function activeLink() {
@@ -201,18 +185,19 @@ function init(state) {
         item.addEventListener('click', activeLink));
 }
 
-// function init(state) {
-//     const STATE = state;
-//     fillForm(STATE.dev.person);
-//     modalUser(STATE.dev.person);
-//     fillFileSystems();
-//     fillThemes(STATE);
-//
-//     routeModal('user1');
-//
-//     if (!getLocalStorage()) {
-//         setLocalStorage();
-//
-//     }
-//     list.forEach((item) => item.addEventListener('click', activeLink));
-// }
+function init(state) {
+    const STATE = state;
+    fillForm(STATE.dev.person);
+    modalDeveloper(STATE.dev.person);
+    fillFileSystems();
+    fillThemes(STATE);
+
+    routeModal('user1');
+
+    if (!getLocalStorage()) {
+        setLocalStorage();
+    }
+    const filters = getLocalStorage();
+    questionsFilter(STATE, filters.fileSystem, filters.theme);
+    addListenerAll(state);
+}

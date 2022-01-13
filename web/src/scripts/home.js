@@ -32,7 +32,7 @@ function fillForm(devData) {
     }
 }
 
-function modalUser(devData) {
+function modalDeveloper(devData) {
     const infoDeveloper = document.getElementById('developerModal');
     infoDeveloper.innerHTML = '';
     const header = document.createElement('header');
@@ -69,11 +69,13 @@ function modalUser(devData) {
             <label>Birthday: <input type="date"  value='${item.birthday}' name="Birthday"></label>
             <label>Locations: <input type='text'  maxlength="20" placeholder=${item.locations} name="Locations"></label>
             <label>Hobby: <input type='text' maxlength="100"  placeholder=${item.hobby} name="Hobby"></label>
-            <div class="form-developer__button">
-                <button class="button" id="saveDeveloper${item.id}" type="submit">save</button>
-                <button class="button" id="cancelDeveloper${item.id}" type="reset">cancel</button>
-            </div>`
+            `
 
         infoDeveloper.appendChild(form);
     }
+}
+
+function postDeveloper(state) {
+    const user1 = document.getElementById('user1');
+    console.log(user1, state);
 }
