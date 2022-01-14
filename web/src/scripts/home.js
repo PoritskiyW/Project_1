@@ -37,7 +37,7 @@ function modalDeveloper(devData) {
     const infoDeveloper = document.getElementById('developerModal');
     infoDeveloper.innerHTML = '';
     const header = document.createElement('header');
-    header.className = "header";
+    header.className = "header header__modal";
 
     for (let i = 0; i < devData.length; i++) {
         const item = devData[i];
@@ -60,7 +60,7 @@ function modalDeveloper(devData) {
             <div class="img__content">
                 <img src="${item.images}" alt='person'/>
             </div>
-            <input type="file" name="AddImage" accept="image/*" >
+            <input class="img__input" type="file" name="AddImage" accept="image/*" >
             <label>Name: <input type='text'  maxlength="10" placeholder=${item.name} name="Name" /></label>
             <label>Surname: <input type='text'  maxlength="20" placeholder=${item.surname} name="Surname" /></label>
             <label>Gender: <input type='text' maxlength="20" placeholder=${item.sex} name="Gender" /></label>

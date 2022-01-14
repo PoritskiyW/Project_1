@@ -1,20 +1,23 @@
 .page-about {
+  background: linear-gradient(180deg, #160040 0%, #4C0070 100%);
+  margin-top: -30px;
 
   &__content {
-
     .info {
-      background: linear-gradient(
-                      90deg, #00009C 0%, #9915D6 100%);
+      background: linear-gradient(90deg, white 80%, blue);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       position: relative;
       font-size: 20px;
       letter-spacing: 0.045em;
-      line-height: 40px;
       font-family: monospace;
       font-weight: 400;
       margin: 30px;
       text-align: left;
+
+      @media(min-width: 768px) {
+        line-height: 40px;
+      }
 
       &__title {
         text-align: center;
@@ -34,9 +37,8 @@
       text-align: center;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-image: repeating-linear-gradient(
-                      -45deg, transparent, transparent 1em, black 1em, red 50%), repeating-linear-gradient(
-                      45deg, red , black 1em, red 1em, black 50%);
+      background-image: repeating-linear-gradient(-45deg, transparent, transparent 1em, white 1em, #9A0680 50%),
+                        repeating-linear-gradient(45deg, #9A0680, white 1em, #9A0680 1em, white 50%);
       background-size: 3em 3em, 2em 2em;
       animation-name: ani;
       animation-duration: 80s;
