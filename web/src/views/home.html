@@ -11,6 +11,7 @@
     <title>Question application</title>
     <script>
         window.module = {};
+
         function require(url) {
             if (url.toLowerCase().substr(-3) !== '.js') url += '.js'; // to allow loading without js suffix;
             if (!require.cache) require.cache = []; //init cache
@@ -155,20 +156,23 @@
                         </div>
                         <div class="form-questions__buttons-group">
                             <button class="button form-questions__cancel" id="close-modal" type="button">cancel</button>
-                            <button class="button form-questions__cancel disabled" type="button" id="post-question" disabled="disabled">save</button>
+                            <button class="button form-questions__cancel disabled" type="button" id="post-question"
+                                    disabled="disabled">save
+                            </button>
                         </div>
                     </div>
                 </div>
             </section>
-        
-        <section class="modal modalDelete" id="deleteQuestionModal">
-            <div class="modal__content delete">
-               <div class="delete__context">
-                   <p>Are you sure you want to delete this question?</p>
-                   <button class="button" id="confirm-delete" type="button">confirm</button>
-                   <button class="button" id="cancelDelete" type="button">cancel</button>
-               </div>
-            </div>
+
+            <section class="modal modalDelete" id="deleteQuestionModal">
+                <div class="modal__content delete">
+                    <div class="delete__context">
+                        <p>Are you sure you want to delete this question?</p>
+                        <button class="button" id="confirm-delete" type="button">confirm</button>
+                        <button class="button" id="cancelDelete" type="button">cancel</button>
+                    </div>
+                </div>
+            </section>
         </section>
         <section class="page-about" id="page-about">
             <div class="page-about__content">
@@ -179,7 +183,8 @@
                         направлением в сфере IT.
                         Перед командой стояла задача - разработать проект прилагая к этому максимум усилий,
                         при этом было запрещено использовать библиотеки.
-                        Функционалом проекта является возможность записывать, редактировать а также удалять информацию
+                        Функционалом проекта является возможность записывать, редактировать а также удалять
+                        информацию
                         с дальнейшим сохранением данных на стороне пользователя в поддерживаемые форматы, такие как:
                     </div>
                 </div>
