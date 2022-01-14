@@ -19,7 +19,9 @@ function generate(state) {
     const _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
     let UID = '';
 
+
     for (let i = 0; i < 5; i++) {
+
         UID += _sym[Math.floor(Math.random() * (_sym.length))];
     }
 
@@ -234,11 +236,29 @@ function postQuestions(state) {
     postData('/end', requestBody);
 }
 
-function changeTextArea(e) {
+function checkModalQuestion() {
     const button = document.getElementById('post-question');
-    if (e.target.value.length > 1) {
+
+    const textArea = document.getElementById('form-questions__question');
+    const boolean = document.querySelectorAll('input[name="boolean"]');
+    const theme = document.getElementById('modalTheme').value;
+
+    const fileSystemsArray = document.querySelectorAll('input[name=fileSystem]');
+    const fileSystems = [];
+    fileSystemsArray.forEach(i => {
+        if(i.checked) {
+            fileSystems.push(i)
+        }
+    })
+
+    if (textArea.value.length > 3 &&
+        theme !== 'Select theme' &&
+        (boolean[0].checked || boolean[1].checked) &&
+        fileSystems.length >= 1 ) {
+        button.disabled = false;
         button.classList.remove('disabled');
     } else {
+        button.disabled = true;
         button.classList.add('disabled');
     }
 }

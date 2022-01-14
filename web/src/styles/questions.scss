@@ -1,18 +1,17 @@
 @import "_variables";
 
 .page-questions {
+  background: linear-gradient(180deg, #160040 0%, #4C0070 100%);
 
   &__filters {
     display: flex;
     flex-wrap: wrap;
-    margin: 10px;
+    margin: 0 20px;
   }
 
   &__add {
-    border: 3px solid blue;
-    border-radius: 15px;
     text-align: left;
-    padding: 10px 20px;
+    padding: 5px 10px;
     margin: 10px;
 
     ul {
@@ -20,16 +19,15 @@
       position: relative;
       transition-duration: 2s;
       border: 1px solid;
-      border-radius: 15px;
       list-style-type: none;
       padding: 10px;
       margin: 10px 0;
-      color: blue;
+      color: #79018C;;
       font-size: 16px;
       cursor: pointer;
 
       &:hover {
-        background: darkblue;
+        background: #79018C;
         color: white;
       }
 
@@ -39,9 +37,8 @@
         right: 10px;
         cursor: pointer;
         border: 1px solid;
-        border-radius: 10px;
         color: white;
-        background: lightblue;
+        background: #160040;
       }
 
       .question {
@@ -81,7 +78,8 @@
     position: relative;
     text-align: left;
     width: 60vw;
-    background: white;
+    background: linear-gradient(180deg, #160040 0%, #4C0070 100%);
+    color: white;
 
     .disabled {
       background-color: grey;
@@ -90,56 +88,54 @@
         cursor: not-allowed;
         color: white;
         border: 5px double white;
+      }
+    }
+
+    label {
+      font-weight: 800;
+      padding: 10px;
+    }
+
+    input {
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    &__input {
+      border: 3px double $main-color;
+
+      &:focus,
+      &:focus-visible {
+        outline: skyblue;
+        border: 3px double $main-color;
+      }
+    }
+
+    &__exit {
+      position: absolute;
+      right: 10px;
+      border: 3px solid;
+      color: white;
+      background-color: #79018C;;
+    }
+
+    &__title {
+      display: block;
+      text-align: left;
+      padding: 5px;
+    }
+
+    &__buttons-group {
+      text-align: right;
+    }
   }
-}
 
-label {
-  font-weight: 800;
-  padding: 10px;
-}
-
-input {
-  cursor: pointer;
-  margin: 5px;
-}
-
-&__input {
-  border: 3px double $main-color;
-
-  &:focus,
-  &:focus-visible {
-    outline: skyblue;
-    border: 3px double $main-color;
+  //fixed height textarea
+  textarea[name="details"] {
+    resize: none;
+    border: 1px solid;
+    color: #79018C;
+    padding: 10px;
+    margin: 5px;
   }
-}
-
-&__exit {
-  position: absolute;
-  right: 10px;
-  border-radius: 50%;
-  border: 3px solid;
-  color: white;
-  background-color: blue;
-}
-
-&__title {
-  display: block;
-  text-align: left;
-  padding: 5px;
-}
-
-&__buttons-group {
-  text-align: right;
-}
-}
-
-//fixed height textarea
-textarea[name="details"] {
-resize: none;
-border: 1px solid;
-color: blue;
-border-radius: 15px;
-padding: 10px;
-margin: 5px;
-}
 }

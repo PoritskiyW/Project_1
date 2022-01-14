@@ -3,16 +3,17 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  font-family: monospace;
 }
 
 body {
-  background-image: url('./images/background.png');
-  color: blue;
+  background: url(./images/background.png) no-repeat center center fixed;
+  background-size: cover;
   text-align: center;
 }
 
 .bg-ex-snowflake {
-  height: 98vh;
+  height: 100vh;
   margin-top: -10px;
   background: url('./images/snowflake.png'); /* Путь к картинке */
   background-position: 0 0;
@@ -38,9 +39,9 @@ body {
 }
 
 .button {
+  width: 165px;
   background-color: $main-color;
   border: 5px double;
-  border-radius: 25px;
   text-transform: uppercase;
   color: white;
   padding: 7px 15px;
@@ -48,17 +49,16 @@ body {
   cursor: pointer;
 
   &:hover {
-    background-color: black;
-    color: $main-color;
-    border: 5px double $main-color;
+    background-color: #160040;
+    color: white;
+    border: 5px double white;
   }
 }
 
 select {
+  background: $main-color;
   color: white;
   border: 5px double;
-  border-radius: 25px;
-  background: $main-color;
   padding: 7px 15px;
   margin: 5px;
   cursor: pointer;
@@ -68,4 +68,7 @@ abbr {
   text-decoration: auto
 }
 
-
+.container {
+  max-width: 1400px;
+  margin: auto;
+}
