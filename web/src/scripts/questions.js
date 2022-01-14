@@ -19,7 +19,9 @@ function generate(state) {
     const _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
     let UID = '';
 
-    for (let i = 0; i < 10; i++) {
+
+    for (let i = 0; i < 5; i++) {
+
         UID += _sym[Math.floor(Math.random() * (_sym.length))];
     }
 
@@ -100,7 +102,7 @@ function fillFileSystems() {
     }
 }
 
-function questionsList(data) {
+function questionsList(data, state) {
     const questionList = document.getElementById('question-list');
     questionList.innerHTML = '';
 
@@ -109,7 +111,7 @@ function questionsList(data) {
 
         myUl.id = `${el.id}`;
         myUl.innerHTML = `
-            <li><button type='submit' class='question__delete' id="deleteQuestion">x</button></li>
+            <li><button type="button" class="question__delete" id="deleteQuestion${el.id}" name="button${el.id}">x</button></li>
             <li>Question: ${el.question}</li>
             <li>Answer: ${el.answer}</li>
             <li>Theme: ${el.theme}</li>
@@ -118,6 +120,63 @@ function questionsList(data) {
         questionList.appendChild(myUl);
         return questionList;
     })
+    addListenersQuestions(state);
+}
+
+function addListenersQuestions(state) {
+    const xButtons = document.querySelectorAll('button[name^="' + "button" + '"]');
+
+    for (let i = 0; i < xButtons.length; i++) {
+        const item = xButtons[i];
+        addListener(item.id, 'click', openModalDelete.bind(null, state, item.id));
+    }
+}
+
+function openModalDelete(state, id) {
+    const modalWindow = document.getElementById("deleteQuestionModal");
+    modalWindow.style.display = 'grid';
+
+    const callback = deleteQuestion(id.replace('deleteQuestion', ''), state);
+    const cancel = document.getElementById('cancelDelete');
+    cancel.onclick = cancelDeleting(callback);
+    addListener('confirm-delete', 'click', callback);
+}
+
+function cancelDeleting(callback) {
+    function once2 () {
+        setDisplay("deleteQuestionModal", 'none');
+        removeListener('confirm-delete', 'click', callback);
+    }
+    return once2;
+}
+
+function deleteQuestion(id, state) {
+    function once () {
+        const filters = getLocalStorage();
+        state[filters.fileSystem].questions = state[filters.fileSystem].questions.filter(item => String(item.id) !== id);
+        const requestBody = {};
+
+        switch (filters.fileSystem) {
+            case 'jsonD':
+                requestBody.jsonD = JSON.stringify(state.jsonD);
+                break;
+            case 'csv':
+                requestBody.csv = getCSV(state.csv.questions);
+                break;
+            case 'xml':
+                requestBody.xml = getXML(state.xml.questions);
+                break;
+            case 'yaml':
+                requestBody.yaml = getYAML(state.yaml.questions);
+                break;
+        }
+
+        postData('/end', requestBody);
+        closedModal('deleteQuestionModal');
+        questionsFilter(state, filters.fileSystem, filters.theme);
+        removeListener('confirm-delete', 'click', once);
+    }
+    return once;
 }
 
 function searchButtonHandler(state) {
@@ -146,7 +205,6 @@ function postQuestions(state) {
         question: question,
         theme: theme,
         answer: answer,
-        fileSystem: fileSystem,
         dateModify: dateModify
     }
 
@@ -180,6 +238,7 @@ function postQuestions(state) {
 
 function checkModalQuestion() {
     const button = document.getElementById('post-question');
+
     const textArea = document.getElementById('form-questions__question');
     const boolean = document.querySelectorAll('input[name="boolean"]');
     const theme = document.getElementById('modalTheme').value;

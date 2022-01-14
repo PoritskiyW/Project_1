@@ -25,7 +25,6 @@ server.get('/init', (request, response) => {
 })
 
 server.post('/end', (request, response) => {
-    console.log(request.body);
     postData(request.body)
     response.status(200);
     response.end();

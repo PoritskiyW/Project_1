@@ -28,10 +28,17 @@ function fillThemesDOM(themes, filters) {
     }
 }
 
-function addListener (id, eventType, callback){
+function addListener (id, eventType, callback, options){
     const node = document.getElementById(id);
     if (node){
-        node.addEventListener(eventType, callback);
+        node.addEventListener(eventType, callback, options);
+    }
+}
+
+function removeListener (id, eventType, callback, options){
+    const node = document.getElementById(id);
+    if (node){
+        node.removeEventListener(eventType, callback, options);
     }
 }
 
