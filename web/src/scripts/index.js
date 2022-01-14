@@ -22,7 +22,7 @@ function postData(url = '/end', data) {
         //make sure to serialize your JSON body
         body: JSON.stringify(data)
     })
-        .then( (response) => {
+        .then((response) => {
             console.log(response);
         });
 }
@@ -85,6 +85,9 @@ function openModalDelete() {
 function closedModal(id) {
     setDisplay(id, 'none');
     cleanForm();
+    const button = document.getElementById('post-question');
+    button.classList.add('disabled');
+    button.disabled = true;
 }
 
 function getLocalStorage() {
@@ -145,15 +148,14 @@ function addListenerAll(STATE) {
     addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
     addListener('cancelDeveloper', 'click', () => closedModal('developer'));
     // event in textArea
-    addListener('form-questions__question', 'input', (e) => changeTextArea(e));
-
+    addListener('formQuestions', 'change', checkModalQuestion);
     //general buttons
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
     addListener('selectUser', 'click', () => openModal('developer'));
     addListener('show-question', 'click', () => openModal('modal'));
 
     //modal delete question
-    document.querySelector('.question__delete').onclick = function(e) {
+    document.querySelector('.question__delete').onclick = function (e) {
         if (e.target.matches('.question__delete')) {
             console.log(111111111)
         }
@@ -166,20 +168,24 @@ function addListenerAll(STATE) {
 
     //lists
     const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
+
     function activeLinkModal() {
         listModal.forEach((item) =>
             item.classList.remove('active'));
         this.classList.add('active');
     }
+
     listModal.forEach((item) =>
         item.addEventListener('click', activeLinkModal));
 
     const list = document.querySelectorAll('.home, .question, .about');
+
     function activeLink() {
         list.forEach((item) =>
             item.classList.remove('active'));
         this.classList.add('active');
     }
+
     list.forEach((item) =>
         item.addEventListener('click', activeLink));
 }

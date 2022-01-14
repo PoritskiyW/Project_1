@@ -10,7 +10,7 @@ function generate(state) {
     for (let i = 0; i < questionsArray.length; i++) {
         const partialArray = questionsArray[i];
         for (let j = 0; j < partialArray.length; j++) {
-            if (!idArray.includes(partialArray.id)){
+            if (!idArray.includes(partialArray.id)) {
                 idArray.push(partialArray.id);
             }
         }
@@ -19,11 +19,11 @@ function generate(state) {
     const _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
     let UID = '';
 
-    for(let i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
         UID += _sym[Math.floor(Math.random() * (_sym.length))];
     }
 
-    if(idArray.includes(UID)){
+    if (idArray.includes(UID)) {
         UID = generate();
     }
     return UID;
@@ -51,22 +51,22 @@ function fillThemes(state) {
     let csvQuestions = state.csv.questions;
 
     for (let i = 0; i < jsonQuestions.length; i++) {
-        if(!themes.includes(jsonQuestions[i].theme)) {
+        if (!themes.includes(jsonQuestions[i].theme)) {
             themes.push(jsonQuestions[i].theme);
         }
     }
     for (let i = 0; i < xmlQuestions.length; i++) {
-        if(!themes.includes(xmlQuestions[i].theme)) {
+        if (!themes.includes(xmlQuestions[i].theme)) {
             themes.push(xmlQuestions[i].theme);
         }
     }
     for (let i = 0; i < yamlQuestions.length; i++) {
-        if(!themes.includes(yamlQuestions[i].theme)) {
+        if (!themes.includes(yamlQuestions[i].theme)) {
             themes.push(yamlQuestions[i].theme);
         }
     }
     for (let i = 0; i < csvQuestions.length; i++) {
-        if(!themes.includes(csvQuestions[i].theme)) {
+        if (!themes.includes(csvQuestions[i].theme)) {
             themes.push(csvQuestions[i].theme);
         }
     }
@@ -78,13 +78,14 @@ function fillFileSystems() {
     const fileSystems = document.getElementById('file-system');
     fileSystems.innerHTML = '<option disabled>Select file system</option>'
 
-    const fileSystemsObj = {jsonD: 'JSON',
-        xml:'XML',
-        yaml:'YAML',
-        csv:'CSV'
+    const fileSystemsObj = {
+        jsonD: 'JSON',
+        xml: 'XML',
+        yaml: 'YAML',
+        csv: 'CSV'
     };
     for (const key in fileSystemsObj) {
-        if (filters.fileSystem === key){
+        if (filters.fileSystem === key) {
             let option = document.createElement('option');
             option.value = key;
             option.selected = true;
@@ -134,7 +135,7 @@ function postQuestions(state) {
     let fileSystem = [];
     for (let i = 0; i < fileSystemsArray.length; i++) {
         const item = fileSystemsArray[i]
-        if (item.checked){
+        if (item.checked) {
             fileSystem.push(item.value);
         }
     }
@@ -145,14 +146,14 @@ function postQuestions(state) {
         question: question,
         theme: theme,
         answer: answer,
-        fileSystem:fileSystem,
+        fileSystem: fileSystem,
         dateModify: dateModify
     }
 
     const requestBody = {};
 
     for (let i = 0; i < fileSystem.length; i++) {
-        switch (fileSystem[i]){
+        switch (fileSystem[i]) {
             case 'jsonD':
                 state.jsonD.questions.push(result);
                 requestBody.jsonD = JSON.stringify(state.jsonD);
@@ -177,11 +178,28 @@ function postQuestions(state) {
     postData('/end', requestBody);
 }
 
-function changeTextArea(e) {
+function checkModalQuestion() {
     const button = document.getElementById('post-question');
-    if(e.target.value.length > 1) {
+    const textArea = document.getElementById('form-questions__question');
+    const boolean = document.querySelectorAll('input[name="boolean"]');
+    const theme = document.getElementById('modalTheme').value;
+
+    const fileSystemsArray = document.querySelectorAll('input[name=fileSystem]');
+    const fileSystems = [];
+    fileSystemsArray.forEach(i => {
+        if(i.checked) {
+            fileSystems.push(i)
+        }
+    })
+
+    if (textArea.value.length > 3 &&
+        theme !== 'Select theme' &&
+        (boolean[0].checked || boolean[1].checked) &&
+        fileSystems.length >= 1 ) {
+        button.disabled = false;
         button.classList.remove('disabled');
     } else {
+        button.disabled = true;
         button.classList.add('disabled');
     }
 }
