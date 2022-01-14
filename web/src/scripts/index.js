@@ -76,12 +76,6 @@ const closeModal = (e) => {
     }
 }
 
-function openModalDelete() {
-    console.log(document.getElementsByClassName('modalDelete')[0])
-    const button = document.getElementsByClassName('modalDelete')[0];
-    button.style.display = 'grid';
-}
-
 function closedModal(id) {
     setDisplay(id, 'none');
     cleanForm();
@@ -142,27 +136,14 @@ function addListenerAll(STATE) {
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
     addListener('close-modal', 'click', () => closedModal('modal'));
     addListener('closedQuestion', 'click', () => closedModal('modal'));
-    addListener('cancelDelete', 'click', () => closedModal('deleteQuestionModal'));
+    addListener('cancelDelete', 'click', () => cancelDeleting);
     addListener('cancelDeveloper', 'click', () => closedModal('developer'));
     // event in textArea
     addListener('form-questions__question', 'input', (e) => changeTextArea(e));
-
     //general buttons
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
     addListener('selectUser', 'click', () => openModal('developer'));
     addListener('show-question', 'click', () => openModal('modal'));
-
-    //modal delete question
-    document.querySelector('.question__delete').onclick = function(e) {
-        if (e.target.matches('.question__delete')) {
-            console.log(111111111)
-        }
-    };
-    const elem = document.getElementsByClassName('question__delete')[0];
-    elem.addEventListener('click', openModalDelete);
-    // addListener('deleteQuestion', 'click', openModalDelete);
-    //  addListener('deleteQuestion', 'click', modalDeleteQuestion());
-    // addListener('modal', 'click', closedModalQuestion());
 
     //lists
     const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
@@ -171,8 +152,7 @@ function addListenerAll(STATE) {
             item.classList.remove('active'));
         this.classList.add('active');
     }
-    listModal.forEach((item) =>
-        item.addEventListener('click', activeLinkModal));
+    listModal.forEach((item) => item.addEventListener('click', activeLinkModal));
 
     const list = document.querySelectorAll('.home, .question, .about');
     function activeLink() {
@@ -180,8 +160,7 @@ function addListenerAll(STATE) {
             item.classList.remove('active'));
         this.classList.add('active');
     }
-    list.forEach((item) =>
-        item.addEventListener('click', activeLink));
+    list.forEach((item) => item.addEventListener('click', activeLink));
 }
 
 function init(state) {

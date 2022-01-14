@@ -10,7 +10,7 @@ function generate(state) {
     for (let i = 0; i < questionsArray.length; i++) {
         const partialArray = questionsArray[i];
         for (let j = 0; j < partialArray.length; j++) {
-            if (!idArray.includes(partialArray.id)){
+            if (!idArray.includes(partialArray.id)) {
                 idArray.push(partialArray.id);
             }
         }
@@ -19,11 +19,11 @@ function generate(state) {
     const _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
     let UID = '';
 
-    for(let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
         UID += _sym[Math.floor(Math.random() * (_sym.length))];
     }
 
-    if(idArray.includes(UID)){
+    if (idArray.includes(UID)) {
         UID = generate();
     }
     return UID;
@@ -51,22 +51,22 @@ function fillThemes(state) {
     let csvQuestions = state.csv.questions;
 
     for (let i = 0; i < jsonQuestions.length; i++) {
-        if(!themes.includes(jsonQuestions[i].theme)) {
+        if (!themes.includes(jsonQuestions[i].theme)) {
             themes.push(jsonQuestions[i].theme);
         }
     }
     for (let i = 0; i < xmlQuestions.length; i++) {
-        if(!themes.includes(xmlQuestions[i].theme)) {
+        if (!themes.includes(xmlQuestions[i].theme)) {
             themes.push(xmlQuestions[i].theme);
         }
     }
     for (let i = 0; i < yamlQuestions.length; i++) {
-        if(!themes.includes(yamlQuestions[i].theme)) {
+        if (!themes.includes(yamlQuestions[i].theme)) {
             themes.push(yamlQuestions[i].theme);
         }
     }
     for (let i = 0; i < csvQuestions.length; i++) {
-        if(!themes.includes(csvQuestions[i].theme)) {
+        if (!themes.includes(csvQuestions[i].theme)) {
             themes.push(csvQuestions[i].theme);
         }
     }
@@ -78,13 +78,14 @@ function fillFileSystems() {
     const fileSystems = document.getElementById('file-system');
     fileSystems.innerHTML = '<option disabled>Select file system</option>'
 
-    const fileSystemsObj = {jsonD: 'JSON',
-        xml:'XML',
-        yaml:'YAML',
-        csv:'CSV'
+    const fileSystemsObj = {
+        jsonD: 'JSON',
+        xml: 'XML',
+        yaml: 'YAML',
+        csv: 'CSV'
     };
     for (const key in fileSystemsObj) {
-        if (filters.fileSystem === key){
+        if (filters.fileSystem === key) {
             let option = document.createElement('option');
             option.value = key;
             option.selected = true;
@@ -99,7 +100,7 @@ function fillFileSystems() {
     }
 }
 
-function questionsList(data) {
+function questionsList(data, state) {
     const questionList = document.getElementById('question-list');
     questionList.innerHTML = '';
 
@@ -108,7 +109,7 @@ function questionsList(data) {
 
         myUl.id = `${el.id}`;
         myUl.innerHTML = `
-            <li><button type='submit' class='question__delete' id="deleteQuestion">x</button></li>
+            <li><button type="button" class="question__delete" id="deleteQuestion${el.id}" name="button${el.id}">x</button></li>
             <li>Question: ${el.question}</li>
             <li>Answer: ${el.answer}</li>
             <li>Theme: ${el.theme}</li>
@@ -117,6 +118,63 @@ function questionsList(data) {
         questionList.appendChild(myUl);
         return questionList;
     })
+    addListenersQuestions(state);
+}
+
+function addListenersQuestions(state) {
+    const xButtons = document.querySelectorAll('button[name^="' + "button" + '"]');
+
+    for (let i = 0; i < xButtons.length; i++) {
+        const item = xButtons[i];
+        addListener(item.id, 'click', openModalDelete.bind(null, state, item.id));
+    }
+}
+
+function openModalDelete(state, id) {
+    const modalWindow = document.getElementById("deleteQuestionModal");
+    modalWindow.style.display = 'grid';
+
+    const callback = deleteQuestion(id.replace('deleteQuestion', ''), state);
+    const cancel = document.getElementById('cancelDelete');
+    cancel.onclick = cancelDeleting(callback);
+    addListener('confirm-delete', 'click', callback);
+}
+
+function cancelDeleting(callback) {
+    function once2 () {
+        setDisplay("deleteQuestionModal", 'none');
+        removeListener('confirm-delete', 'click', callback);
+    }
+    return once2;
+}
+
+function deleteQuestion(id, state) {
+    function once () {
+        const filters = getLocalStorage();
+        state[filters.fileSystem].questions = state[filters.fileSystem].questions.filter(item => String(item.id) !== id);
+        const requestBody = {};
+
+        switch (filters.fileSystem) {
+            case 'jsonD':
+                requestBody.jsonD = JSON.stringify(state.jsonD);
+                break;
+            case 'csv':
+                requestBody.csv = getCSV(state.csv.questions);
+                break;
+            case 'xml':
+                requestBody.xml = getXML(state.xml.questions);
+                break;
+            case 'yaml':
+                requestBody.yaml = getYAML(state.yaml.questions);
+                break;
+        }
+
+        postData('/end', requestBody);
+        closedModal('deleteQuestionModal');
+        questionsFilter(state, filters.fileSystem, filters.theme);
+        removeListener('confirm-delete', 'click', once);
+    }
+    return once;
 }
 
 function searchButtonHandler(state) {
@@ -134,7 +192,7 @@ function postQuestions(state) {
     let fileSystem = [];
     for (let i = 0; i < fileSystemsArray.length; i++) {
         const item = fileSystemsArray[i]
-        if (item.checked){
+        if (item.checked) {
             fileSystem.push(item.value);
         }
     }
@@ -145,14 +203,13 @@ function postQuestions(state) {
         question: question,
         theme: theme,
         answer: answer,
-        fileSystem:fileSystem,
         dateModify: dateModify
     }
 
     const requestBody = {};
 
     for (let i = 0; i < fileSystem.length; i++) {
-        switch (fileSystem[i]){
+        switch (fileSystem[i]) {
             case 'jsonD':
                 state.jsonD.questions.push(result);
                 requestBody.jsonD = JSON.stringify(state.jsonD);
@@ -179,7 +236,7 @@ function postQuestions(state) {
 
 function changeTextArea(e) {
     const button = document.getElementById('post-question');
-    if(e.target.value.length > 1) {
+    if (e.target.value.length > 1) {
         button.classList.remove('disabled');
     } else {
         button.classList.add('disabled');
