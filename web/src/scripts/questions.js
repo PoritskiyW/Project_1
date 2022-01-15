@@ -42,7 +42,6 @@ function questionsFilter(state, fileSystem = 'jsonD', theme = 'all') {
 }
 
 function fillThemes(state) {
-
     const filters = getLocalStorage();
     let themes = [];
     themes.push('all');
