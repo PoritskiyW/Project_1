@@ -50,7 +50,7 @@
     </script>
 </head>
 <body>
-<section class="bg-ex-snowflake">
+<section class="snowflake__wrapper">
     <header class="header">
         <div class="header__container">
             <div class="header__logo">
@@ -62,30 +62,30 @@
             <nav class="header__navigation navigation">
                 <button type="button" class="navigation__button home active" id="routeHome">
                     <i class="fas fa-house-user"></i>
-                    <span class="navigation__button--title">HOME</span>
+                    <span class="navigation__button__title">HOME</span>
                 </button>
                 <button type="button" class="navigation__button question" id="routeQuestion">
                     <i class="fas fa-question-circle"></i>
-                    <span class="navigation__button--title">QUESTIONS</span>
+                    <span class="navigation__button__title">QUESTIONS</span>
                 </button>
                 <button type="button" class="navigation__button about" id="routeAbout">
                     <i class="far fa-address-card"></i>
-                    <span class="navigation__button--title">ABOUT</span>
+                    <span class="navigation__button__title">ABOUT</span>
                 </button>
             </nav>
         </div>
     </header>
     <main class="container">
         <section class="page-home" id="page-home">
-            <section class="page-home__developers" id="info-developer"></section>
-            <button class="button" id="selectUser" type="button">Select user</button>
-            <section class="modal" id="developer">
+            <section class="page-home__developers developers" id="info-developer"></section>
+            <button class="developers__select__user button" id="select-user" type="button">Select user</button>
+            <section class="developers__modal modal" id="developer">
                 <div class="modal__content">
-                    <section class="form-developer">
-                        <div id="developerModal"></div>
+                    <section class="modal__form-developer form-developer">
+                        <div class="form-developers__developers-modal" id="developer-modal"></div>
                         <div class="form-developer__button">
-                            <button class="button" id="saveDeveloper" type="submit">save</button>
-                            <button class="button" id="cancelDeveloper" type="reset">cancel</button>
+                            <button class="button" id="save-developer" type="submit">save</button>
+                            <button class="button" id="cancel-developer" type="reset">cancel</button>
                         </div>
                     </section>
                 </div>

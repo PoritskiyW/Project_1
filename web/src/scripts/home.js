@@ -34,7 +34,7 @@ function fillForm(devData) {
 
 function modalDeveloper(devData) {
     let id = 0;
-    const infoDeveloper = document.getElementById('developerModal');
+    const infoDeveloper = document.getElementById('developer-modal');
     infoDeveloper.innerHTML = '';
     const header = document.createElement('header');
     header.className = "header header__modal";
@@ -71,13 +71,13 @@ function modalDeveloper(devData) {
         infoDeveloper.appendChild(div);
     }
 
-    const container = document.getElementById('developerModal');
+    const container = document.getElementById('developer-modal');
     const inputs = container.querySelectorAll('input');
     inputs.forEach(i => i.onchange = (e) => {
         devData[id][e.target.name.toLowerCase()] = e.target.value;
     });
 
-    document.getElementById('saveDeveloper').addEventListener('click', () => {
+    document.getElementById('save-developer').addEventListener('click', () => {
         postData('/end', {dev: JSON.stringify({ person: devData })});
         closedModal('developer');
         fillForm(devData);
