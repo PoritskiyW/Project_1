@@ -31,14 +31,14 @@ function parseYAML(obj) {
             if (partResult[j] !== '') {
                 let stringResult = partResult[j].split(': ');
                 const key = stringResult[0].replaceAll(' ', '');
-                const value = stringResult[1].trim();
+                const value = stringResult[1];
                 if (stringResult.length > 1){
                     if (key === 'id') {
                         obj[key] = Number.parseInt(value);
                     } else if (key === 'answer') {
                         obj[key] = value !== 'false';
                     } else {
-                        obj[key] = value;
+                        obj[key] = value.trim();
                     }
                 }
             }
