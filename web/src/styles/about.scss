@@ -1,18 +1,19 @@
+@import "_variables";
+
 .page-about {
-  background: linear-gradient(180deg, #160040 0%, #4C0070 100%);
   margin-top: -30px;
+  background: linear-gradient(180deg, $color-main-dark 0%,$color-main-medium 100%);
 
   &__content {
     .info {
-      background: linear-gradient(90deg, white 80%, blue);
+      position: relative;
+      margin: 30px;
+      background: linear-gradient(90deg, $color-white 80%, blue);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      position: relative;
-      font-size: 20px;
       letter-spacing: 0.045em;
-      font-family: monospace;
       font-weight: 400;
-      margin: 30px;
+      font-size: 20px;
       text-align: left;
 
       @media(min-width: 768px) {
@@ -20,26 +21,25 @@
       }
 
       &__title {
-        text-align: center;
         margin-bottom: 30px;
+        text-align: center;
         font-size: 40px;
       }
     }
 
     .forms {
-      font-size: 30px;
-      line-height: 40px;
-      font-family: Verdana, sans-serif;
-      font-weight: 900;
       position: relative;
-      overflow: hidden;
-      text-transform: initial;
-      text-align: center;
+      background-image: repeating-linear-gradient(-45deg, transparent, transparent 1em, $color-white 1em, #9A0680 50%),
+                        repeating-linear-gradient(45deg, $color-main-bright, $color-white 1em, $color-main-bright 1em, $color-white 50%);
+      background-size: 3em 3em, 2em 2em;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-image: repeating-linear-gradient(-45deg, transparent, transparent 1em, white 1em, #9A0680 50%),
-                        repeating-linear-gradient(45deg, #9A0680, white 1em, #9A0680 1em, white 50%);
-      background-size: 3em 3em, 2em 2em;
+      text-transform: initial;
+      text-align: center;
+      font-weight: 900;
+      font-size: 30px;
+      line-height: 40px;
+      overflow: hidden;
       animation-name: ani;
       animation-duration: 80s;
       animation-timing-function: linear;

@@ -5,7 +5,7 @@ const gulp = require("gulp");
 const concat = require('gulp-concat');
 
 gulpfile.task('clean', function(cb) {
-    del(['dist/*']);
+    del(['dist/images/*']);
     cb();
 })
 
@@ -30,22 +30,15 @@ gulpfile.task('copy:js', function (cb) {
     cb()
 })
 
-//.gif
-// gulpfile.task('copy:gif', function (cb) {
-//     gulp.src('./src/images/*.gif')
-//         .pipe(gulp.dest('./dist'))
-//     cb()
-// })
-
-gulpfile.task('copy:png', function (cb) {
-    gulp.src('./src/images/*.png')
+gulpfile.task('copy:img', function (cb) {
+    gulp.src('./src/images/*.*', {since: gulp.lastRun('copy:img')})
         .pipe(gulp.dest('./dist/images'))
     cb()
 })
 
 gulpfile.task('watch', function () {
-    gulpfile.watch(['./src/**/*.scss', './src/scripts/**/*.js', './src/views/*.html', './src/images/*.png'],
-        gulpfile.series(['clean', 'sass', 'copy:html', 'copy:js', 'copy:png']));
+    gulpfile.watch(['./src/**/*.scss', './src/scripts/**/*.js', './src/views/*.html', './src/images/*.*'],
+        gulpfile.series(['clean', 'copy:img', 'sass', 'copy:html', 'copy:js']));
 })
 
-gulpfile.task('default', gulpfile.series(['clean', 'copy:html',  'sass', 'copy:js', 'copy:png']))
+gulpfile.task('default', gulpfile.series(['clean', 'copy:img', 'copy:html',  'sass', 'copy:js']))

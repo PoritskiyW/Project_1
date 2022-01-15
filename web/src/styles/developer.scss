@@ -1,18 +1,20 @@
+@import "_variables";
+
 .page-home__developers {
   display: flex;
   justify-content: center;
-  margin: 0 20px;
   flex-wrap: wrap;
-  color: white;
+  margin: 0 20px;
+  color: $color-white;
   font-size: 19px;
 
   ul {
-    background: linear-gradient(180deg, #160040 0%, #4C0070 100%);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     padding: 40px 10px 10px;
+    background: linear-gradient(180deg, $color-main-dark 0%, $color-main-medium 100%);
 
     @media (min-width: 768px) {
       width: 350px;
@@ -36,9 +38,9 @@
         .img__content {
           width: 250px;
           height: 250px;
+          margin: 5px;
           border: 1px solid;
           box-shadow: 0 0 2px 2px;
-          margin: 5px;
 
           @media(min-width: 425px) {
             width: 300px;

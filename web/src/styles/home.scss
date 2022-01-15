@@ -1,13 +1,13 @@
 @import "_variables";
 
 .form-developer {
-  background: linear-gradient(180deg, #160040 0%, #4C0070 100%);
-  color: white;
+  background: linear-gradient(180deg, $color-main-dark 0%, $color-main-medium 100%);
+  color: $color-white;
 
   input {
-    font-size: 20px;
-    margin: 10px 10px 0;
     width: 70%;
+    margin: 10px 10px 0;
+    font-size: 20px;
   }
 
   label {
@@ -19,17 +19,17 @@
 
   .img {
     &__input {
-      color: white;
       margin: 5px;
+      color: $color-white;
       cursor: pointer;
     }
 
     &__content {
       width: 250px;
       height: 250px;
+      margin: 7px auto 0;
       border: 1px solid;
       box-shadow: 0 0 2px 2px;
-      margin: 7px auto 0;
 
       @media(min-width: 425px) {
         width: 300px;
@@ -53,7 +53,7 @@
   }
 
   &__button {
-    text-align: right;
     margin: 10px;
+    text-align: right;
   }
 }

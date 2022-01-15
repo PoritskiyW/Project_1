@@ -1,7 +1,11 @@
 @import "_variables";
 
 .page-questions {
-  background: linear-gradient(180deg, #160040 0%, #4C0070 100%);
+  background: linear-gradient(180deg, $color-main-dark 0%,$color-main-medium 100%);
+
+  abbr {
+    text-decoration: auto
+  }
 
   &__filters {
     display: flex;
@@ -10,45 +14,45 @@
   }
 
   &__add {
-    text-align: left;
-    padding: 5px 10px;
     margin: 10px;
+    padding: 5px 10px;
+    text-align: left;
 
     ul {
-      background-color: white;
       position: relative;
-      transition-duration: 2s;
+      margin: 10px 0;
+      padding: 10px;
       border: 1px solid;
       list-style-type: none;
-      padding: 10px;
-      margin: 10px 0;
-      color: #79018C;;
+      background-color: $color-white;
+      color: $color-main;
       font-size: 16px;
+      transition-duration: 2s;
       cursor: pointer;
 
       &:hover {
-        background: #79018C;
-        color: white;
+        background: $color-main;
+        color: $color-white;
       }
 
       &:hover .question__delete {
         display: inline-block;
         position: absolute;
         right: 10px;
-        cursor: pointer;
         border: 1px solid;
-        color: white;
-        background: #160040;
+        background: $color-main-dark;
+        color: $color-white;
+        cursor: pointer;
       }
 
       .question {
         &__ask {
           max-height: 60px;
-          overflow: hidden;
           display: -webkit-box;
           //add height > 3 line? add: (...) and hidden text
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
+          overflow: hidden;
           transition-duration: 0.5s;
 
           &:hover {
@@ -58,8 +62,8 @@
         }
 
         &__delete {
-          transition-duration: 0.5s;
           display: none;
+          transition-duration: 0.5s;
         }
 
         &__date {
@@ -74,40 +78,40 @@
   .form-questions {
     display: flex;
     flex-direction: column;
-    padding: 10px;
     position: relative;
-    text-align: left;
     width: 60vw;
-    background: linear-gradient(180deg, #160040 0%, #4C0070 100%);
-    color: white;
+    padding: 10px;
+    background: linear-gradient(180deg, $color-main-dark 0%, $color-main-medium 100%);
+    color: $color-white;
+    text-align: left;
 
     .disabled {
       background-color: grey;
 
       &:hover {
+        border: 5px double $color-white;
+        color: $color-white;
         cursor: not-allowed;
-        color: white;
-        border: 5px double white;
       }
     }
 
     label {
-      font-weight: 800;
       padding: 10px;
+      font-weight: 800;
     }
 
     input {
-      cursor: pointer;
       margin: 5px;
+      cursor: pointer;
     }
 
     &__input {
-      border: 3px double $main-color;
+      border: 3px double $color-main;
 
       &:focus,
       &:focus-visible {
+        border: 3px double $color-main;
         outline: skyblue;
-        border: 3px double $main-color;
       }
     }
 
@@ -115,14 +119,21 @@
       position: absolute;
       right: 10px;
       border: 3px solid;
-      color: white;
-      background-color: #79018C;;
+      background-color: $color-main;
+      color: $color-white;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $color-main-dark;
+        text-decoration: none;
+      }
     }
 
     &__title {
       display: block;
-      text-align: left;
       padding: 5px;
+      text-align: left;
     }
 
     &__buttons-group {
@@ -134,8 +145,8 @@
   textarea[name="details"] {
     resize: none;
     border: 1px solid;
-    color: #79018C;
-    padding: 10px;
     margin: 5px;
+    padding: 10px;
+    color: $color-main;
   }
 }
