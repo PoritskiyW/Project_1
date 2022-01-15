@@ -5,7 +5,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <link rel="icon" href="/images/logo.png" type="image/png">
     <link href="./index.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -13,7 +12,6 @@
     <title>Question application</title>
     <script>
         window.module = {};
-
         function require(url) {
             if (url.toLowerCase().substr(-3) !== '.js') url += '.js'; // to allow loading without js suffix;
             if (!require.cache) require.cache = []; //init cache
@@ -50,7 +48,7 @@
     </script>
 </head>
 <body>
-<section class="snowflake__wrapper">
+<section class="snowflake-wrapper">
     <header class="header">
         <div class="header__container">
             <div class="header__logo">
@@ -77,9 +75,10 @@
     </header>
     <main class="container">
         <section class="page-home" id="page-home">
-            <section class="page-home__developers developers" id="info-developer"></section>
-            <button class="developers__select__user button" id="select-user" type="button">Select user</button>
-            <section class="developers__modal modal" id="developer">
+            <section class="page-home__developers" id="info-developer"></section>
+            <button class="button" id="selectUser" type="button">Select user</button>
+            <section class="page-home__modal modal" id="developer">
+
                 <div class="modal__content">
                     <section class="modal__form-developer form-developer">
                         <div class="form-developers__developers-modal" id="developer-modal"></div>
@@ -91,7 +90,7 @@
                 </div>
             </section>
         </section>
-        <section class="page-questions" id="page-questions">
+        <section class="container__page-questions page-questions" id="page-questions">
             <div class="page-questions__filters">
                 <select name="file-system" id="file-system">
                     <option disabled>Select file system</option>
@@ -109,22 +108,21 @@
                     <option value="GIT">GIT</option>
                     <option value="SCSS">SCSS</option>
                 </select>
-                <button type="button" class="button" id="local-storage">Search</button>
-                <button class="add button" id="show-question" type="button">
+                <button class="button" id="local-storage" type="button"  >Search</button>
+                <button class="button" id="show-question" type="button">
                     <abbr title="Add new question">+</abbr>
                 </button>
             </div>
             <section class="page-questions__add add" id="question-list">
-
             </section>
-            <section class="modal" id="modal">
-                <div class="modal__content">
-                    <div class="form-questions" id="formQuestions">
-                        <button class="form-questions__exit" id="closedQuestion" type="button">x</button>
-                        <label class="form-questions__title" for="form-questions__question">Question:</label>
-                        <textarea name="details" maxlength='255' autofocus tabindex="0" id="form-questions__question"
+            <section class="page-questions__modal modal" id="modal">
+                <div class="modal__content content">
+                    <div class="content__form-questions form-questions" id="form-questions">
+                        <button class="form-questions__exit" id="closed-question" type="button">x</button>
+                        <label class="form-questions__title" for="question-text">Question:</label>
+                        <textarea name="details" maxlength='255' autofocus tabindex="0" id="question-text"
                                   placeholder="Your question ..." cols="30" rows="5"></textarea>
-                        <select id="modalTheme">
+                        <select id="modal-theme">
                             <option selected disabled>Select theme</option>
                             <option value="HTML">HTML</option>
                             <option value="CSS">CSS</option>
@@ -157,28 +155,27 @@
                             </label>
                         </div>
                         <div class="form-questions__buttons-group">
-                            <button class="button form-questions__cancel" id="close-modal" type="button">cancel</button>
-                            <button class="button form-questions__cancel disabled" type="button" id="post-question"
+                            <button class="button" id="close-modal" type="button">cancel</button>
+                            <button class="button disabled" type="button" id="post-question"
                                     disabled="disabled">save
                             </button>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <section class="modal modalDelete" id="deleteQuestionModal">
+            <section class="page-questions__modal-delete modal" id="modal-delete-question">
                 <div class="modal__content delete">
                     <div class="delete__context">
                         <p>Are you sure you want to delete this question?</p>
                         <button class="button" id="confirm-delete" type="button">confirm</button>
-                        <button class="button" id="cancelDelete" type="button">cancel</button>
+                        <button class="button" id="cancel-delete" type="button">cancel</button>
                     </div>
                 </div>
             </section>
         </section>
-        <section class="page-about" id="page-about">
-            <div class="page-about__content">
-                <div class="page-about__content info">
+        <section class="container__page-about page-about" id="page-about">
+            <div class="page-about__content content">
+                <div class="content__info info">
                     <h2 class="info__title">Description about project</h2>
                     <div class="info__description">
                         Командой разработчиков "Холодные" был создан вводный проект для ознакомления с Front-End
@@ -190,7 +187,7 @@
                         с дальнейшим сохранением данных на стороне пользователя в поддерживаемые форматы, такие как:
                     </div>
                 </div>
-                <div class="page-about__content forms">
+                <div class="content__forms forms">
                     <span class="forms__form-one">CSV</span>
                     <span class="forms__form-two">JSON</span>
                     <span class="forms__form-three">YAML</span>
@@ -200,7 +197,6 @@
         </section>
     </main>
 </section>
-
 <script type="text/javascript" src="../index.js"></script>
 </body>
 </html>

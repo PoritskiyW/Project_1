@@ -138,18 +138,18 @@ function addListenersQuestions(state) {
 }
 
 function openModalDelete(state, id) {
-    const modalWindow = document.getElementById("deleteQuestionModal");
+    const modalWindow = document.getElementById("modal-delete-question");
     modalWindow.style.display = 'grid';
 
     const callback = deleteQuestion(id.replace('deleteQuestion', ''), state);
-    const cancel = document.getElementById('cancelDelete');
+    const cancel = document.getElementById('cancel-delete');
     cancel.onclick = cancelDeleting(callback);
     addListener('confirm-delete', 'click', callback);
 }
 
 function cancelDeleting(callback) {
     function once2 () {
-        setDisplay("deleteQuestionModal", 'none');
+        setDisplay("modal-delete-question", 'none');
         removeListener('confirm-delete', 'click', callback);
     }
     return once2;
@@ -177,7 +177,7 @@ function deleteQuestion(id, state) {
         }
 
         postData('/end', requestBody);
-        closedModal('deleteQuestionModal');
+        closedModal('modal-delete-question');
         questionsFilter(state, filters.fileSystem, filters.theme);
         removeListener('confirm-delete', 'click', once);
     }
@@ -191,8 +191,8 @@ function searchButtonHandler(state) {
 }
 
 function postQuestions(state) {
-    const question = document.getElementById('form-questions__question').value;
-    const theme = document.getElementById('modalTheme').value;
+    const question = document.getElementById('question-text').value;
+    const theme = document.getElementById('modal-theme').value;
     const answer = document.querySelector('input[name="' + "boolean" + '"]:checked').value;
 
     const fileSystemsArray = document.querySelectorAll('input[name=fileSystem]');
@@ -244,9 +244,9 @@ function postQuestions(state) {
 function checkModalQuestion() {
     const button = document.getElementById('post-question');
 
-    const textArea = document.getElementById('form-questions__question');
+    const textArea = document.getElementById('question-text');
     const boolean = document.querySelectorAll('input[name="boolean"]');
-    const theme = document.getElementById('modalTheme').value;
+    const theme = document.getElementById('modal-theme').value;
 
     const fileSystemsArray = document.querySelectorAll('input[name=fileSystem]');
     const fileSystems = [];

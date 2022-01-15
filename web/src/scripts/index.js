@@ -109,14 +109,14 @@ function cleanForm() {
         const item = boolean[i];
         item.checked = false;
     }
-    const theme = document.getElementById('modalTheme').getElementsByTagName('option');
+    const theme = document.getElementById('modal-theme').getElementsByTagName('option');
     for (let i = 0; i < theme.length; i++) {
         const item = theme[i];
         if (item.disabled) {
             item.selected = true;
         }
     }
-    const question = document.getElementById('form-questions__question');
+    const question = document.getElementById('question-text');
     question.value = '';
 }
 
@@ -138,11 +138,12 @@ function addListenerAll(STATE) {
     //modal window buttons
     addListener('post-question', 'click', postQuestions.bind(null, STATE));
     addListener('close-modal', 'click', () => closedModal('modal'));
-    addListener('closedQuestion', 'click', () => closedModal('modal'));
-    addListener('cancelDelete', 'click', () => cancelDeleting);
+    addListener('closed-question', 'click', () => closedModal('modal'));
+    addListener('cancel-delete', 'click', () => cancelDeleting);
     addListener('cancel-developer', 'click', () => closedModal('developer'));
+
     // event in textArea
-    addListener('formQuestions', 'change', checkModalQuestion);
+    addListener('form-questions', 'change', checkModalQuestion);
     //general buttons
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
     addListener('select-user', 'click', () => openModal('developer'));
