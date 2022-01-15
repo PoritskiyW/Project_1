@@ -42,7 +42,6 @@ function questionsFilter(state, fileSystem = 'jsonD', theme = 'all') {
 }
 
 function fillThemes(state) {
-
     const filters = getLocalStorage();
     let themes = [];
     themes.push('all');
@@ -106,21 +105,27 @@ function questionsList(data, state) {
     const questionList = document.getElementById('question-list');
     questionList.innerHTML = '';
 
-    data.map(el => {
-        const myUl = document.createElement('ul');
+    if(!Array.isArray(data) || data.length === 0) {
+        const Ul = document.createElement('ul');
+        Ul.innerHTML = '<p class="add__question">There are no questions</p>';
+        questionList.appendChild(Ul);
+    } else {
+        data.map(el => {
+            const Ul = document.createElement('ul');
 
-        myUl.id = `${el.id}`;
-        myUl.innerHTML = `
+            Ul.id = `${el.id}`;
+            Ul.innerHTML = `
             <li><button type="button" class="question__delete" id="deleteQuestion${el.id}" name="button${el.id}">x</button></li>
             <li>Question: ${el.question}</li>
             <li>Answer: ${el.answer}</li>
             <li>Theme: ${el.theme}</li>
             <li class='question__date'>Date: ${el.dateModify}</li>`
 
-        questionList.appendChild(myUl);
-        return questionList;
-    })
-    addListenersQuestions(state);
+            questionList.appendChild(Ul);
+            return questionList;
+        })
+        addListenersQuestions(state);
+    }
 }
 
 function addListenersQuestions(state) {

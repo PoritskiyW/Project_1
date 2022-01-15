@@ -5,7 +5,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <link rel="icon" href="/images/logo.png" type="image/png">
     <link href="./index.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -13,7 +12,6 @@
     <title>Question application</title>
     <script>
         window.module = {};
-
         function require(url) {
             if (url.toLowerCase().substr(-3) !== '.js') url += '.js'; // to allow loading without js suffix;
             if (!require.cache) require.cache = []; //init cache
@@ -62,15 +60,15 @@
             <nav class="header__navigation navigation">
                 <button type="button" class="navigation__button home active" id="routeHome">
                     <i class="fas fa-house-user"></i>
-                    <span class="navigation__button--title">HOME</span>
+                    <span class="navigation__button__title">HOME</span>
                 </button>
                 <button type="button" class="navigation__button question" id="routeQuestion">
                     <i class="fas fa-question-circle"></i>
-                    <span class="navigation__button--title">QUESTIONS</span>
+                    <span class="navigation__button__title">QUESTIONS</span>
                 </button>
                 <button type="button" class="navigation__button about" id="routeAbout">
                     <i class="far fa-address-card"></i>
-                    <span class="navigation__button--title">ABOUT</span>
+                    <span class="navigation__button__title">ABOUT</span>
                 </button>
             </nav>
         </div>
@@ -80,12 +78,13 @@
             <section class="page-home__developers" id="info-developer"></section>
             <button class="button" id="selectUser" type="button">Select user</button>
             <section class="page-home__modal modal" id="developer">
+
                 <div class="modal__content">
-                    <section class="form-developer">
-                        <div id="developerModal"></div>
+                    <section class="modal__form-developer form-developer">
+                        <div class="form-developers__developers-modal" id="developer-modal"></div>
                         <div class="form-developer__button">
-                            <button class="button" id="saveDeveloper" type="submit">save</button>
-                            <button class="button" id="cancelDeveloper" type="reset">cancel</button>
+                            <button class="button" id="save-developer" type="submit">save</button>
+                            <button class="button" id="cancel-developer" type="reset">cancel</button>
                         </div>
                     </section>
                 </div>
@@ -114,8 +113,7 @@
                     <abbr title="Add new question">+</abbr>
                 </button>
             </div>
-            <section class="page-questions__add add">
-                <p class="add__question" id="question-list">There are no questions</p>
+            <section class="page-questions__add add" id="question-list">
             </section>
             <section class="page-questions__modal modal" id="modal">
                 <div class="modal__content content">
@@ -165,7 +163,6 @@
                     </div>
                 </div>
             </section>
-
             <section class="page-questions__modal-delete modal" id="modal-delete-question">
                 <div class="modal__content delete">
                     <div class="delete__context">
@@ -200,7 +197,6 @@
         </section>
     </main>
 </section>
-
 <script type="text/javascript" src="../index.js"></script>
 </body>
 </html>

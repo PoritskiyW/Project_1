@@ -10,7 +10,7 @@ function parseCSV(obj) {
             "question": objBuffer[1],
             "theme": objBuffer[2],
             "answer": objBuffer[3] === 'true',
-            "dateModify": Date.parse(objBuffer[4])
+            "dateModify": objBuffer[4]
         }
         resultArr.push(partResult);
     }
@@ -30,17 +30,15 @@ function parseYAML(obj) {
         for (let j = 0; j < partResult.length; j++) {
             if (partResult[j] !== '') {
                 let stringResult = partResult[j].split(': ');
+                const key = stringResult[0].replaceAll(' ', '');
+                const value = stringResult[1];
                 if (stringResult.length > 1){
-                    if (stringResult[0].replaceAll(' ', '') === 'id') {
-                        obj[stringResult[0].replaceAll(' ', '')] = Number.parseInt(stringResult[1]);
-                    } else if (stringResult[0].replaceAll(' ', '') === 'answer') {
-                        obj[stringResult[0].replaceAll(' ', '')] = stringResult[1] !== 'false';
-                    } else if (stringResult[0].replaceAll(' ', '') === 'dateModify') {
-                        obj[stringResult[0].replaceAll(' ', '')] = Date.parse(stringResult[1]);
-                    }
-                    else {
-                        stringResult[1] = stringResult[1].trim();
-                        obj[stringResult[0].replaceAll(' ', '')] = stringResult[1];
+                    if (key === 'id') {
+                        obj[key] = Number.parseInt(value);
+                    } else if (key === 'answer') {
+                        obj[key] = value !== 'false';
+                    } else {
+                        obj[key] = value.trim();
                     }
                 }
             }
@@ -85,8 +83,6 @@ function parseXML(obj) {
                     questionObj[paramName] = Number.parseInt(paramValue);
                 } else if(paramName === 'answer') {
                     questionObj[paramName] = paramValue === 'true';
-                } else if(paramName === 'dateModify') {
-                    questionObj[paramName] = Date.parse(paramValue);
                 } else {
                     questionObj[paramName] = paramValue;
                 }
