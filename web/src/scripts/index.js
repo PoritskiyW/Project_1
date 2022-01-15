@@ -140,12 +140,12 @@ function addListenerAll(STATE) {
     addListener('close-modal', 'click', () => closedModal('modal'));
     addListener('closedQuestion', 'click', () => closedModal('modal'));
     addListener('cancelDelete', 'click', () => cancelDeleting);
-    addListener('cancelDeveloper', 'click', () => closedModal('developer'));
+    addListener('cancel-developer', 'click', () => closedModal('developer'));
     // event in textArea
     addListener('formQuestions', 'change', checkModalQuestion);
     //general buttons
     addListener('local-storage', 'click', searchButtonHandler.bind(null, STATE));
-    addListener('selectUser', 'click', () => openModal('developer'));
+    addListener('select-user', 'click', () => openModal('developer'));
     addListener('show-question', 'click', () => openModal('modal'));
     //lists
     const listModal = document.querySelectorAll('.user1, .user2, .user3, .user4');
