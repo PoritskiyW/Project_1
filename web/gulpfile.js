@@ -35,11 +35,6 @@ gulpfile.task('copy:img', function (cb) {
         .pipe(gulp.dest('./dist/images'))
     cb()
 })
-// gulp.task('img', (cb) => {
-//     gulp.src('./src.images/*.*', {since: gulp.lastRun('img')})
-//         .pipe(gulp.dest('./dist/images'));
-//     cb()
-// });
 
 gulpfile.task('watch', function () {
     gulpfile.watch(['./src/**/*.scss', './src/scripts/**/*.js', './src/views/*.html', './src/images/*.*'],
