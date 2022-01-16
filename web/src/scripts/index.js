@@ -127,9 +127,9 @@ window.onload = () => {
 
 function addListenerAll(STATE) {
     //main routes
-    addListener('routeHome', 'click', () => route('page-home'));
-    addListener('routeQuestion', 'click', () => route('page-questions'));
-    addListener('routeAbout', 'click', () => route('page-about'));
+    addListener('route-home', 'click', () => route('page-home'));
+    addListener('route-question', 'click', () => route('page-questions'));
+    addListener('route-about', 'click', () => route('page-about'));
     //modal window routes
     addListener('route1', 'click', () => routeModal('user1'));
     addListener('route2', 'click', () => routeModal('user2'));

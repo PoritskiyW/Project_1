@@ -50,25 +50,25 @@
 <body>
 <section class="snowflake-wrapper">
     <header class="header">
-        <div class="header__container">
-            <div class="header__logo">
+        <div class="header__container container">
+            <div class="container__logo logo">
                 <div>
-                    <img class="header__img" alt="logo" src="./images/logo.png" alt="logo"/>
+                    <img class="logo__img" alt="logo" src="./images/logo.png" alt="logo"/>
                 </div>
-                <p class="header__team">Холодные</p>
+                <p class="logo__team">Холодные</p>
             </div>
             <nav class="header__navigation navigation">
-                <button type="button" class="navigation__button home active" id="routeHome">
+                <button type="button" class="navigation__link link home active" id="route-home">
                     <i class="fas fa-house-user"></i>
-                    <span class="navigation__button__title">HOME</span>
+                    <span class="link__title">HOME</span>
                 </button>
-                <button type="button" class="navigation__button question" id="routeQuestion">
+                <button type="button" class="navigation__link link question" id="route-question">
                     <i class="fas fa-question-circle"></i>
-                    <span class="navigation__button__title">QUESTIONS</span>
+                    <span class="link__title">QUESTIONS</span>
                 </button>
-                <button type="button" class="navigation__button about" id="routeAbout">
+                <button type="button" class="navigation__link link about" id="route-about">
                     <i class="far fa-address-card"></i>
-                    <span class="navigation__button__title">ABOUT</span>
+                    <span class="link__title">ABOUT</span>
                 </button>
             </nav>
         </div>
@@ -76,22 +76,22 @@
     <main class="container">
         <section class="page-home" id="page-home">
             <section class="page-home__developers" id="info-developer"></section>
-            <button class="button" id="select-user" type="button">Select user</button>
+            <button class="page-home__button--select button" id="select-user" type="button">Select user</button>
             <section class="page-home__modal modal" id="developer">
 
                 <div class="modal__content">
                     <section class="modal__form-developer form-developer">
                         <div class="form-developers__developers-modal" id="developer-modal"></div>
-                        <div class="form-developer__button">
-                            <button class="button" id="save-developer" type="submit">save</button>
-                            <button class="button" id="cancel-developer" type="reset">cancel</button>
+                        <div class="form-developer__buttons buttons">
+                            <button class="buttons__button--save button" id="save-developer" type="submit">save</button>
+                            <button class="buttons__button--cancel button" id="cancel-developer" type="reset">cancel</button>
                         </div>
                     </section>
                 </div>
             </section>
         </section>
         <section class="container__page-questions page-questions" id="page-questions">
-            <div class="page-questions__filters">
+            <div class="page-questions__filters filters">
                 <select name="file-system" id="file-system">
                     <option disabled>Select file system</option>
                     <option selected value="jsonD">JSON</option>
@@ -108,8 +108,8 @@
                     <option value="GIT">GIT</option>
                     <option value="SCSS">SCSS</option>
                 </select>
-                <button class="button" id="local-storage" type="button"  >Search</button>
-                <button class="button" id="show-question" type="button">
+                <button class="filters__button--search button" id="local-storage" type="button">Search</button>
+                <button class="filters__button--add button" id="show-question" type="button">
                     <abbr title="Add new question">+</abbr>
                 </button>
             </div>
@@ -140,7 +140,7 @@
                             </label>
                         </div>
                         <label class="form-questions__title">File system:</label>
-                        <div class="form-questions__type questions__type">
+                        <div class="form-questions__type">
                             <label>
                                 <input type="checkbox" name="fileSystem" value="jsonD">JSON
                             </label>
@@ -154,9 +154,9 @@
                                 <input type="checkbox" name="fileSystem" value="yaml">YAML
                             </label>
                         </div>
-                        <div class="form-questions__buttons-group">
-                            <button class="button" id="close-modal" type="button">cancel</button>
-                            <button class="button disabled" type="button" id="post-question"
+                        <div class="form-questions__buttons-group buttons-group">
+                            <button class="buttons-group__button--close button" id="close-modal" type="button">cancel</button>
+                            <button class="buttons-group__button--save button disabled" type="button" id="post-question"
                                     disabled="disabled">save
                             </button>
                         </div>
@@ -164,11 +164,11 @@
                 </div>
             </section>
             <section class="page-questions__modal-delete modal" id="modal-delete-question">
-                <div class="modal__content delete">
-                    <div class="delete__context">
+                <div class="modal__content content-delete">
+                    <div class="content-delete__context context">
                         <p>Are you sure you want to delete this question?</p>
-                        <button class="button" id="confirm-delete" type="button">confirm</button>
-                        <button class="button" id="cancel-delete" type="button">cancel</button>
+                        <button class="context__button--confirm button" id="confirm-delete" type="button">confirm</button>
+                        <button class="context__button--cancel button" id="cancel-delete" type="button">cancel</button>
                     </div>
                 </div>
             </section>
