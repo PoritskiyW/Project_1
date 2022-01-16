@@ -87,6 +87,11 @@ function createDataDir() {
                     throw err;
                 }
             });
+            fs.mkdir('./data/images', (e) => {
+                if (e) {
+                    throw e;
+                }
+            });
         }
     });
 }
