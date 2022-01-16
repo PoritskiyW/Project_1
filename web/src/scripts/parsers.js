@@ -33,12 +33,10 @@ function parseYAML(obj) {
                 const key = stringResult[0].replaceAll(' ', '');
                 const value = stringResult[1];
                 if (stringResult.length > 1){
-                    if (key === 'id') {
-                        obj[key] = Number.parseInt(value);
-                    } else if (key === 'answer') {
+                    if (key === 'answer') {
                         obj[key] = value !== 'false';
                     } else {
-                        obj[key] = value.trim();
+                        obj[key] = value.trim().replaceAll("'", '');
                     }
                 }
             }

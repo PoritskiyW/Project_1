@@ -73,6 +73,7 @@ const closeModal = (e) => {
     if (modalState.isVisibleModal && !clickPath.includes(target) && !clickPath.includes(showButton)) {
         modal.style.display = "none";
         modalState.isVisibleModal = false;
+        cleanForm();
     }
 }
 

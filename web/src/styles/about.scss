@@ -4,6 +4,11 @@
   margin-top: -30px;
   background: linear-gradient(180deg, $color-main-dark 0%,$color-main-medium 100%);
 
+  ul{
+    list-style-type: disclosure-closed;
+    color: white;
+  }
+
   &__content {
     .info {
       position: relative;
