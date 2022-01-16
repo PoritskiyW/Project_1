@@ -2,14 +2,28 @@ const express = require('express');
 const path = require('path');
 const dataFill = require('./modules/dataFill');
 const getData = require('./modules/fileReading');
-const postData = require('./modules/fileWriting');
+const cleanImage = require('./modules/deleteFiles');
+const {writeImages, writeFiles} = require('./modules/fileWriting');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './data/images')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+const upload = multer({ storage: storage })
+
 
 const server = express();
 const PORT = process.env.PORT || 3000;
 
 server.use(express.static('../web/dist'));
 server.use('/images', express.static('data/images'));
+//server.use('/uploads', express.static('data/images'));
 server.use(bodyParser.json());
 
 //Respond to request with index.html
@@ -24,19 +38,17 @@ server.get('/init', (request, response) => {
     response.end();
 })
 
+server.post('/images*', upload.array('file', 4), function (req, res, next) {
+    res.status(200)
+    res.end();
+    cleanImage();
+})
+
 server.post('/end', (request, response) => {
-    postData(request.body)
+    writeFiles(request.body)
     response.status(200);
     response.end();
 })
-/*
-//handle delete question data
-server.delete('/deleteQuestion', (request, response) => {
-    deleteQuestion(request.body.id);
-    response.status(200);
-    response.end();
-})
- */
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

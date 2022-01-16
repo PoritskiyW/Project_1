@@ -43,4 +43,9 @@ function writeFiles(data) {
     }
 }
 
-module.exports = writeFiles;
+function writeImages(imageArray, Names) {
+
+
+}
+
+module.exports = {writeFiles, writeImages};

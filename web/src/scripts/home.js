@@ -57,10 +57,11 @@ function modalDeveloper(devData) {
         const div = document.createElement('div');
         div.id = `user${item.id}`;
         div.innerHTML = `
-            <div class="img__content">
-                <img src="${item.images}" alt='person'/>
+            <div class="img__content" id="img-content${item.id}">
+                <img src="${item.images}" alt='main' id="main-image${item.id}"/>
+                <img src="" alt="side" id="side-image${item.id}" hidden>
             </div>
-            <input class="img__input" type="file" name="AddImage" accept="image/*" >
+            <input class="img__input" type="file" name="add-image" accept="image/*" id="image-input${item.id}" oninput="uploadFile(this)">
             <label>Name: <input type='text'  maxlength="10" placeholder=${item.name} name="Name" /></label>
             <label>Surname: <input type='text'  maxlength="20" placeholder=${item.surname} name="Surname" /></label>
             <label>Gender: <input type='text' maxlength="20" placeholder=${item.sex} name="Gender" /></label>
@@ -74,12 +75,81 @@ function modalDeveloper(devData) {
     const container = document.getElementById('developer-modal');
     const inputs = container.querySelectorAll('input');
     inputs.forEach(i => i.onchange = (e) => {
-        devData[id][e.target.name.toLowerCase()] = e.target.value;
+        if (e.target.name !== 'add-image'){
+            devData[id][e.target.name.toLowerCase()] = e.target.value;
+        }
     });
 
     document.getElementById('save-developer').addEventListener('click', () => {
-        postData('/end', {dev: JSON.stringify({ person: devData })});
+        const photos = container.querySelectorAll('input[name="add-image"]');
+        let filesArray = [];
+        let idArray = [];
+        for (let i = 0; i < photos.length; i++) {
+            const item = photos[i];
+            if (typeof item.files[0] !== 'undefined'){
+                if (item.files[0].type === 'image/jpeg'){
+                    idArray.push(item.id.replace('image-input', '') + Date.now() + '.jpg');
+                    filesArray.push(item.files[0]);
+                } else if (item.files[0].type === 'image/png') {
+                    idArray.push(item.id.replace('image-input', '') + Date.now() + '.png');
+                    filesArray.push(item.files[0]);
+                }
+            }
+        }
+
+        for (let i = 0; i < idArray.length; i++) {
+            const name = idArray[i];
+            for (let j = 0; j < devData.length; j++) {
+                const item = devData[j];
+                if (item.id === Number.parseInt(name[0])){
+                    item.images = `./images/${name}`;
+                }
+            }
+        }
+
+        postData('/end', {dev: JSON.stringify({person: devData})});
+        postDataPhoto(filesArray, idArray);
         closedModal('developer');
-        fillForm(devData);
+        setTimeout(fillForm, 150, devData);
     });
+}
+
+function uploadFile(obj) {
+
+    const sideImage = document.getElementById(obj.id.replace('image-input', 'side-image'));
+    sideImage.hidden = false;
+    const mainImage = document.getElementById(obj.id.replace('image-input', 'main-image'));
+    mainImage.hidden = true;
+    const file = document.getElementById(obj.id).files[0];
+    let reader = new FileReader();
+
+    reader.onloadend = function () {
+        sideImage.src = reader.result;
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        sideImage.src = "";
+    }
+}
+
+function postDataPhoto(fileArray, nameArray) {
+    const formData = new FormData();
+
+    for (let i = 0; i < fileArray.length; i++) {
+        if (typeof fileArray[i] !== 'undefined') {
+            const id = nameArray[i];
+            let file = fileArray[i];
+            let newFile = new File([file], id);
+            formData.append('file', newFile);
+        }
+    }
+
+    fetch(`/images*`, {
+        method: 'POST',
+        body: formData
+    }).then((res) => {
+        console.log(res)
+    })
 }
