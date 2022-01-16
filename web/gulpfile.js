@@ -25,7 +25,6 @@ gulpfile.task('copy:html', function (cb) {
 
 gulpfile.task('copy:js', function (cb) {
     gulp.src('./src/scripts/*.js')
-        .pipe(concat('index.js'))
         .pipe(gulp.dest('./dist'))
     cb()
 })

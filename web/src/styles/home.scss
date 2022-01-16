@@ -4,9 +4,16 @@
   background: linear-gradient(180deg, $color-main-dark 0%, $color-main-medium 100%);
   color: $color-white;
 
+  #user1,
+  #user2,
+  #user3,
+  #user4 {
+    padding: 0 20px;
+  }
+
   input {
-    width: 70%;
-    margin: 10px 10px 0;
+    width: 65%;
+    margin: 3px 10px 0;
     font-size: 20px;
   }
 

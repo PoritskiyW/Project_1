@@ -2,6 +2,7 @@
 
 .page-home {
   background: linear-gradient(180deg, $color-main-dark 0%, $color-main-medium 100%);
+  text-align: center;
 
   &__developers {
     display: flex;
@@ -10,6 +11,7 @@
     margin: 0 20px;
     color: $color-white;
     font-size: 19px;
+    text-align: left;
 
     ul {
       display: flex;
@@ -31,11 +33,13 @@
       }
 
       li {
-        margin: 3px 0 0 37px;
         list-style-type: none;
 
+        @media(min-width: 425px) {
+          margin: 0 8%;;
+        }
+
         &.img {
-          margin: auto;
 
           .img__content {
             width: 250px;
