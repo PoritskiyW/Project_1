@@ -77,3 +77,10 @@ function setDisplay(id, display){
     return false;
 }
 
+function getElementsByTagName(tagName){
+    const node = document.getElementsByTagName(tagName);
+    if (node){
+        return node;
+    }
+    return false;
+}
