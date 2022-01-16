@@ -1,3 +1,9 @@
+const {setNodeHidden, setDisplay, getNodeValue, addListener} = require("./utils");
+const {parseCSV, parseYAML, parseXML} = require("./parsers");
+const {routeModal, fillForm, modalDeveloper, uploadFile, postDataPhoto} = require("./home");
+const {postQuestions, checkModalQuestion, cancelDeleting, searchButtonHandler, fillFileSystems, questionsFilter,
+    fillThemes
+} = require("./questions");
 const modalState = {
     isVisibleModal: false,
     isVisibleDevelopers: false

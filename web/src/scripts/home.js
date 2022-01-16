@@ -1,3 +1,5 @@
+const {setNodeHidden, addClassById} = require("./utils");
+
 function routeModal(id) {
     setNodeHidden('user1', true);
     setNodeHidden('user2', true);
@@ -115,7 +117,6 @@ function modalDeveloper(devData) {
 }
 
 function uploadFile(obj) {
-
     const sideImage = document.getElementById(obj.id.replace('image-input', 'side-image'));
     sideImage.hidden = false;
     const mainImage = document.getElementById(obj.id.replace('image-input', 'main-image'));
@@ -153,3 +154,5 @@ function postDataPhoto(fileArray, nameArray) {
         console.log(res)
     })
 }
+
+module.exports = { modalDeveloper, routeModal, uploadFile, postDataPhoto, fillForm}

@@ -1,3 +1,6 @@
+const {getYAML, getXML, getCSV} = require("./serializers");
+const {removeListener, setDisplay, addListener, fillThemesDOM} = require("./utils");
+
 function generate(state) {
     let idArray = [];
 
@@ -269,5 +272,5 @@ function checkModalQuestion() {
     }
 }
 
-module.exports = { cancelDeleting, deleteQuestion, postQuestions, addListenersQuestions, generate,
+module.exports = { cancelDeleting, deleteQuestion, postQuestions, addListenersQuestions, generate, fillThemes,
     fillFileSystems, searchButtonHandler, questionsFilter, questionsList, checkModalQuestion, openModalDelete }

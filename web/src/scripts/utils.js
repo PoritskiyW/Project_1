@@ -77,3 +77,6 @@ function setDisplay(id, display){
     return false;
 }
 
+module.exports = {
+    addListener, setDisplay, addClassById, setNodeHidden, setNodeValue, getNodeValue, fillThemesDOM, setNodeHidden, removeListener
+}
