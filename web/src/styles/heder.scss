@@ -4,12 +4,36 @@
   padding-top: 10px;
   background-color: $color-main-dark;
 
-  &__container {
+  .container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     max-width: 1330px;
     margin: auto;
+
+    .logo {
+      display: flex;
+      justify-content: center;
+
+      @media(min-width: 768px) {
+        justify-content: flex-end;
+      }
+
+      &__img {
+        width: 80px;
+        margin-bottom: -3px;
+      }
+
+      &__team {
+        margin: auto 10px;
+        font-size: 30px;
+        text-transform: uppercase;
+        background: linear-gradient(
+                        90deg, $color-white 0%, #1515c3 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
 
     @media (min-width: 600px) {
       display: flex;
@@ -23,29 +47,6 @@
     justify-content: center;
   }
 
-  &__logo {
-    display: flex;
-    justify-content: center;
-
-    @media(min-width: 768px) {
-      justify-content: flex-end;
-    }
-  }
-
-  &__img {
-    width: 80px;
-    margin-bottom: -3px;
-  }
-
-  &__team {
-    margin: auto 10px;
-    font-size: 30px;
-    text-transform: uppercase;
-    background: linear-gradient(
-                    90deg, $color-white 0%, #1515c3 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
 
   .navigation {
     display: flex;
@@ -57,7 +58,7 @@
       margin: 0;
     }
 
-    &__button {
+    &__link {
       min-height: 50px;
       height: 60px;
       margin: 0 10px;
@@ -89,7 +90,7 @@
           transform: translateY(15px);
         }
 
-        .navigation__button__title {
+        .link__title {
           transform: translateY(20px);
           display: inline-block;
         }

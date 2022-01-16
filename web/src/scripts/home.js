@@ -43,7 +43,7 @@ function modalDeveloper(devData) {
         const item = devData[i];
         const button = document.createElement('button');
         button.id = `route${item.id}`;
-        button.className = `navigation__button user${item.id}`;
+        button.className = `navigation__link user${item.id}`;
         button.onclick = () => {
             id = i;
         };
