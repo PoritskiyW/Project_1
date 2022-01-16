@@ -116,7 +116,7 @@ function questionsList(data, state) {
             Ul.id = `${el.id}`;
             Ul.innerHTML = `
             <li><button type="button" class="question__delete" id="deleteQuestion${el.id}" name="button${el.id}">x</button></li>
-            <li>Question: ${el.question}</li>
+            <li class="question__ask">Question: ${el.question}</li>
             <li>Answer: ${el.answer}</li>
             <li>Theme: ${el.theme}</li>
             <li class='question__date'>Date: ${el.dateModify}</li>`
@@ -239,6 +239,7 @@ function postQuestions(state) {
     const filters = getLocalStorage();
     questionsFilter(state, filters.fileSystem, filters.theme);
     postData('/end', requestBody);
+    fillThemes(state);
 }
 
 function checkModalQuestion() {
