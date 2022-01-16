@@ -1,6 +1,6 @@
-const {containerQuerySelectorAll, renderFiled, getHidden, getFileImg, postData, getData,
-    postImg, addListener, addClassById, removeListener, fillThemesDOM, setDisplay, getNodeValue,
-    setNodeHidden, setNodeValue, setInnerHtml} = require("./utils");
+const {renderFiled, getHidden, getFileImg, postData,
+    postImg, addClassById, setNodeHidden, setInnerHtml, addListener, getAppendChild, containerQuerySelectorAll
+} = require("./utils");
 
 function routeModal(id) {
     setNodeHidden('user1', true);
@@ -32,14 +32,14 @@ function fillForm(devData) {
         <li>Birthday: ${item.birthday}</li>
         <li>Locations: ${item.locations}</li>
         <li>Hobby: ${item.hobby}</li>`;
-        infoDeveloper.appendChild(mySection);
+        getAppendChild(infoDeveloper, mySection )
+       // infoDeveloper.appendChild(mySection);
     }
 }
 
 function modalDeveloper(devData) {
     let id = 0;
     const infoDeveloper = document.getElementById('developer-modal');
-    infoDeveloper.innerHTML = '';
     const header = document.createElement('header');
     header.className = "header header__modal";
 
@@ -52,9 +52,9 @@ function modalDeveloper(devData) {
             id = i;
         };
         button.innerHTML = `${item.name}`;
-        header.appendChild(button);
+        getAppendChild(header, button)
     }
-    infoDeveloper.appendChild(header);
+    getAppendChild(infoDeveloper, header);
 
     for (let i = 0; i < devData.length; i++) {
         const item = devData[i];
@@ -73,19 +73,19 @@ function modalDeveloper(devData) {
             <label>Birthday: <input type="date"  value='${item.birthday}' name="Birthday" /></label>
             <label>Locations: <input type='text'  maxlength="20" placeholder=${item.locations} name="Locations" /></label>
             <label>Hobby: <input type='text' maxlength="100"  placeholder='${item.hobby}' name="Hobby" /></label>`
-        infoDeveloper.appendChild(div);
+        getAppendChild(infoDeveloper, div);
     }
 
-    const container = document.getElementById('developer-modal');
-    const inputs = container.querySelectorAll('input');
-    inputs.forEach(i => i.onchange = (e) => {
-        if (e.target.name !== 'add-image'){
-            devData[id][e.target.name.toLowerCase()] = e.target.value;
-        }
-    });
-
-    document.getElementById('save-developer').addEventListener('click', () => {
-        const photos = container.querySelectorAll('input[name="add-image"]');
+    const inputs = containerQuerySelectorAll('developer-modal', 'input');
+    if(inputs) {
+        inputs.forEach(i => i.onchange = (e) => {
+            if (e.target.name !== 'add-image') {
+                devData[id][e.target.name.toLowerCase()] = e.target.value;
+            }
+        });
+    }
+    addListener('save-developer', 'click', () => {
+        const photos = containerQuerySelectorAll('developer-modal', 'input[name="add-image"]');
         let filesArray = [];
         let idArray = [];
         for (let i = 0; i < photos.length; i++) {
@@ -115,7 +115,7 @@ function modalDeveloper(devData) {
         postDataPhoto(filesArray, idArray);
         closedModal('developer');
         setTimeout(fillForm, 150, devData);
-    });
+    })
 }
 
 function uploadFile(obj) {

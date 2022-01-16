@@ -158,6 +158,7 @@ function init(state) {
     fillThemes(STATE);
     routeModal('user1');
 
+    console.log(JSON.stringify(state));
     if (!getLocalStorage()) {
         setLocalStorage();
     }

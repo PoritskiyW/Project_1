@@ -16,7 +16,6 @@ jest.mock('../utils', () => {
         setDisplay: jest.fn(() => true),
         setNodeHidden: jest.fn(() => true),
         setNodeValue: jest.fn(() => true),
-        //
         setInnerHtml: jest.fn(() => true),
         postImg: jest.fn(),
         getData: jest.fn(),
@@ -25,6 +24,7 @@ jest.mock('../utils', () => {
         getFileImg: jest.fn(() =>  file),
         renderFiled: jest.fn(),
         containerQuerySelectorAll: jest.fn(),
+        getAppendChild: jest.fn()
     };
 });
 
@@ -81,62 +81,71 @@ describe('test home page', () => {
     test('test', () => {
         expect(true).toBe(true);
     })
-    //1
-    test('should be defined', () => {
-        expect(routeModal).toBeDefined()
-    })
-    test('should be function', () => {
-        expect(typeof routeModal).toBe('function');
-    })
-    test('route modal', () => {
-        expect(routeModal('route1')).toBeUndefined();
-    })
-//2
-    test('should be defined', () => {
-        expect(fillForm).toBeDefined()
-    })
-    test('should be function', () => {
-        expect(typeof fillForm).toBe('function');
-    })
-    test('fill form', () => {
-        expect(fillForm(devData)).toBeUndefined();
-    })
-//3
-    const a = {id: 'image-input1'}
-    test('should be defined', () => {
-        expect(uploadFile).toBeDefined()
-    })
-    test('should be function', () => {
-        expect(typeof uploadFile).toBe('function');
-    })
-    test('upload file', () => {
-        expect(uploadFile(a)).toBeUndefined()
-    })
-//4
-    const fileArr =[{lastModified: 1642101771303,
-        lastModifiedDate: 'Thu Jan 13 2022 21:22:51 GMT+0200 (Восточная Европа, стандартное время)',
-        name: "Viktoria.jpg",
-        size: 91465,
-        type: "image/jpeg",
-        webkitRelativePath: ""}];
-    test('should be defined', () => {
-        expect(postDataPhoto).toBeDefined()
-    })
-    test('should be function', () => {
-        expect(typeof postDataPhoto).toBe('function');
-    })
-    test('post data photo', () => {
-        expect(postDataPhoto(fileArr, '11642354242359.jpg')).toBeUndefined()
+
+    describe('route modal', () => {
+        test('should be defined', () => {
+            expect(routeModal).toBeDefined()
+        })
+        test('should be function', () => {
+            expect(typeof routeModal).toBe('function');
+        })
+        test('route modal', () => {
+            expect(routeModal('route1')).toBeUndefined();
+        })
     })
 
-    // 5
-    test('should be defined', () => {
-        expect(modalDeveloper).toBeDefined()
+    describe('fill form', () => {
+        test('should be defined', () => {
+            expect(fillForm).toBeDefined()
+        })
+        test('should be function', () => {
+            expect(typeof fillForm).toBe('function');
+        })
+        test('fill form', () => {
+            expect(fillForm(devData)).toBeUndefined();
+        })
     })
-    test('should be function', () => {
-        expect(typeof modalDeveloper).toBe('function');
+
+    describe('upload file', () => {
+        const a = {id: 'image-input1'}
+        test('should be defined', () => {
+            expect(uploadFile).toBeDefined()
+        })
+        test('should be function', () => {
+            expect(typeof uploadFile).toBe('function');
+        })
+        test('upload file', () => {
+            expect(uploadFile(a)).toBeUndefined()
+        })
     })
-    // test('modal developer', () => {
-    //     expect(modalDeveloper(devData)).toBeUndefined()
-    // })
+
+    describe('post data photo', () => {
+        const fileArr =[{lastModified: 1642101771303,
+            lastModifiedDate: 'Thu Jan 13 2022 21:22:51 GMT+0200 (Восточная Европа, стандартное время)',
+            name: "Viktoria.jpg",
+            size: 91465,
+            type: "image/jpeg",
+            webkitRelativePath: ""}];
+        test('should be defined', () => {
+            expect(postDataPhoto).toBeDefined()
+        })
+        test('should be function', () => {
+            expect(typeof postDataPhoto).toBe('function');
+        })
+        test('post data photo', () => {
+            expect(postDataPhoto(fileArr, '11642354242359.jpg')).toBeUndefined()
+        })
+    })
+
+    describe('modal developer', () => {
+        test('should be defined', () => {
+            expect(modalDeveloper).toBeDefined()
+        })
+        test('should be function', () => {
+            expect(typeof modalDeveloper).toBe('function');
+        })
+        test('modal developer', () => {
+            expect(modalDeveloper(devData)).toBeUndefined()
+        })
+    })
 })

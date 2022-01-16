@@ -88,7 +88,7 @@ function setInnerHtml(id, innerHtml) {
     }
     return false;
 }
-
+//POST REQUEST IMAGES
 function postImg(formData) {
     fetch(`/images*`, {
         method: 'POST',
@@ -158,7 +158,12 @@ function containerQuerySelectorAll(id, selector) {
     return node;
 }
 
+function getAppendChild(id, value) {
+    id.appendChild(value);
+}
+
 module.exports = {
+    getAppendChild,
     containerQuerySelectorAll,
     renderFiled,
     getHidden,

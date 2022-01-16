@@ -2,6 +2,35 @@ const { cancelDeleting, deleteQuestion, postQuestions, addListenersQuestions, ge
         fillFileSystems, searchButtonHandler, questionsFilter, questionsList, checkModalQuestion,
         openModalDelete } = require('../questions');
 
+jest.mock('../utils', () => {
+    let file = {lastModified: 1642101771303,
+        lastModifiedDate: 'Thu Jan 13 2022 21:22:51 GMT+0200 (Восточная Европа, стандартное время)',
+        name: "Viktoria.jpg",
+        size: 91465,
+        type: "image/jpeg",
+        webkitRelativePath: ""};
+    return {
+        __esModule: true,
+        fillThemesDOM: jest.fn(),
+        addListener: jest.fn(() => true),
+        getNodeValue: jest.fn(() => "value"),
+        addClassById: jest.fn(() => true),
+        removeListener: jest.fn(() => true),
+        setDisplay: jest.fn(() => true),
+        setNodeHidden: jest.fn(() => true),
+        setNodeValue: jest.fn(() => true),
+        setInnerHtml: jest.fn(() => true),
+        postImg: jest.fn(),
+        getData: jest.fn(),
+        postData: jest.fn(),
+        getHidden: jest.fn(() => "main-image1"),
+        getFileImg: jest.fn(() =>  file),
+        renderFiled: jest.fn(),
+        containerQuerySelectorAll: jest.fn(),
+        getAppendChild: jest.fn()
+    };
+});
+
 describe('tests for cancelDeleting', () => {
     test('should be defined', () => {
         expect(cancelDeleting).toBeDefined()
