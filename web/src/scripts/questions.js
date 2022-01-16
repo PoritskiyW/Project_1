@@ -268,6 +268,3 @@ function checkModalQuestion() {
         button.classList.add('disabled');
     }
 }
-
-module.exports = { cancelDeleting, deleteQuestion, postQuestions, addListenersQuestions, generate,
-    fillFileSystems, searchButtonHandler, questionsFilter, questionsList, checkModalQuestion, openModalDelete }
