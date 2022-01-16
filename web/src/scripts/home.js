@@ -1,4 +1,6 @@
-const {setNodeHidden, addClassById} = require("./utils");
+const {containerQuerySelectorAll, renderFiled, getHidden, getFileImg, postData, getData,
+    postImg, addListener, addClassById, removeListener, fillThemesDOM, setDisplay, getNodeValue,
+    setNodeHidden, setNodeValue, setInnerHtml} = require("./utils");
 
 function routeModal(id) {
     setNodeHidden('user1', true);
@@ -11,7 +13,7 @@ function routeModal(id) {
 
 function fillForm(devData) {
     const infoDeveloper = document.getElementById('info-developer');
-    infoDeveloper.innerHTML = '';
+    setInnerHtml('info-developer', '')
 
     for (let i = 0; i < devData.length; i++) {
         const item = devData[i];
@@ -117,19 +119,12 @@ function modalDeveloper(devData) {
 }
 
 function uploadFile(obj) {
-    const sideImage = document.getElementById(obj.id.replace('image-input', 'side-image'));
-    sideImage.hidden = false;
-    const mainImage = document.getElementById(obj.id.replace('image-input', 'main-image'));
-    mainImage.hidden = true;
-    const file = document.getElementById(obj.id).files[0];
-    let reader = new FileReader();
-
-    reader.onloadend = function () {
-        sideImage.src = reader.result;
-    }
+    const sideImage = getHidden(obj.id.replace('image-input', 'side-image'), false);
+    getHidden(obj.id.replace('image-input', 'main-image'), true);
+    const file = getFileImg(obj.id);
 
     if (file) {
-        reader.readAsDataURL(file);
+        renderFiled(sideImage, obj)
     } else {
         sideImage.src = "";
     }
@@ -147,12 +142,9 @@ function postDataPhoto(fileArray, nameArray) {
         }
     }
 
-    fetch(`/images*`, {
-        method: 'POST',
-        body: formData
-    }).then((res) => {
-        console.log(res)
-    })
+    postImg(formData);
 }
 
-module.exports = { modalDeveloper, routeModal, uploadFile, postDataPhoto, fillForm}
+module.exports = {
+    routeModal, fillForm, modalDeveloper, uploadFile, postDataPhoto
+}

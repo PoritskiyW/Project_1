@@ -1,4 +1,4 @@
-const {setNodeHidden, setDisplay, getNodeValue, addListener} = require("./utils");
+const {setNodeHidden, setDisplay, getNodeValue, addListener, getData} = require("./utils");
 const {parseCSV, parseYAML, parseXML} = require("./parsers");
 const {routeModal, fillForm, modalDeveloper, uploadFile, postDataPhoto} = require("./home");
 const {postQuestions, checkModalQuestion, cancelDeleting, searchButtonHandler, fillFileSystems, questionsFilter,
@@ -15,34 +15,6 @@ function route(id) {
     setNodeHidden('page-questions', true);
     setNodeHidden('page-about', true);
     setNodeHidden(id, false);
-}
-
-//POST REQUEST FUNCTION
-function postData(url = '/end', data) {
-    fetch(url, {
-        method: "post",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        //make sure to serialize your JSON body
-        body: JSON.stringify(data)
-    })
-        .then((response) => {
-            console.log(response);
-        });
-}
-
-//GET REQUEST FUNCTION
-function getData() {
-    fetch('/init')
-        .then((response) => response.json())
-        .then(function (data) {
-            fillState(JSON.parse(data));
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
 }
 
 function fillState(obj) {
@@ -129,7 +101,7 @@ function cleanForm() {
 
 window.onload = () => {
     route('page-home');
-    getData();
+    getData(fillState);
 }
 
 function addListenerAll(STATE) {
