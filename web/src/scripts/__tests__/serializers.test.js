@@ -35,7 +35,7 @@ describe('tets for serializerCSV', () => {
 
 
 })
-describe('tets for serializerXML', () => {
+describe('test for serializerXML', () => {
     test('should be defined', () => {
         expect(getXML).toBeDefined()
     })
@@ -46,7 +46,7 @@ describe('tets for serializerXML', () => {
 
         let result =
             {
-                xml: "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<root>\n<item>\n<id>1</id>\n<question>1111</question>\n<theme>HTML</theme>\n<answer>true</answer>\n<dateModify>0</dateModify>\n</item>\n<item>\n<id>2</id>\n<question>2222</question>\n<theme>CSS</theme>\n<answer>true</answer>\n<dateModify>0</dateModify>\n</item>\n<item>\n<id>3</id>\n<question>3333</question>\n<theme>JS</theme>\n<answer>true</answer>\n<dateModify>0</dateModify>\n</item>\n<item>\n<id>4</id>\n<question>4444</question>\n<theme>GIT</theme>\n<answer>true</answer>\n<dateModify>0</dateModify>\n</item>\n<item>\n<id>5</id>\n<question>5555</question>\n<theme>SCSS</theme>\n<answer>true</answer>\n<dateModify>0</dateModify>\n</item></root>"
+                xml: "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n    <root>\n    <questions>\n<item>\n<id>1</id>\n<question>1111</question>\n<theme>HTML</theme>\n<answer>true</answer>\n<dateModify>0</dateModify>\n</item>\n<item>\n<id>2</id>\n<question>2222</question>\n<theme>CSS</theme>\n<answer>true</answer>\n<dateModify>0</dateModify>\n</item>\n<item>\n<id>3</id>\n<question>3333</question>\n<theme>JS</theme>\n<answer>true</answer>\n<dateModify>0</dateModify>\n</item>\n<item>\n<id>4</id>\n<question>4444</question>\n<theme>GIT</theme>\n<answer>true</answer>\n<dateModify>0</dateModify>\n</item>\n<item>\n<id>5</id>\n<question>5555</question>\n<theme>SCSS</theme>\n<answer>true</answer>\n<dateModify>0</dateModify>\n</item></questions></root>"
             }
         let obj = result.xml
         expect(getXML(state)).toBe(obj);

@@ -21,11 +21,11 @@ describe('tests for parseYAML', () => {
         let state =
             {
                 "questions": [
-                    {"id": 1, "question": "'1111'", "theme": "HTML", "answer": true, "dateModify": 946677600000},
-                    {"id": 2, "question": "'2222'", "theme": "CSS", "answer": true, "dateModify": 946677600000},
-                    {"id": 3, "question": "'3333'", "theme": "JS", "answer": true, "dateModify": 946677600000},
-                    {"id": 4, "question": "'4444'", "theme": "GIT", "answer": true, "dateModify": 946677600000},
-                    {"id": 5, "question": "'5555'", "theme": "SCSS", "answer": true, "dateModify": 946677600000}
+                    {"id": "1", "question": "1111", "theme": "HTML", "answer": true, "dateModify": "0000"},
+                    {"id": "2", "question": "2222", "theme": "CSS", "answer": true, "dateModify": "0000"},
+                    {"id": "3", "question": "3333", "theme": "JS", "answer": true, "dateModify": "0000"},
+                    {"id": "4", "question": "4444", "theme": "GIT", "answer": true, "dateModify": "0000"},
+                    {"id": "5", "question": "5555", "theme": "SCSS", "answer": true, "dateModify": "0000"}
                 ]
             }
         let obj = result.yaml
@@ -44,10 +44,10 @@ describe('tests for parseCSV', () => {
         let state =
             {
                 "questions": [
-                    {"id": 1, "question": "1111", "theme": "HTML", "answer": true, "dateModify": 946677600000},
-                    {"id": 2, "question": "2222", "theme": "CSS", "answer": true, "dateModify": 946677600000},
-                    {"id": 3, "question": "3333", "theme": "JS", "answer": true, "dateModify": 946677600000},
-                    {"id": 4, "question": "4444", "theme": "GIT", "answer": true, "dateModify": 946677600000}
+                    {"id": 1, "question": "1111", "theme": "HTML", "answer": true, "dateModify": "0"},
+                    {"id": 2, "question": "2222", "theme": "CSS", "answer": true, "dateModify": "0"},
+                    {"id": 3, "question": "3333", "theme": "JS", "answer": true, "dateModify": "0"},
+                    {"id": 4, "question": "4444", "theme": "GIT", "answer": true, "dateModify": "0"}
                 ]
             }
         let obj = result.csv
@@ -65,11 +65,11 @@ describe('tests for parseXML', () => {
     test("should be right result", () => {
         let state = {
             "questions": [
-                {"id": 1, "question": "1111", "theme": "HTML", "answer": true, "dateModify": 946677600000},
-                {"id": 2, "question": "2222", "theme": "CSS", "answer": true, "dateModify": 946677600000},
-                {"id": 3, "question": "3333", "theme": "JS", "answer": true, "dateModify": 946677600000},
-                {"id": 4, "question": "4444", "theme": "GIT", "answer": true, "dateModify": 946677600000},
-                {"id": 5, "question": "5555", "theme": "SCSS", "answer": true, "dateModify": 946677600000}
+                {"id": 1, "question": "1111", "theme": "HTML", "answer": true, "dateModify": "0000000"},
+                {"id": 2, "question": "2222", "theme": "CSS", "answer": true, "dateModify": "0000000"},
+                {"id": 3, "question": "3333", "theme": "JS", "answer": true, "dateModify": "0000000"},
+                {"id": 4, "question": "4444", "theme": "GIT", "answer": true, "dateModify": "0000000"},
+                {"id": 5, "question": "5555", "theme": "SCSS", "answer": true, "dateModify": "0000000"}
             ]
         }
         let obj = result.xml
