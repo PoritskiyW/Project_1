@@ -80,6 +80,7 @@ function setDisplay(id, display){
     return false;
 }
 
+
 function setInnerHtml(id, innerHtml) {
     const node = document.getElementById(id);
     if(node) {
@@ -130,10 +131,16 @@ function getHidden(id, value) {
     const node = document.getElementById(id);
     if (node) {
         node.hidden = value;
+
+function getElementsByTagName(tagName){
+    const node = document.getElementsByTagName(tagName);
+    if (node){
+
         return node;
     }
     return false;
 }
+
 
 function getFileImg(id) {
     const node = document.getElementById(id);
@@ -181,3 +188,4 @@ module.exports = {
     setNodeValue,
     setInnerHtml
 }
+

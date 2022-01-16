@@ -18,6 +18,7 @@ function route(id) {
 }
 
 function fillState(obj) {
+    console.log(obj)
     obj.jsonD = JSON.parse(obj.jsonD);
     obj.csv = parseCSV(obj.csv);
     obj.yaml = parseYAML(obj.yaml);
@@ -166,4 +167,3 @@ function init(state) {
     questionsFilter(STATE, filters.fileSystem, filters.theme);
     addListenerAll(state);
 }
-

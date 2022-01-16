@@ -272,5 +272,7 @@ function checkModalQuestion() {
     }
 }
 
+
 module.exports = { cancelDeleting, deleteQuestion, postQuestions, addListenersQuestions, generate, fillThemes,
     fillFileSystems, searchButtonHandler, questionsFilter, questionsList, checkModalQuestion, openModalDelete }
+
