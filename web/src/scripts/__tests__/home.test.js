@@ -21,10 +21,20 @@ jest.mock('../utils', () => {
         getData: jest.fn(),
         postData: jest.fn(),
         getHidden: jest.fn(() => "main-image1"),
-        getFileImg: jest.fn(() =>  file),
+        getFileImg: jest.fn(() => file),
         renderFiled: jest.fn(),
         containerQuerySelectorAll: jest.fn(),
-        getAppendChild: jest.fn()
+        getAppendChild: jest.fn(),
+        generate: jest.fn(() => 'eznmk'),
+        setOnclick: jest.fn(() => true),
+        querySelectorAll: jest.fn(() => [true]),
+        querySelectorChecked: jest.fn(() => true),
+        disabledValue: jest.fn(() => true)
+            .mockImplementationOnce(() => false),
+        getElementsByTagName: jest.fn(() => true),
+        getLocalStorage: jest.fn(() => true),
+        fillThemes: jest.fn(() => true),
+        querySelectorValue: jest.fn(() => true),
     };
 });
 

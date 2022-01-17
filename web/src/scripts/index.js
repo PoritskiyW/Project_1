@@ -1,8 +1,9 @@
-const {setNodeHidden, setDisplay, getNodeValue, addListener, getData} = require("./utils");
+const {setNodeHidden, setDisplay, getNodeValue, addListener, getData, getElementsByTagName, setNodeValue, addClassById,
+    disabledValue, getLocalStorage,   fillThemes, fillState, composedPath, includes
+} = require("./utils");
 const {parseCSV, parseYAML, parseXML} = require("./parsers");
 const {routeModal, fillForm, modalDeveloper, uploadFile, postDataPhoto} = require("./home");
 const {postQuestions, checkModalQuestion, cancelDeleting, searchButtonHandler, fillFileSystems, questionsFilter,
-    fillThemes
 } = require("./questions");
 const modalState = {
     isVisibleModal: false,
@@ -15,17 +16,6 @@ function route(id) {
     setNodeHidden('page-questions', true);
     setNodeHidden('page-about', true);
     setNodeHidden(id, false);
-}
-
-function fillState(obj) {
-    console.log(obj)
-    obj.jsonD = JSON.parse(obj.jsonD);
-    obj.csv = parseCSV(obj.csv);
-    obj.yaml = parseYAML(obj.yaml);
-    obj.xml = parseXML(obj.xml);
-    obj.dev = JSON.parse(obj.dev);
-
-    init(obj);
 }
 
 function openModal(id) {
@@ -48,8 +38,8 @@ const closeModal = (e) => {
     const modal = document.getElementById('modal');
     const target = document.getElementsByClassName('form-questions')[0];
     const showButton = document.getElementById('show-question');
-    const clickPath = e.composedPath();
-    if (modalState.isVisibleModal && !clickPath.includes(target) && !clickPath.includes(showButton)) {
+    const clickPath = composedPath(e);
+    if(modalState.isVisibleModal && !includes(clickPath, target) && !includes(clickPath, showButton)) {
         modal.style.display = "none";
         modalState.isVisibleModal = false;
         cleanForm();
@@ -59,17 +49,9 @@ const closeModal = (e) => {
 function closedModal(id) {
     setDisplay(id, 'none');
     cleanForm();
+    addClassById('post-question', 'disabled')
     const button = document.getElementById('post-question');
-    button.classList.add('disabled');
-    button.disabled = true;
-}
-
-function getLocalStorage() {
-    const filters = localStorage.getItem('filters');
-    if (filters) {
-        return JSON.parse(filters);
-    }
-    return false;
+    disabledValue(button, true);
 }
 
 function setLocalStorage() {
@@ -89,15 +71,16 @@ function cleanForm() {
         const item = boolean[i];
         item.checked = false;
     }
-    const theme = document.getElementById('modal-theme').getElementsByTagName('option');
+
+    const theme = getElementsByTagName('modal-theme', 'option');
     for (let i = 0; i < theme.length; i++) {
         const item = theme[i];
         if (item.disabled) {
             item.selected = true;
         }
     }
-    const question = document.getElementById('question-text');
-    question.value = '';
+
+    setNodeValue('question-text', '');
 }
 
 window.onload = () => {
@@ -159,11 +142,21 @@ function init(state) {
     fillThemes(STATE);
     routeModal('user1');
 
-    console.log(JSON.stringify(state));
     if (!getLocalStorage()) {
         setLocalStorage();
     }
     const filters = getLocalStorage();
     questionsFilter(STATE, filters.fileSystem, filters.theme);
     addListenerAll(state);
+}
+
+module.exports = {
+    route,
+    openModal,
+    closedModal,
+    closeModal,
+    setLocalStorage,
+    cleanForm,
+    addListenerAll,
+    init
 }

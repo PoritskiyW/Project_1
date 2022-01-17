@@ -1,5 +1,6 @@
-const {renderFiled, getHidden, getFileImg, postData,
-    postImg, addClassById, setNodeHidden, setInnerHtml, addListener, getAppendChild, containerQuerySelectorAll
+const { getHidden, getFileImg, postData,
+    postImg, addClassById, setNodeHidden, setInnerHtml, addListener, getAppendChild, containerQuerySelectorAll,
+    renderFiled
 } = require("./utils");
 
 function routeModal(id) {
@@ -32,8 +33,7 @@ function fillForm(devData) {
         <li>Birthday: ${item.birthday}</li>
         <li>Locations: ${item.locations}</li>
         <li>Hobby: ${item.hobby}</li>`;
-        getAppendChild(infoDeveloper, mySection )
-       // infoDeveloper.appendChild(mySection);
+        getAppendChild(infoDeveloper, mySection)
     }
 }
 
@@ -126,7 +126,7 @@ function uploadFile(obj) {
     if (file) {
         renderFiled(sideImage, obj)
     } else {
-        sideImage.src = "";
+       sideImage.src = "";
     }
 }
 
