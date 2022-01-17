@@ -1,40 +1,10 @@
 const {getYAML, getXML, getCSV} = require("./serializers");
-const {removeListener, setDisplay, addListener, fillThemesDOM, postData} = require("./utils");
+const {removeListener, setDisplay, addListener, fillThemesDOM, postData,generate, setInnerHtml, getAppendChild,
+    setOnclick, getNodeValue, querySelectorAll, querySelectorChecked, disabledValue, addClassById, getLocalStorage,
+    fillThemes, querySelectorValue
+} = require("./utils");
+//const {closedModal, setLocalStorage} = require("./index");//test
 
-function generate(state) {
-    let idArray = [];
-
-    const questionsArray = []
-    questionsArray.push(state.xml.questions);
-    questionsArray.push(state.csv.questions);
-    questionsArray.push(state.jsonD.questions);
-    questionsArray.push(state.yaml.questions);
-
-    for (let i = 0; i < questionsArray.length; i++) {
-        const partialArray = questionsArray[i];
-        for (let j = 0; j < partialArray.length; j++) {
-            if (!idArray.includes(partialArray.id)) {
-                idArray.push(partialArray.id);
-            }
-        }
-    }
-
-    const _sym = 'abcdefghijklmnopqrstuvwxyz1234567890';
-    let UID = '';
-
-
-    for (let i = 0; i < 5; i++) {
-
-        UID += _sym[Math.floor(Math.random() * (_sym.length))];
-    }
-
-    if (idArray.includes(UID)) {
-        UID = generate();
-    }
-    return UID;
-}
-
-///////////////////////////////////////////////////////
 //page-questions area
 function questionsFilter(state, fileSystem = 'jsonD', theme = 'all') {
     if (theme === 'all') {
@@ -44,43 +14,10 @@ function questionsFilter(state, fileSystem = 'jsonD', theme = 'all') {
     }
 }
 
-function fillThemes(state) {
-    const filters = getLocalStorage();
-    let themes = [];
-    themes.push('all');
-
-    let jsonQuestions = state.jsonD.questions;
-    let xmlQuestions = state.xml.questions;
-    let yamlQuestions = state.yaml.questions;
-    let csvQuestions = state.csv.questions;
-
-    for (let i = 0; i < jsonQuestions.length; i++) {
-        if (!themes.includes(jsonQuestions[i].theme)) {
-            themes.push(jsonQuestions[i].theme);
-        }
-    }
-    for (let i = 0; i < xmlQuestions.length; i++) {
-        if (!themes.includes(xmlQuestions[i].theme)) {
-            themes.push(xmlQuestions[i].theme);
-        }
-    }
-    for (let i = 0; i < yamlQuestions.length; i++) {
-        if (!themes.includes(yamlQuestions[i].theme)) {
-            themes.push(yamlQuestions[i].theme);
-        }
-    }
-    for (let i = 0; i < csvQuestions.length; i++) {
-        if (!themes.includes(csvQuestions[i].theme)) {
-            themes.push(csvQuestions[i].theme);
-        }
-    }
-    fillThemesDOM(themes, filters);
-}
-
 function fillFileSystems() {
     let filters = getLocalStorage();
     const fileSystems = document.getElementById('file-system');
-    fileSystems.innerHTML = '<option disabled>Select file system</option>'
+    setInnerHtml('file-system', '<option disabled>Select file system</option>')
 
     const fileSystemsObj = {
         jsonD: 'JSON',
@@ -94,24 +31,24 @@ function fillFileSystems() {
             option.value = key;
             option.selected = true;
             option.textContent = `${fileSystemsObj[key]}`;
-            fileSystems.appendChild(option);
+            getAppendChild(fileSystems, option)
         } else {
             let option = document.createElement('option');
             option.value = key;
             option.textContent = `${fileSystemsObj[key]}`;
-            fileSystems.appendChild(option);
+            getAppendChild(fileSystems, option);
         }
     }
 }
 
 function questionsList(data, state) {
     const questionList = document.getElementById('question-list');
-    questionList.innerHTML = '';
+    setInnerHtml('question-list', '');
 
     if(!Array.isArray(data) || data.length === 0) {
         const Ul = document.createElement('ul');
         Ul.innerHTML = '<p class="add__question">There are no questions</p>';
-        questionList.appendChild(Ul);
+        getAppendChild(questionList,  Ul)
     } else {
         data.map(el => {
             const Ul = document.createElement('ul');
@@ -124,7 +61,7 @@ function questionsList(data, state) {
             <li>Theme: ${el.theme}</li>
             <li class='question__date'>Date: ${el.dateModify}</li>`
 
-            questionList.appendChild(Ul);
+            getAppendChild(questionList,  Ul);
             return questionList;
         })
         addListenersQuestions(state);
@@ -141,12 +78,10 @@ function addListenersQuestions(state) {
 }
 
 function openModalDelete(state, id) {
-    const modalWindow = document.getElementById("modal-delete-question");
-    modalWindow.style.display = 'grid';
+    setDisplay("modal-delete-question", 'grid')
 
     const callback = deleteQuestion(id.replace('deleteQuestion', ''), state);
-    const cancel = document.getElementById('cancel-delete');
-    cancel.onclick = cancelDeleting(callback);
+    setOnclick('cancel-delete', cancelDeleting(callback));
     addListener('confirm-delete', 'click', callback);
 }
 
@@ -194,9 +129,9 @@ function searchButtonHandler(state) {
 }
 
 function postQuestions(state) {
-    const question = document.getElementById('question-text').value;
-    const theme = document.getElementById('modal-theme').value;
-    const answer = document.querySelector('input[name="' + "boolean" + '"]:checked').value;
+    const question = getNodeValue('question-text');
+    const theme = getNodeValue('modal-theme');
+    const answer = querySelectorValue('input[name="' + "boolean" + '"]:checked');
 
     const fileSystemsArray = document.querySelectorAll('input[name=fileSystem]');
     let fileSystem = [];
@@ -245,14 +180,14 @@ function postQuestions(state) {
     fillThemes(state);
 }
 
+
 function checkModalQuestion() {
     const button = document.getElementById('post-question');
+    const boolean = querySelectorAll('input[name="boolean"]');
+    const theme = getNodeValue('modal-theme')
+    const textArea = getNodeValue('question-text')
 
-    const textArea = document.getElementById('question-text');
-    const boolean = document.querySelectorAll('input[name="boolean"]');
-    const theme = document.getElementById('modal-theme').value;
-
-    const fileSystemsArray = document.querySelectorAll('input[name=fileSystem]');
+    const fileSystemsArray = querySelectorAll('input[name=fileSystem]');
     const fileSystems = [];
     fileSystemsArray.forEach(i => {
         if(i.checked) {
@@ -260,19 +195,18 @@ function checkModalQuestion() {
         }
     })
 
-    if (textArea.value.length > 3 &&
+    if (textArea.length > 3 &&
         theme !== 'Select theme' &&
-        (boolean[0].checked || boolean[1].checked) &&
+        (querySelectorChecked(boolean[0]) || querySelectorChecked(boolean[1])) &&
         fileSystems.length >= 1 ) {
-        button.disabled = false;
+        disabledValue(button, false)
         button.classList.remove('disabled');
     } else {
-        button.disabled = true;
-        button.classList.add('disabled');
+        disabledValue(button,  true);
+        addClassById('post-question', 'disabled');
     }
 }
 
 
-module.exports = { cancelDeleting, deleteQuestion, postQuestions, addListenersQuestions, generate, fillThemes,
+module.exports = { cancelDeleting, deleteQuestion, postQuestions, addListenersQuestions,
     fillFileSystems, searchButtonHandler, questionsFilter, questionsList, checkModalQuestion, openModalDelete }
-
