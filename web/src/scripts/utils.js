@@ -97,7 +97,7 @@ function postImg(formData) {
         method: 'POST',
         body: formData
     }).then((res) => {
-        console.log(res)
+        //console.log(res)
     })
 }
 
@@ -113,7 +113,7 @@ function postData(url = '/end', data) {
         body: JSON.stringify(data)
     })
         .then((response) => {
-            console.log(response);
+            //console.log(response);
         });
 }
 
